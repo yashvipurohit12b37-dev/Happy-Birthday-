@@ -1,328 +1,859 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy 24th Birthday Yash 🎉</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy 24th Birthday Yash 🎉</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
+  <style>
+    :root{
+      --bg1:#fff7f2;
+      --bg2:#ffffff;
+      --ink:#1f1f1f;
+      --muted:rgba(31,31,31,.72);
+      --accent:#ff6f91;
+      --card:#ffffff;
+      --shadow:0 22px 60px rgba(0,0,0,.10);
+      --radius:22px;
+    }
 
-body{
-  font-family:'Inter',sans-serif;
-  background:linear-gradient(180deg,#fff7f2,#ffffff);
-  color:#222;
-  overflow-x:hidden;
-}
+    *{margin:0;padding:0;box-sizing:border-box}
 
-section{
-  min-height:100vh;
-  padding:70px 20px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
+    body{
+      font-family:'Inter',sans-serif;
+      background:linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:var(--ink);
+      overflow:hidden; /* NO SCROLL */
+    }
 
-h1,h2{
-  font-family:'Playfair Display',serif;
-  margin-bottom:18px;
-}
+    /* ---------- overlay (tap to start music) ---------- */
+    #musicOverlay{
+      position:fixed; inset:0;
+      background:#000;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      z-index:9999;
+      text-align:center;
+      padding:24px;
+    }
+    #musicOverlay h2{
+      font-family:'Playfair Display',serif;
+      font-weight:600;
+      font-size:28px;
+      margin-bottom:10px;
+    }
+    #musicOverlay p{opacity:.75; max-width:520px; line-height:1.6}
 
-p{
-  max-width:740px;
-  line-height:1.85;
-  font-size:16px;
-  opacity:.92;
-  margin-top:14px;
-}
+    /* ---------- Slides framework ---------- */
+    .app{
+      height:100vh;
+      width:100vw;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
 
-button{
-  padding:14px 30px;
-  border:none;
-  border-radius:40px;
-  background:#ff6f91;
-  color:#fff;
-  font-size:16px;
-  margin-top:26px;
-  cursor:pointer;
-}
+    .slide{
+      width:min(980px, 100%);
+      height:min(720px, 100%);
+      background:rgba(255,255,255,.72);
+      backdrop-filter: blur(10px);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:26px;
+      display:none;
+      overflow:hidden;
+      position:relative;
+    }
 
-img{
-  width:85%;
-  max-width:420px;
-  border-radius:22px;
-  margin:22px 0;
-  box-shadow:0 18px 50px rgba(0,0,0,.12);
-}
+    .slide.active{display:block}
 
-.parallax{
-  transition:transform .2s ease-out;
-}
+    .topTitle{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(22px, 3vw, 32px);
+      font-weight:600;
+      letter-spacing:.2px;
+      margin-bottom:10px;
+      text-align:center;
+    }
+    .subTitle{
+      text-align:center;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.65;
+      margin-bottom:18px;
+    }
 
-/* intro fade */
-#intro img{
-  opacity:0;
-  animation:fadeIn 1.2s ease forwards;
-}
-#intro img:nth-child(2){animation-delay:1s}
-#intro img:nth-child(3){animation-delay:2s}
-@keyframes fadeIn{to{opacity:1}}
+    .btnRow{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      margin-top:18px;
+      flex-wrap:wrap;
+    }
 
-/* music overlay */
-#musicOverlay{
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  background:#000;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  z-index:9999;
-}
+    button{
+      border:none;
+      padding:12px 18px;
+      border-radius:999px;
+      font-size:15px;
+      cursor:pointer;
+      background:var(--accent);
+      color:#fff;
+      transition:transform .12s ease, opacity .12s ease;
+    }
+    button:active{transform:scale(.98)}
+    .ghost{
+      background:transparent;
+      color:var(--ink);
+      border:1px solid rgba(0,0,0,.12);
+    }
 
-/* hearts on option click */
-.heart{
-  position:fixed;
-  font-size:20px;
-  color:#ff6f91;
-  animation:float 3s linear forwards;
-  pointer-events:none;
-}
-@keyframes float{
-  from{opacity:1;transform:translateY(0)}
-  to{opacity:0;transform:translateY(-150px)}
-}
+    /* ---------- Intro typing block ---------- */
+    .introWrap{
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:14px;
+    }
 
-/* final pop-in image */
-.pop-in{
-  opacity:0;
-  transform:scale(.92) translateY(18px);
-  transition:opacity .9s ease, transform .9s ease;
-}
-.pop-in.show{
-  opacity:1;
-  transform:scale(1) translateY(0);
-}
+    .typingArea{
+      margin-top:8px;
+      min-height:160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:0 10px;
+    }
 
-/* party poppers */
-.popper{
-  position:fixed;
-  font-size:30px;
-  animation:pop 1.8s ease-out forwards;
-  pointer-events:none;
-}
-@keyframes pop{
-  0%{transform:scale(0) rotate(0deg);opacity:1}
-  100%{transform:scale(1.8) rotate(25deg);opacity:0}
-}
+    .typingLine{
+      font-family:'Playfair Display',serif;
+      font-weight:600;
+      font-size:clamp(22px, 3.4vw, 34px);
+      line-height:1.25;
+      letter-spacing:.2px;
+    }
 
-/* big final text */
-.big-bday{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.2rem,6vw,3.6rem);
-  letter-spacing:.5px;
-  margin-top:8px;
-}
-.small-note{
-  opacity:.75;
-  margin-top:8px;
-}
-</style>
+    .cursor{
+      display:inline-block;
+      width:10px;
+      height:22px;
+      margin-left:6px;
+      background:rgba(31,31,31,.75);
+      animation:blink .85s infinite;
+      transform:translateY(3px);
+      border-radius:3px;
+    }
+    @keyframes blink{50%{opacity:0}}
+
+    .fadeOut{
+      animation: fadeOut .45s ease forwards;
+    }
+    @keyframes fadeOut{
+      to{opacity:0; transform:translateY(-6px)}
+    }
+
+    /* ---------- Intro 3 images row ---------- */
+    .introImages{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+      margin-top:10px;
+      align-items:stretch;
+    }
+
+    .introImages img{
+      width:100%;
+      height:160px;
+      object-fit:cover;
+      border-radius:18px;
+      box-shadow:0 14px 36px rgba(0,0,0,.10);
+      opacity:0;
+      transform:translateY(10px);
+      animation: popIn .8s ease forwards;
+    }
+    .introImages img:nth-child(1){animation-delay:.25s}
+    .introImages img:nth-child(2){animation-delay:.45s}
+    .introImages img:nth-child(3){animation-delay:.65s}
+
+    @keyframes popIn{
+      to{opacity:1; transform:translateY(0)}
+    }
+
+    /* ---------- Questions ---------- */
+    .qWrap{
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:18px;
+      padding:6px 6px 0;
+    }
+
+    .qCard{
+      background:var(--card);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:18px;
+      padding:16px 16px;
+      box-shadow:0 14px 40px rgba(0,0,0,.06);
+      text-align:left;
+    }
+
+    .qTitle{
+      font-weight:500;
+      font-size:16px;
+      line-height:1.55;
+      margin-bottom:10px;
+    }
+
+    .optRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .optBtn{
+      background:rgba(255,111,145,.10);
+      color:var(--ink);
+      border:1px solid rgba(255,111,145,.25);
+    }
+
+    /* ---------- Journey card (one at a time) ---------- */
+    .journeyWrap{
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      gap:14px;
+      padding:6px;
+    }
+
+    .journeyCard{
+      width:min(720px, 100%);
+      background:var(--card);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:22px;
+      box-shadow:0 18px 60px rgba(0,0,0,.08);
+      padding:18px;
+      text-align:center;
+      animation: slideUp .55s ease both;
+    }
+    @keyframes slideUp{
+      from{opacity:0; transform:translateY(16px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+
+    .journeyCard img{
+      width:100%;
+      max-width:440px;
+      height:260px;
+      object-fit:cover;
+      border-radius:18px;
+      box-shadow:0 18px 50px rgba(0,0,0,.12);
+      margin:10px 0 12px;
+    }
+
+    .journeyTitle{
+      font-family:'Playfair Display',serif;
+      font-size:22px;
+      margin-top:4px;
+      margin-bottom:6px;
+    }
+
+    .journeyText{
+      color:rgba(31,31,31,.78);
+      line-height:1.9;
+      font-size:15.5px;
+      padding:0 8px;
+    }
+
+    /* ---------- Letter ---------- */
+    .letterBox{
+      width:min(760px, 100%);
+      background:var(--card);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:22px;
+      box-shadow:0 18px 60px rgba(0,0,0,.08);
+      padding:20px 18px;
+      text-align:left;
+      margin:10px auto 0;
+    }
+
+    .letterHeading{
+      font-family:'Playfair Display',serif;
+      font-size:22px;
+      margin-bottom:10px;
+      text-align:center;
+    }
+
+    .letterText{
+      font-size:15.5px;
+      line-height:1.95;
+      color:rgba(31,31,31,.80);
+      white-space:pre-line;
+      min-height:210px;
+    }
+
+    /* ---------- Final ---------- */
+    .finalWrap{
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+    }
+
+    .finalImg{
+      width:min(440px, 88%);
+      height:300px;
+      object-fit:cover;
+      border-radius:22px;
+      box-shadow:0 22px 70px rgba(0,0,0,.15);
+      opacity:0;
+      transform:scale(.94) translateY(14px);
+      transition:opacity .9s ease, transform .9s ease;
+    }
+    .finalImg.show{
+      opacity:1;
+      transform:scale(1) translateY(0);
+    }
+
+    .finalBig{
+      font-family:'Playfair Display',serif;
+      font-weight:600;
+      font-size:clamp(30px, 5vw, 52px);
+      letter-spacing:.4px;
+      text-align:center;
+    }
+
+    .finalSmall{
+      color:rgba(31,31,31,.72);
+      text-align:center;
+      max-width:720px;
+      line-height:1.7;
+      font-size:15px;
+    }
+
+    /* ---------- Floating hearts (options) ---------- */
+    .heart{
+      position:fixed;
+      font-size:18px;
+      color:var(--accent);
+      pointer-events:none;
+      animation: floatHeart 2.3s ease forwards;
+      opacity:.95;
+    }
+    @keyframes floatHeart{
+      0%{transform:translateY(0) scale(1); opacity:.95}
+      100%{transform:translateY(-140px) scale(1.35); opacity:0}
+    }
+
+    /* ---------- Party poppers ---------- */
+    .popper{
+      position:fixed;
+      font-size:30px;
+      pointer-events:none;
+      animation: pop 1.8s ease-out forwards;
+    }
+    @keyframes pop{
+      0%{transform:scale(0) rotate(0deg);opacity:1}
+      100%{transform:scale(1.7) rotate(25deg);opacity:0}
+    }
+
+    /* ---------- Mobile tweaks ---------- */
+    @media (max-width:520px){
+      .slide{padding:18px}
+      .introImages img{height:120px}
+      .journeyCard img{height:220px}
+      .typingArea{min-height:150px}
+    }
+  </style>
 </head>
 
 <body>
+  <!-- MUSIC -->
+  <div id="musicOverlay">
+    <h2>Tap to Begin 🎵</h2>
+    <p>This is something special I made for you on your birthday.</p>
+    <p style="margin-top:10px;opacity:.6;font-size:13px">Music starts after tap (mobile rule)</p>
+  </div>
 
-<!-- MUSIC START -->
-<div id="musicOverlay">
-  <h2>Tap to Begin 🎵</h2>
-  <p style="opacity:.7;margin-top:10px">A birthday surprise awaits</p>
-</div>
+  <audio id="bgMusic" loop>
+    <!-- IMPORTANT: your file in repo is "Birthday.mp3.mp3" right now.
+         EASIEST FIX: rename that file to "birthday.mp3"
+         OR change the src below to match your exact filename. -->
+    <source src="birthday.mp3" type="audio/mpeg">
+  </audio>
 
-<audio id="bgMusic" loop>
-  <source src="birthday.mp3" type="audio/mpeg">
-</audio>
+  <div class="app">
 
-<!-- INTRO -->
-<section id="intro">
-  <h1 id="introText"></h1>
+    <!-- SLIDE 1: Intro -->
+    <div class="slide active" id="slide-intro">
+      <div class="introWrap">
+        <div>
+          <div class="topTitle">Happy Birthday, Yash 🤍</div>
+          <div class="subTitle">Here’s something small but meaningful, made just for your 24th.</div>
+        </div>
 
-  <img src="images/intro1.jpeg">
-  <img src="images/intro2.jpeg">
-  <img src="images/intro3.jpeg">
+        <div class="typingArea">
+          <div class="typingLine" id="introTyping"></div><span class="cursor" id="introCursor"></span>
+        </div>
 
-  <button onclick="goTo('questions')">Continue</button>
-</section>
+        <div class="introImages">
+          <img src="images/intro1.jpeg" alt="intro 1">
+          <img src="images/intro2.jpeg" alt="intro 2">
+          <img src="images/intro3.jpeg" alt="intro 3">
+        </div>
 
-<!-- QUESTIONS -->
-<section id="questions">
-  <h2>Your younger self asks…</h2>
-  <p>Every answer brings a little love with it.</p>
+        <div class="btnRow">
+          <button id="introNextBtn" onclick="goToSlide('slide-questions')" disabled style="opacity:.55;cursor:not-allowed">
+            Continue
+          </button>
+        </div>
+      </div>
+    </div>
 
-  <p>Did you believe you could change everything?</p>
-  <button onclick="heart()">Yes, I always knew</button>
+    <!-- SLIDE 2: Questions -->
+    <div class="slide" id="slide-questions">
+      <div class="topTitle">Your younger self has a few questions 🧒</div>
+      <div class="subTitle">Answer gently. This is you talking to you.</div>
 
-  <p>When life tested you, did you still stand tall?</p>
-  <button onclick="heart()">Every single time</button>
+      <div class="qWrap" id="qWrap"></div>
 
-  <p>Are you proud of who you’ve become?</p>
-  <button onclick="heart()">More than words</button>
+      <div class="btnRow">
+        <button class="ghost" onclick="goToSlide('slide-intro')">Back</button>
+        <button onclick="goToSlide('slide-journey-start')">Continue</button>
+      </div>
+    </div>
 
-  <button onclick="goTo('journey')">See your journey</button>
-</section>
+    <!-- SLIDE 3: Journey start -->
+    <div class="slide" id="slide-journey-start">
+      <div class="topTitle">Before we begin…</div>
+      <div class="subTitle">
+        Let’s look at your life through the eyes of the boy who started it all.
+      </div>
 
-<!-- JOURNEY -->
-<section id="journey">
-  <h2>Let’s see life from our eyes ✨</h2>
+      <div class="btnRow">
+        <button class="ghost" onclick="goToSlide('slide-questions')">Back</button>
+        <button onclick="startJourney()">Start your story →</button>
+      </div>
+    </div>
 
-  <img src="images/childhood.jpeg" class="parallax">
-  <p><b>Childhood</b><br>
-  Born after eleven years, stubborn and fearless.
-  A child who wanted the rarest things,
-  not knowing he would one day inspire so many.</p>
+    <!-- SLIDE 4: Journey (one at a time) -->
+    <div class="slide" id="slide-journey">
+      <div class="journeyWrap">
+        <div class="journeyCard" id="journeyCard"></div>
 
-  <img src="images/competitions.jpeg" class="parallax">
-  <p><b>Competitions</b><br>
-  Determination, discipline, and belief.
-  From UCMAS to nationals,
-  you proved that lack never defines limits.</p>
+        <div class="btnRow">
+          <button class="ghost" onclick="prevJourney()">Previous</button>
+          <button onclick="nextJourney()">Next</button>
+        </div>
+      </div>
+    </div>
 
-  <img src="images/turning-point.jpeg" class="parallax">
-  <p><b>Turning Point</b><br>
-  Choosing dreams over norms.
-  Courage over comfort.
-  This is where ordinary thinking ended.</p>
+    <!-- SLIDE 5: Letter -->
+    <div class="slide" id="slide-letter">
+      <div class="letterBox">
+        <div class="letterHeading">A letter from someone who believes in you 🤍</div>
+        <div class="letterText" id="letterTyping"></div>
+      </div>
 
-  <img src="images/success.jpeg" class="parallax">
-  <p><b>Success</b><br>
-  Years of silent grind.
-  Aligned stars.
-  Growth that changed lives.</p>
+      <div class="btnRow">
+        <button class="ghost" onclick="goToSlide('slide-journey')">Back</button>
+        <button onclick="goToSlide('slide-final'); triggerFinal();">One last thing</button>
+      </div>
+    </div>
 
-  <img src="images/present.jpeg" class="parallax">
-  <p><b>Present</b><br>
-  Still hungry.
-  Still humble.
-  Still unstoppable.</p>
+    <!-- SLIDE 6: Final -->
+    <div class="slide" id="slide-final">
+      <div class="finalWrap">
+        <img src="images/present.jpeg" class="finalImg" id="finalImg" alt="final">
+        <div class="finalBig">HAPPIEST BIRTHDAY AGAIN 🎉</div>
+        <div class="finalSmall">
+          You are rare. You are powerful. And this is only the beginning.
+        </div>
 
-  <button onclick="goTo('letter')">Read the letter</button>
-</section>
+        <div class="btnRow">
+          <button class="ghost" onclick="goToSlide('slide-letter')">Back</button>
+          <button onclick="poppersBurst(40)">Celebrate 🎉</button>
+        </div>
+      </div>
+    </div>
 
-<!-- LETTER -->
-<section id="letter">
-  <h2>A letter from someone who believes in you 🤍</h2>
-  <p id="letterText"></p>
-  <button onclick="goTo('final')">One last thing</button>
-</section>
+  </div>
 
-<!-- FINAL -->
-<section id="final">
-  <img id="finalImg" class="pop-in" src="images/present.jpeg" alt="Yash">
-  <div class="big-bday">HAPPIEST BIRTHDAY AGAIN 🎉</div>
-  <p class="small-note">You are rare. You are powerful. This is only the beginning.</p>
-</section>
+  <script>
+    /* -------------------------
+       IMPORTANT MUSIC NOTE
+       -------------------------
+       In your repo screenshot, your audio file is named:
+       "Birthday.mp3.mp3"
 
-<script>
-// intro typing
-const introMsg =
-"Hi Yash, this is your younger self.\n" +
-"Happy happy birthday, elder one. My champ.\n" +
-"You’ve spent 24 years growing into a man who handles life the best he can.\n" +
-"Keep growing. Keep dreaming.\n" +
-"And remember, resting does not mean you are behind.";
+       This code expects: birthday.mp3
+       EASIEST:
+         Rename file in repo to: birthday.mp3
 
-let i=0;
-function typeIntro(){
-  if(i<introMsg.length){
-    document.getElementById("introText").innerHTML+=introMsg.charAt(i);
-    i++; setTimeout(typeIntro,45);
-  }
-}
-typeIntro();
+       If you do NOT want to rename,
+       then change this line instead:
+         <source src="Birthday.mp3.mp3" ...>
+    */
 
-// music start (mobile-safe)
-document.getElementById("musicOverlay").onclick=()=>{
-  document.getElementById("bgMusic").play();
-  document.getElementById("musicOverlay").style.display="none";
-};
+    // 1) Tap overlay => play music + start intro typing sequence
+    const overlay = document.getElementById('musicOverlay');
+    const music = document.getElementById('bgMusic');
 
-// smooth navigation
-function goTo(id){
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
-}
+    overlay.addEventListener('click', async () => {
+      try{
+        await music.play();
+      }catch(e){}
+      overlay.style.display = 'none';
+      runIntroSequence(); // start typing after tap
+    });
 
-// hearts on click
-function heart(){
-  const h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="❤";
-  h.style.left=Math.random()*100+"vw";
-  h.style.top="80%";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),3000);
-}
-
-// soft parallax
-window.addEventListener("scroll",()=>{
-  document.querySelectorAll(".parallax").forEach(img=>{
-    img.style.transform=`translateY(${window.scrollY*0.10}px)`;
-  });
-});
-
-// letter typewriter (your short mobile letter)
-const letter =
-"It feels like I’ve known you forever.\n" +
-"You chose courage when life was uncertain.\n" +
-"You carried discipline quietly.\n" +
-"You changed lives by not giving up.\n\n" +
-"Happy happy 24th birthday.\n" +
-"With love, always.\n" +
-"Yours ❤️";
-
-let j=0;
-function typeLetter(){
-  if(j<letter.length){
-    document.getElementById("letterText").innerHTML+=letter.charAt(j);
-    j++; setTimeout(typeLetter,35);
-  }
-}
-setTimeout(typeLetter,1200);
-
-// PARTY POPPERS burst
-function poppersBurst(count=28){
-  for(let k=0;k<count;k++){
-    const p=document.createElement("div");
-    p.className="popper";
-    p.innerHTML = (Math.random() > 0.5) ? "🎉" : "🥳";
-    p.style.left = Math.random()*100+"vw";
-    p.style.top  = Math.random()*100+"vh";
-    document.body.appendChild(p);
-    setTimeout(()=>p.remove(),1800);
-  }
-}
-
-// Trigger final animation ONLY when final section appears
-let finalPlayed=false;
-const finalSection = document.getElementById("final");
-const finalImg = document.getElementById("finalImg");
-
-const observer = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting && !finalPlayed){
-      finalPlayed=true;
-      finalImg.classList.add("show");     // image pop in
-      setTimeout(()=>poppersBurst(36),350); // party burst right after
+    // Slide navigation (NO SCROLL, just show/hide)
+    function goToSlide(id){
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      // little reset for letter typing if needed
+      if(id === 'slide-letter') startLetterTyping();
     }
-  });
-},{threshold:0.55});
 
-observer.observe(finalSection);
-</script>
+    /* -------------------------
+       INTRO TYPEWRITER SEQUENCE
+       Each line types, stays 2s, disappears, next line types...
+       ------------------------- */
+    const introLines = [
+      "Hi Yash,",
+      "This is your younger self.",
+      "Happy happy birthday, elder one. My champ.",
+      "You have spent 24 years living and handling life the best you could.",
+      "You are doing a tremendous job. Keep growing towards your dream life.",
+      "And hey, take a pause and rest sometimes. Resting doesn’t mean you’re behind."
+    ];
 
+    const introEl = document.getElementById('introTyping');
+    const cursorEl = document.getElementById('introCursor');
+    const introNextBtn = document.getElementById('introNextBtn');
+
+    function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+    async function typeLine(text, speed=42){
+      introEl.textContent = "";
+      introEl.classList.remove('fadeOut');
+      for(let i=0;i<text.length;i++){
+        introEl.textContent += text[i];
+        await sleep(speed);
+      }
+    }
+
+    async function runIntroSequence(){
+      cursorEl.style.display = 'inline-block';
+
+      for(let idx=0; idx<introLines.length; idx++){
+        await typeLine(introLines[idx], 42);
+        await sleep(2000); // stays 2s
+        introEl.classList.add('fadeOut');
+        await sleep(500);
+      }
+
+      // finish
+      cursorEl.style.display = 'none';
+      introEl.textContent = "Ready? 💫";
+      introNextBtn.disabled = false;
+      introNextBtn.style.opacity = "1";
+      introNextBtn.style.cursor = "pointer";
+    }
+
+    /* -------------------------
+       QUESTIONS (younger self)
+       hearts float on option click
+       ------------------------- */
+    const questions = [
+      {
+        q: "Do you remember me, the kid who wanted so many things but couldn’t have them?",
+        a: ["Yes. I remember you every day.", "Yes, and I carried you with me."]
+      },
+      {
+        q: "Did that lack break us, or did it make us stronger?",
+        a: ["It hurt more than I admit.", "It lit a fire that still burns."]
+      },
+      {
+        q: "When we worked so hard in competitions, who were we trying to prove it to?",
+        a: ["To myself.", "To the world and to me."]
+      },
+      {
+        q: "When you chose a path different from everyone else, were you scared like I used to be?",
+        a: ["Terrified, but hopeful.", "Scared, but determined."]
+      },
+      {
+        q: "When no one understood you, did you ever feel like giving up?",
+        a: ["Yes, many times.", "Yes, but I kept going."]
+      },
+      {
+        q: "All those years of discipline… was it worth it?",
+        a: ["Every single sacrifice.", "More than words can say."]
+      },
+      {
+        q: "If I ask you one last thing… are you proud of me?",
+        a: ["So proud it hurts.", "Always was. Always will be."]
+      }
+    ];
+
+    const qWrap = document.getElementById('qWrap');
+
+    function buildQuestions(){
+      qWrap.innerHTML = "";
+      questions.forEach((item) => {
+        const card = document.createElement('div');
+        card.className = 'qCard';
+
+        const t = document.createElement('div');
+        t.className = 'qTitle';
+        t.textContent = item.q;
+
+        const opts = document.createElement('div');
+        opts.className = 'optRow';
+
+        item.a.forEach(optText => {
+          const b = document.createElement('button');
+          b.className = 'optBtn';
+          b.textContent = optText;
+          b.onclick = () => { floatHeart(); };
+          opts.appendChild(b);
+        });
+
+        card.appendChild(t);
+        card.appendChild(opts);
+        qWrap.appendChild(card);
+      });
+    }
+    buildQuestions();
+
+    function floatHeart(){
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.textContent = '❤';
+      h.style.left = (Math.random()*80 + 10) + 'vw';
+      h.style.top = (Math.random()*18 + 70) + 'vh';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(), 2300);
+    }
+
+    /* -------------------------
+       JOURNEY (one at a time, button next/prev)
+       Use your exact filenames from repo:
+         childhood.jpeg
+         competitions.jpeg
+         turning-point.jpeg
+         success.jpeg
+         present.jpeg
+       ------------------------- */
+    const journeyData = [
+      {
+        title: "A boy was born",
+        img: "images/childhood.jpeg",
+        text:
+`Born after eleven years, a child arrived and quietly rewired fate.
+Stubborn and notorious, wanting what he wanted, especially the rarest things.
+Who knew that same child would grow into such an inspiring man?`
+      },
+      {
+        title: "The competitor",
+        img: "images/competitions.jpeg",
+        text:
+`A determined boy who studied with discipline and sharp belief.
+Not to impress anyone, but to prove to himself: I can win, no matter the lack.
+UCMAS, nationals, every stage, the same zeal, the same hunger.
+And every win made the home a little prouder.`
+      },
+      {
+        title: "The turning point",
+        img: "images/turning-point.jpeg",
+        text:
+`One day, it was society’s safe path or your own dreams.
+Something inside you knew your current life wasn’t meant for you.
+So you chose the uncommon road, where hardly anyone walks.
+Courage, ambition, belief, you had it all, and you chose yourself.`
+      },
+      {
+        title: "Success",
+        img: "images/success.jpeg",
+        text:
+`Then came the entry of your Godfather, Paul.
+Like you became light for others, he became hope for your future.
+Stars aligned, vibe matched, and you turned unstoppable.
+You grew, and with you, the people around you grew too.`
+      },
+      {
+        title: "Present",
+        img: "images/present.jpeg",
+        text:
+`And here you are today, after 7 to 8 years of proving yourself.
+Moving mountains quietly.
+Changing lives, not just yours, but everyone who crossed your path.
+Still hungry, still humble, still rising.`
+      }
+    ];
+
+    let journeyIndex = 0;
+    const journeyCard = document.getElementById('journeyCard');
+
+    function startJourney(){
+      journeyIndex = 0;
+      renderJourney();
+      goToSlide('slide-journey');
+    }
+
+    function renderJourney(){
+      const item = journeyData[journeyIndex];
+      journeyCard.innerHTML = `
+        <div class="journeyTitle">${item.title}</div>
+        <img src="${item.img}" alt="${item.title}">
+        <div class="journeyText">${item.text.replaceAll("\n","<br>")}</div>
+      `;
+      // If last card, change next button text
+      const btns = document.querySelector('#slide-journey .btnRow');
+      const nextBtn = btns.querySelector('button:last-child');
+      if(journeyIndex === journeyData.length - 1){
+        nextBtn.textContent = "Continue →";
+        nextBtn.onclick = () => goToSlide('slide-letter');
+      }else{
+        nextBtn.textContent = "Next";
+        nextBtn.onclick = nextJourney;
+      }
+    }
+
+    function nextJourney(){
+      if(journeyIndex < journeyData.length - 1){
+        journeyIndex++;
+        renderJourney();
+      }
+    }
+
+    function prevJourney(){
+      if(journeyIndex > 0){
+        journeyIndex--;
+        renderJourney();
+      }
+    }
+
+    /* -------------------------
+       LETTER typewriter (subtle, scroll-free)
+       ------------------------- */
+    const letterText =
+It feels like I’ve known you forever.
+Like I somehow knew your story even before you told me.
+
+I know I wasn’t there when you were a child,
+but the way you talk about your life,
+it feels like I’ve lived it with you.
+You always wanted everything, not because you were greedy,
+but because you saw others have what you couldn’t.
+And that lack lit a fire inside you,
+a fire to give yourself and your family everything one day.
+
+You were always a champion.
+In school, in competitions, in life,
+you never played small.
+You want to win and you worked for it quietly, patiently.
+
+Then came the moment where you chose yourself.
+You didn’t follow the usual path.
+You chose something uncertain, risky and completely yours.
+And that decision changed everything.
+
+The discipline you’ve shown for years,
+seven, eight, now so many years,
+I honestly don’t have words for how proud we are of you.
+We are grateful, protected, and standing strong
+because of you.
+
+Yes, you’re annoying sometimes.
+Yes, you’re stubborn.
+But that mischief, that madness,
+we somewhere love it.
+You are the main character in our lives,
+and we cannot imagine life without you.
+
+And then… there’s us.
+How destiny made us meet out of nowhere,
+right when I needed light the most.
+You showed up — just like that.
+And somehow, everything shifted.
+
+You give me comfort, but you also push me to grow.
+You make me feel safe, but never stagnant.
+You walk ahead but always holding everyone’s hand.
+
+From our first conversations,
+to Rishikesh, Goa, Kerala, Dubai
+so many firsts, so many memories.
+Life with you has been magical in ways I can’t explain.
+
+You feel like home to me.
+Safe. Warm. Real.
+And still challenging me to become better.
+
+I don’t know what good karma brought us together,
+but I’m grateful every single day.
+
+Happy happy 24th birthday.
+You are rare. You are powerful.
+And this is only the beginning.
+
+I love you so much. 🤍
+
+Happy happy 24th birthday.
+With love, always.
+Someone who believes in you ❤️`;
+
+    const letterEl = document.getElementById('letterTyping');
+    let letterTyped = false;
+
+    async function startLetterTyping(){
+      if(letterTyped) return;
+      letterTyped = true;
+      letterEl.textContent = "";
+      for(let i=0;i<letterText.length;i++){
+        letterEl.textContent += letterText[i];
+        await sleep(28);
+      }
+    }
+
+    /* -------------------------
+       FINAL: image pops in + poppers burst when slide opens
+       ------------------------- */
+    const finalImg = document.getElementById('finalImg');
+    let finalPlayed = false;
+
+    function poppersBurst(count=36){
+      for(let i=0;i<count;i++){
+        const p = document.createElement('div');
+        p.className = 'popper';
+        p.textContent = (Math.random() > 0.5) ? '🎉' : '🥳';
+        p.style.left = Math.random()*100 + 'vw';
+        p.style.top  = Math.random()*100 + 'vh';
+        document.body.appendChild(p);
+        setTimeout(()=>p.remove(), 1800);
+      }
+    }
+
+    function triggerFinal(){
+      if(finalPlayed) return;
+      finalPlayed = true;
+      setTimeout(()=> finalImg.classList.add('show'), 200);
+      setTimeout(()=> poppersBurst(44), 520);
+    }
+  </script>
 </body>
 </html>
