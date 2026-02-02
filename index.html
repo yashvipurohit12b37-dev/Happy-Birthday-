@@ -382,17 +382,28 @@
 
 <body>
   <!-- MUSIC -->
-  <div id="musicOverlay">
-    <h2>Tap to Begin 🎵</h2>
-    <p>This is something special I made for you on your birthday.</p>
-    <p style="margin-top:10px;opacity:.6;font-size:13px">Music starts after tap (mobile rule)</p>
-  </div>
+ <div id="musicOverlay">
+  <h2>Happy Birthday, Yash 🎉</h2>
+
+  <p>This is something special I made for you on your birthday.</p>
+
+  <!-- 👇 THIS IS THE TAP -->
+  <button id="playVibeBtn">
+    ▶ Play the song for the vibe
+  </button>
+
+  <p style="margin-top:10px;opacity:.6;font-size:13px">
+    (Turn sound on 🔊)
+  </p>
+</div>
+<button id="playVibeBtn">
+
 
   <audio id="bgMusic" loop>
     <!-- IMPORTANT: your file in repo is "Birthday.mp3.mp3" right now.
          EASIEST FIX: rename that file to "birthday.mp3"
          OR change the src below to match your exact filename. -->
-    <source src="birthday.mp3" type="audio/mpeg">
+    <source src="Birthday.mp3.mp3" type="audio/mpeg">
   </audio>
 
   <div class="app">
@@ -854,6 +865,25 @@ Someone who believes in you ❤️`;
       setTimeout(()=> finalImg.classList.add('show'), 200);
       setTimeout(()=> poppersBurst(44), 520);
     }
+  
+const playBtn = document.getElementById("playVibeBtn");
+const overlay = document.getElementById("musicOverlay");
+const music = document.getElementById("bgMusic");
+
+if (playBtn) {
+  playBtn.addEventListener("click", async () => {
+    try {
+      await music.play();
+    } catch (e) {
+      alert("Turn off silent mode and increase volume 🔊");
+    }
+    overlay.style.display = "none";
+
+    // Start intro typing if your function exists
+    if (typeof runIntroSequence === "function") runIntroSequence();
+  });
+}
+
   </script>
 </body>
 </html>
