@@ -3,36 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday 💖</title>
+<title>Happy 24th Birthday Yash 🎉</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(180deg,#fff0f5,#ffffff);
-  color:#333;
+  font-family:'Inter',sans-serif;
+  background:linear-gradient(180deg,#fff7f2,#ffffff);
+  color:#222;
   overflow-x:hidden;
-}
-
-/* Floating hearts */
-.heart{
-  position:fixed;
-  bottom:-20px;
-  font-size:18px;
-  animation:float 8s linear infinite;
-  opacity:.7;
-}
-@keyframes float{
-  from{transform:translateY(0);opacity:.8}
-  to{transform:translateY(-120vh);opacity:0}
 }
 
 section{
   min-height:100vh;
-  padding:80px 20px;
+  padding:70px 20px;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -40,219 +27,301 @@ section{
   text-align:center;
 }
 
-.hero h1{
+h1,h2{
   font-family:'Playfair Display',serif;
-  font-size:clamp(2.2rem,5vw,3.2rem);
+  margin-bottom:18px;
 }
-.hero p{
-  max-width:650px;
-  margin-top:15px;
-  line-height:1.8;
+
+p{
+  max-width:740px;
+  line-height:1.85;
+  font-size:16px;
+  opacity:.92;
+  margin-top:14px;
 }
+
 button{
-  margin-top:30px;
-  padding:14px 34px;
+  padding:14px 30px;
   border:none;
   border-radius:40px;
-  background:#ff5f9e;
-  color:white;
-  font-size:1rem;
+  background:#ff6f91;
+  color:#fff;
+  font-size:16px;
+  margin-top:26px;
   cursor:pointer;
 }
 
-/* Story cards */
-.card{
-  max-width:850px;
-  animation:fadeUp 1s ease forwards;
-}
-.card img{
-  width:100%;
+img{
+  width:85%;
   max-width:420px;
-  border-radius:20px;
-  box-shadow:0 25px 50px rgba(0,0,0,.15);
-  margin-bottom:25px;
+  border-radius:22px;
+  margin:22px 0;
+  box-shadow:0 18px 50px rgba(0,0,0,.12);
 }
-.card h2{
+
+.parallax{
+  transition:transform .2s ease-out;
+}
+
+/* intro fade */
+#intro img{
+  opacity:0;
+  animation:fadeIn 1.2s ease forwards;
+}
+#intro img:nth-child(2){animation-delay:1s}
+#intro img:nth-child(3){animation-delay:2s}
+@keyframes fadeIn{to{opacity:1}}
+
+/* music overlay */
+#musicOverlay{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:#000;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  z-index:9999;
+}
+
+/* hearts on option click */
+.heart{
+  position:fixed;
+  font-size:20px;
+  color:#ff6f91;
+  animation:float 3s linear forwards;
+  pointer-events:none;
+}
+@keyframes float{
+  from{opacity:1;transform:translateY(0)}
+  to{opacity:0;transform:translateY(-150px)}
+}
+
+/* final pop-in image */
+.pop-in{
+  opacity:0;
+  transform:scale(.92) translateY(18px);
+  transition:opacity .9s ease, transform .9s ease;
+}
+.pop-in.show{
+  opacity:1;
+  transform:scale(1) translateY(0);
+}
+
+/* party poppers */
+.popper{
+  position:fixed;
+  font-size:30px;
+  animation:pop 1.8s ease-out forwards;
+  pointer-events:none;
+}
+@keyframes pop{
+  0%{transform:scale(0) rotate(0deg);opacity:1}
+  100%{transform:scale(1.8) rotate(25deg);opacity:0}
+}
+
+/* big final text */
+.big-bday{
   font-family:'Playfair Display',serif;
-  margin-bottom:12px;
+  font-size:clamp(2.2rem,6vw,3.6rem);
+  letter-spacing:.5px;
+  margin-top:8px;
 }
-.card p{
-  font-size:1.05rem;
-  line-height:1.9;
-  color:#555;
+.small-note{
+  opacity:.75;
+  margin-top:8px;
 }
-
-.next{
-  background:transparent;
-  color:#ff5f9e;
-  border:1px solid #ff5f9e;
-}
-
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(40px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-/* Valentine */
-.options{
-  margin-top:35px;
-  position:relative;
-  height:120px;
-}
-.options button{margin:10px}
-.no{position:absolute;background:#eee;color:#333}
-
-/* Letter */
-.letter{
-  max-width:750px;
-  background:white;
-  padding:40px 30px;
-  border-radius:20px;
-  box-shadow:0 25px 60px rgba(0,0,0,.1);
-}
-.letter p{line-height:2;color:#555}
 </style>
 </head>
 
 <body>
 
-<audio id="music" loop>
-  <source src="Birthday.mp3" type="audio/mpeg">
+<!-- MUSIC START -->
+<div id="musicOverlay">
+  <h2>Tap to Begin 🎵</h2>
+  <p style="opacity:.7;margin-top:10px">A birthday surprise awaits</p>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="birthday.mp3" type="audio/mpeg">
 </audio>
 
-<!-- HERO -->
-<section class="hero">
-  <h1>Happy Birthday 💖</h1>
-  <p>
-    This is something I made just for you.  
-    Not fancy — but meaningful.  
-    Take a moment… and begin.
-  </p>
-  <button onclick="start()">Start ✨</button>
+<!-- INTRO -->
+<section id="intro">
+  <h1 id="introText"></h1>
+
+  <img src="images/intro1.jpeg">
+  <img src="images/intro2.jpeg">
+  <img src="images/intro3.jpeg">
+
+  <button onclick="goTo('questions')">Continue</button>
 </section>
 
-<!-- CHILDHOOD -->
-<section class="story">
-  <div class="card">
-    <img src="images/childhood.jpg">
-    <h2>Childhood</h2>
-    <p>
-      Born after years of patience and prayers,  
-      you arrived with quiet strength.  
-      A stubborn heart, but always full of courage.
-    </p>
-    <button class="next" onclick="next()">Next →</button>
-  </div>
+<!-- QUESTIONS -->
+<section id="questions">
+  <h2>Your younger self asks…</h2>
+  <p>Every answer brings a little love with it.</p>
+
+  <p>Did you believe you could change everything?</p>
+  <button onclick="heart()">Yes, I always knew</button>
+
+  <p>When life tested you, did you still stand tall?</p>
+  <button onclick="heart()">Every single time</button>
+
+  <p>Are you proud of who you’ve become?</p>
+  <button onclick="heart()">More than words</button>
+
+  <button onclick="goTo('journey')">See your journey</button>
 </section>
 
-<!-- COMPETITIONS -->
-<section class="story">
-  <div class="card">
-    <img src="images/competitions.jpg">
-    <h2>The Competitor</h2>
-    <p>
-      Whether it was numbers, games, or challenges,  
-      you never played to participate —  
-      you played to win.
-    </p>
-    <button class="next" onclick="next()">Next →</button>
-  </div>
-</section>
+<!-- JOURNEY -->
+<section id="journey">
+  <h2>Let’s see life from our eyes ✨</h2>
 
-<!-- TURNING POINT -->
-<section class="story">
-  <div class="card">
-    <img src="images/turning-point.jpg">
-    <h2>The Turning Point</h2>
-    <p>
-      When life demanded courage,  
-      you chose an unseen path.  
-      Risky. Lonely. But brave.
-    </p>
-    <button class="next" onclick="next()">Next →</button>
-  </div>
-</section>
+  <img src="images/childhood.jpeg" class="parallax">
+  <p><b>Childhood</b><br>
+  Born after eleven years, stubborn and fearless.
+  A child who wanted the rarest things,
+  not knowing he would one day inspire so many.</p>
 
-<!-- SUCCESS -->
-<section class="story">
-  <div class="card">
-    <img src="images/success.jpg">
-    <h2>The Rise</h2>
-    <p>
-      From scarcity to abundance,  
-      from doubt to belief —  
-      you changed not just your life, but theirs.
-    </p>
-    <button class="next" onclick="next()">Next →</button>
-  </div>
-</section>
+  <img src="images/competitions.jpeg" class="parallax">
+  <p><b>Competitions</b><br>
+  Determination, discipline, and belief.
+  From UCMAS to nationals,
+  you proved that lack never defines limits.</p>
 
-<!-- PRESENT -->
-<section class="story">
-  <div class="card">
-    <img src="images/present.jpg">
-    <h2>The Champion</h2>
-    <p>
-      Today you stand strong, grounded, unstoppable.  
-      A rare mind. A rare heart.  
-      The light others follow.
-    </p>
-    <button class="next" onclick="next()">Next →</button>
-  </div>
-</section>
+  <img src="images/turning-point.jpeg" class="parallax">
+  <p><b>Turning Point</b><br>
+  Choosing dreams over norms.
+  Courage over comfort.
+  This is where ordinary thinking ended.</p>
 
-<!-- QUESTION -->
-<section>
-  <h2>So… will you be my Valentine? 💕</h2>
-  <div class="options">
-    <button onclick="next()">Yes 💖</button>
-    <button class="no" onmouseover="moveNo(this)">No</button>
-  </div>
+  <img src="images/success.jpeg" class="parallax">
+  <p><b>Success</b><br>
+  Years of silent grind.
+  Aligned stars.
+  Growth that changed lives.</p>
+
+  <img src="images/present.jpeg" class="parallax">
+  <p><b>Present</b><br>
+  Still hungry.
+  Still humble.
+  Still unstoppable.</p>
+
+  <button onclick="goTo('letter')">Read the letter</button>
 </section>
 
 <!-- LETTER -->
-<section>
-  <div class="letter">
-    <h2>From Me to You ✉️</h2>
-    <p>
-      You are the rare one — the rabbit who found light  
-      when roads were unknown.<br><br>
-      I see you building more, becoming more,  
-      and touching lives without even trying.<br><br>
-      This is just the beginning.  
-      The world hasn’t seen the best of you yet. 💗
-    </p>
-  </div>
+<section id="letter">
+  <h2>A letter from someone who believes in you 🤍</h2>
+  <p id="letterText"></p>
+  <button onclick="goTo('final')">One last thing</button>
+</section>
+
+<!-- FINAL -->
+<section id="final">
+  <img id="finalImg" class="pop-in" src="images/present.jpeg" alt="Yash">
+  <div class="big-bday">HAPPIEST BIRTHDAY AGAIN 🎉</div>
+  <p class="small-note">You are rare. You are powerful. This is only the beginning.</p>
 </section>
 
 <script>
-let sections=document.querySelectorAll("section");
-let i=0;
-sections.forEach((s,idx)=>{if(idx!==0)s.style.display="none"});
+// intro typing
+const introMsg =
+"Hi Yash, this is your younger self.\n" +
+"Happy happy birthday, elder one. My champ.\n" +
+"You’ve spent 24 years growing into a man who handles life the best he can.\n" +
+"Keep growing. Keep dreaming.\n" +
+"And remember, resting does not mean you are behind.";
 
-function start(){
-  document.getElementById("music").play();
-  sections[0].style.display="none";
-  sections[1].style.display="flex";
-  i=1;
+let i=0;
+function typeIntro(){
+  if(i<introMsg.length){
+    document.getElementById("introText").innerHTML+=introMsg.charAt(i);
+    i++; setTimeout(typeIntro,45);
+  }
 }
-function next(){
-  sections[i].style.display="none";
-  i++;
-  if(sections[i]) sections[i].style.display="flex";
+typeIntro();
+
+// music start (mobile-safe)
+document.getElementById("musicOverlay").onclick=()=>{
+  document.getElementById("bgMusic").play();
+  document.getElementById("musicOverlay").style.display="none";
+};
+
+// smooth navigation
+function goTo(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
-function moveNo(btn){
-  btn.style.left=Math.random()*200+"px";
-  btn.style.top=Math.random()*80+"px";
-}
-setInterval(()=>{
+
+// hearts on click
+function heart(){
   const h=document.createElement("div");
   h.className="heart";
-  h.innerHTML="💗";
+  h.innerHTML="❤";
   h.style.left=Math.random()*100+"vw";
+  h.style.top="80%";
   document.body.appendChild(h);
-  setTimeout(()=>h.remove(),8000);
-},600);
+  setTimeout(()=>h.remove(),3000);
+}
+
+// soft parallax
+window.addEventListener("scroll",()=>{
+  document.querySelectorAll(".parallax").forEach(img=>{
+    img.style.transform=`translateY(${window.scrollY*0.10}px)`;
+  });
+});
+
+// letter typewriter (your short mobile letter)
+const letter =
+"It feels like I’ve known you forever.\n" +
+"You chose courage when life was uncertain.\n" +
+"You carried discipline quietly.\n" +
+"You changed lives by not giving up.\n\n" +
+"Happy happy 24th birthday.\n" +
+"With love, always.\n" +
+"Yours ❤️";
+
+let j=0;
+function typeLetter(){
+  if(j<letter.length){
+    document.getElementById("letterText").innerHTML+=letter.charAt(j);
+    j++; setTimeout(typeLetter,35);
+  }
+}
+setTimeout(typeLetter,1200);
+
+// PARTY POPPERS burst
+function poppersBurst(count=28){
+  for(let k=0;k<count;k++){
+    const p=document.createElement("div");
+    p.className="popper";
+    p.innerHTML = (Math.random() > 0.5) ? "🎉" : "🥳";
+    p.style.left = Math.random()*100+"vw";
+    p.style.top  = Math.random()*100+"vh";
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),1800);
+  }
+}
+
+// Trigger final animation ONLY when final section appears
+let finalPlayed=false;
+const finalSection = document.getElementById("final");
+const finalImg = document.getElementById("finalImg");
+
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting && !finalPlayed){
+      finalPlayed=true;
+      finalImg.classList.add("show");     // image pop in
+      setTimeout(()=>poppersBurst(36),350); // party burst right after
+    }
+  });
+},{threshold:0.55});
+
+observer.observe(finalSection);
 </script>
 
 </body>
