@@ -36,7 +36,6 @@
         linear-gradient(180deg, #fff 0%, #faf7fb 100%);
     }
 
-    /* subtle floating decor */
     .sparkle{
       position:fixed; inset:0; pointer-events:none; opacity:.25;
       background-image:
@@ -64,7 +63,7 @@
       backdrop-filter: blur(10px);
       cursor:pointer;
       user-select:none;
-      font-weight:700;
+      font-weight:800;
     }
     .dot{
       width:10px; height:10px; border-radius:999px;
@@ -73,7 +72,26 @@
     }
     .soundToggle.on .dot{ background: var(--pink); }
 
-    /* app / slides */
+    /* small toast */
+    .toast{
+      position:fixed; left:50%; bottom:18px; transform:translateX(-50%);
+      z-index:80;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(0,0,0,.72);
+      color:#fff;
+      font-weight:700;
+      font-size:13px;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .25s ease, transform .25s ease;
+    }
+    .toast.show{
+      opacity:1;
+      transform:translateX(-50%) translateY(-6px);
+    }
+
+    /* slides */
     .app{
       height:100vh; width:100vw;
       display:flex; align-items:center; justify-content:center;
@@ -83,35 +101,30 @@
     .slide{
       display:none;
       width:min(980px, 96vw);
-      height:min(720px, 92vh);
+      height:min(760px, 92vh);
       background:var(--card);
       border:1px solid var(--border);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
       backdrop-filter: blur(12px);
-      overflow:hidden;
+      overflow:hidden; /* we scroll INSIDE .inner */
       position:relative;
       transform: translateY(8px);
       opacity:0;
       animation: slideIn .45s ease forwards;
     }
-    @keyframes slideIn{
-      to{ opacity:1; transform: translateY(0); }
-    }
+    @keyframes slideIn{ to{ opacity:1; transform: translateY(0); } }
     .slide.active{ display:block; }
 
+    /* ✅ Scroll happens here for every page */
     .inner{
       height:100%;
-      padding:28px 22px;
-      overflow:auto; /* allow scroll inside slide if needed */
+      padding:28px 22px 36px; /* bottom space so buttons never stuck */
+      overflow-y:auto;
+      -webkit-overflow-scrolling:touch;
     }
 
-    /* headings */
-    h1,h2{
-      margin:0;
-      font-family: "Playfair Display", serif;
-      letter-spacing:.2px;
-    }
+    h1,h2{ margin:0; font-family:"Playfair Display", serif; letter-spacing:.2px; }
     .title{
       text-align:center;
       font-size: clamp(32px, 4.8vw, 56px);
@@ -128,22 +141,13 @@
       line-height:1.6;
     }
 
-    /* center block */
-    .centerStack{
-      margin-top:22px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:16px;
-    }
-
     .primary{
       border:none;
       padding:14px 22px;
       border-radius:999px;
       background: linear-gradient(135deg, var(--pink), var(--pink2));
       color:white;
-      font-weight:800;
+      font-weight:900;
       font-size:16px;
       box-shadow:0 16px 34px rgba(255,90,165,.22);
       cursor:pointer;
@@ -151,14 +155,15 @@
     }
     .primary:active{ transform: scale(.98); }
 
-    .ghost{
-      border:1px solid rgba(255,90,165,.25);
-      background:rgba(255,255,255,.7);
-      padding:12px 18px;
-      border-radius:999px;
-      font-weight:800;
-      cursor:pointer;
-      color:#333;
+    .centerFull{
+      min-height: calc(100% - 10px);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      gap:14px;
+      padding:8px 0;
     }
 
     /* typing box */
@@ -190,31 +195,21 @@
     }
     @keyframes blink{ 50%{opacity:0;} }
 
-    /* swap stage (turning image -> intro images) */
+    /* swap stage */
     .swapStage{
       width:min(900px, 92vw);
       margin:18px auto 0;
-      position:relative;
       display:flex;
       justify-content:center;
       align-items:center;
     }
-    .swapItem{
-      display:none;
-      opacity:0;
-      transform: translateY(10px) scale(.98);
-      transition: all .6s ease;
-      width:100%;
-    }
-    .swapItem.show{
-      display:block;
-      opacity:1;
-      transform: translateY(0) scale(1);
-    }
+    .swapItem{ display:none; opacity:0; transform: translateY(10px) scale(.98); transition: all .6s ease; width:100%; }
+    .swapItem.show{ display:block; opacity:1; transform: translateY(0) scale(1); }
+
     .fullImg{
       width:100%;
       height:auto;
-      max-height:52vh;
+      max-height:48vh;
       object-fit:contain; /* fully visible */
       border-radius:26px;
       background:rgba(255,255,255,.65);
@@ -229,8 +224,8 @@
     }
     .introRow img{
       width:100%;
-      height:210px;
-      object-fit:contain; /* fully visible */
+      height:220px;
+      object-fit:contain; /* full visible */
       background:rgba(255,255,255,.78);
       padding:12px;
       border-radius:22px;
@@ -247,20 +242,13 @@
     }
 
     @media (max-width:760px){
-      .slide{ height:min(760px, 94vh); }
       .introRow{ grid-template-columns: 1fr; }
-      .introRow img{ height:240px; }
+      .introRow img{ height:250px; }
       .typeBox{ font-size:15px; }
     }
 
     /* questions */
-    .qWrap{
-      max-width:820px;
-      margin:18px auto 0;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
+    .qWrap{ max-width:820px; margin:18px auto 0; display:flex; flex-direction:column; gap:14px; }
     .qCard{
       background:rgba(255,255,255,.82);
       border:1px solid var(--border);
@@ -268,30 +256,19 @@
       padding:16px;
       box-shadow:0 14px 28px rgba(0,0,0,.05);
     }
-    .q{
-      font-weight:800;
-      margin:0 0 10px;
-      font-size:16px;
-    }
-    .opts{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
+    .q{ font-weight:900; margin:0 0 10px; font-size:16px; }
+    .opts{ display:flex; gap:10px; flex-wrap:wrap; }
     .opt{
       padding:12px 14px;
       border-radius:999px;
       border:1px solid rgba(255,90,165,.25);
       background:rgba(255,255,255,.75);
       cursor:pointer;
-      font-weight:700;
+      font-weight:800;
       transition: transform .12s ease, background .12s ease;
     }
     .opt:active{ transform: scale(.98); }
-    .opt.picked{
-      background: rgba(255,90,165,.12);
-      border-color: rgba(255,90,165,.35);
-    }
+    .opt.picked{ background: rgba(255,90,165,.12); border-color: rgba(255,90,165,.35); }
 
     /* journey */
     .journeyImg{
@@ -342,7 +319,6 @@
       white-space:pre-wrap;
     }
 
-    /* bottom nav area */
     .nav{
       margin:18px auto 0;
       display:flex;
@@ -377,13 +353,6 @@
       from{ transform:translateY(0) scale(.9); opacity:1; }
       to{ transform:translateY(-220px) scale(1.25); opacity:0; }
     }
-
-    .smallNote{
-      text-align:center;
-      color:var(--muted);
-      font-size:13px;
-      margin-top:-6px;
-    }
   </style>
 </head>
 
@@ -391,45 +360,44 @@
   <div class="sparkle"></div>
 
   <!-- SOUND TOGGLE -->
-  <div class="soundToggle" id="soundToggle" aria-label="Sound toggle">
+  <div class="soundToggle" id="soundToggle">
     <div class="dot"></div>
     <span id="soundLabel">Sound Off</span>
   </div>
 
-  <!-- AUDIO (mobile needs user gesture => we provide Play button on slide 1) -->
+  <div class="toast" id="toast">Tap Sound On to start music 🎵</div>
+
+  <!-- AUDIO -->
   <audio id="bgMusic" loop preload="auto">
-    <!-- your file name is currently Birthday.mp3.mp3 -->
+    <!-- ✅ uses your current filename -->
     <source src="Birthday.mp3.mp3" type="audio/mpeg" />
   </audio>
 
   <div class="app">
 
-    <!-- SLIDE 1 -->
+    <!-- SLIDE 1 (Centered) -->
     <section class="slide active" id="s1">
       <div class="inner">
-        <h1 class="title">Happy Birthday, Yash 🥳</h1>
-        <p class="subtitle">
-          Here’s something unique and special for your 24th birthday!<br/>
-          Someone’s here to meet you today.
-        </p>
-
-        <div class="centerStack">
-          <button class="primary" id="playBtn">▶ Play music for the vibe</button>
-          <div class="smallNote">(Mobile needs a tap to start music)</div>
-
+        <div class="centerFull">
+          <h1 class="title">Happy Birthday, Yash 🥳</h1>
+          <p class="subtitle">
+            Here’s something unique and special for your 24th birthday!<br/>
+            Someone’s here to meet you today.
+          </p>
           <button class="primary" id="goS2">Let’s see →</button>
+          <p class="subtitle" style="font-size:13px; opacity:.8; margin-top:2px;">
+            (Tip: tap “Sound On” on the top-right for music)
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 2 (Younger self intro with image swap) -->
+    <!-- SLIDE 2 -->
     <section class="slide" id="s2">
       <div class="inner">
         <h1 class="title">From your younger self 👦</h1>
         <p class="subtitle">He wanted to meet you first…</p>
 
-        <!-- THIS is the place where turning image shows first,
-             then swaps into intro1/2/3 -->
         <div class="swapStage">
           <div class="swapItem show" id="turningWrap">
             <img class="fullImg" src="images/turning-point.jpeg" alt="Turning point" />
@@ -444,7 +412,7 @@
           </div>
         </div>
 
-        <div class="centerStack" style="margin-top:16px;">
+        <div style="margin-top:16px; display:flex; flex-direction:column; align-items:center; gap:14px;">
           <div class="typeBox">
             <span id="introType"></span><span class="cursor"></span>
           </div>
@@ -456,35 +424,31 @@
       </div>
     </section>
 
-    <!-- SLIDE 3 (Questions Part 1: 4 questions) -->
+    <!-- SLIDE 3 (Questions 1/2) -->
     <section class="slide" id="s3">
       <div class="inner">
         <h1 class="title">A few questions… 💗</h1>
         <p class="subtitle">Your younger self is asking softly — answer gently.</p>
-
         <div class="qWrap" id="qPart1"></div>
-
         <div class="nav">
           <button class="primary" id="toQ2">Next →</button>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 4 (Questions Part 2: 3 questions) -->
+    <!-- SLIDE 4 (Questions 2/2) -->
     <section class="slide" id="s4">
       <div class="inner">
         <h1 class="title">Just a little more… 💗</h1>
         <p class="subtitle">And then… we’ll look at our journey.</p>
-
         <div class="qWrap" id="qPart2"></div>
-
         <div class="nav">
           <button class="primary" id="toJourney">Let’s see our journey so far →</button>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 5 (Childhood) -->
+    <!-- SLIDE 5 -->
     <section class="slide" id="s5">
       <div class="inner">
         <h1 class="title">Childhood 🌱</h1>
@@ -500,7 +464,7 @@
       </div>
     </section>
 
-    <!-- SLIDE 6 (Competitions) -->
+    <!-- SLIDE 6 -->
     <section class="slide" id="s6">
       <div class="inner">
         <h1 class="title">Competitions 🏆</h1>
@@ -516,7 +480,7 @@
       </div>
     </section>
 
-    <!-- SLIDE 7 (Turning point) -->
+    <!-- SLIDE 7 -->
     <section class="slide" id="s7">
       <div class="inner">
         <h1 class="title">Turning Point ✨</h1>
@@ -532,7 +496,7 @@
       </div>
     </section>
 
-    <!-- SLIDE 8 (Success) -->
+    <!-- SLIDE 8 -->
     <section class="slide" id="s8">
       <div class="inner">
         <h1 class="title">Success 🌟</h1>
@@ -548,7 +512,7 @@
       </div>
     </section>
 
-    <!-- SLIDE 9 (Present) -->
+    <!-- SLIDE 9 -->
     <section class="slide" id="s9">
       <div class="inner">
         <h1 class="title">Present 🚀</h1>
@@ -564,7 +528,7 @@
       </div>
     </section>
 
-    <!-- SLIDE 10 (Letter) -->
+    <!-- SLIDE 10 -->
     <section class="slide" id="s10">
       <div class="inner">
         <h1 class="title">A letter from someone who believes in you 🤍</h1>
@@ -577,92 +541,95 @@
       </div>
     </section>
 
-    <!-- SLIDE 11 (Final) -->
+    <!-- SLIDE 11 -->
     <section class="slide" id="s11">
       <div class="inner">
         <h1 class="title">Happy 24th Birthday 💖</h1>
         <p class="subtitle">You are rare. You are powerful. And this is only the beginning.</p>
         <img class="journeyImg" src="images/present.jpeg" alt="final">
-        <div class="centerStack">
-          <h2 style="margin-top:6px; font-family:Playfair Display,serif;">I hope you liked it ✨</h2>
+        <div class="nav">
           <button class="primary" id="burst">🎉 Party time</button>
         </div>
+        <p class="subtitle" style="margin-top:12px;">I hope you liked it ✨</p>
       </div>
     </section>
 
   </div>
 
   <script>
-    // ---------- helpers ----------
     const $ = (id)=>document.getElementById(id);
     const slides = ["s1","s2","s3","s4","s5","s6","s7","s8","s9","s10","s11"];
     let current = 0;
 
     function go(n){
-      // n is slide number in human terms (1..11)
       current = n-1;
       slides.forEach((sid,i)=>{
         const el = $(sid);
         if(!el) return;
         el.classList.toggle("active", i===current);
       });
-
-      // start intro typing when entering slide 2
-      if(n===2) startIntro();
-
-      // start letter typing when entering slide 10
-      if(n===10) startLetter();
-
-      // confetti hearts on final open
-      if(n===11) {
-        poppersBurst(28);
-        heartsRain(18);
-      }
-
-      // always scroll top inside slide
       const activeInner = document.querySelector(".slide.active .inner");
       if(activeInner) activeInner.scrollTop = 0;
+
+      if(n===2) startIntro();
+      if(n===10) startLetter();
+      if(n===11){ poppersBurst(26); heartsRain(18); }
     }
 
-    // ---------- music ----------
+    // ----- Music (iPhone-safe) -----
     const music = $("bgMusic");
     const toggle = $("soundToggle");
     const soundLabel = $("soundLabel");
+    const toast = $("toast");
     let soundOn = false;
 
-    function setSound(on){
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(()=>toast.classList.remove("show"), 1600);
+    }
+
+    async function tryPlayMusic(){
+      // must be called from a user action click/tap
+      try{
+        music.muted = false;
+        music.volume = 0.75;
+        await music.play();
+        return true;
+      }catch(e){
+        return false;
+      }
+    }
+
+    async function setSound(on, fromUserTap=false){
       soundOn = on;
       toggle.classList.toggle("on", on);
       soundLabel.textContent = on ? "Sound On" : "Sound Off";
+
       if(on){
-        music.muted = false;
-        music.volume = 0.7;
-        music.play().catch(()=>{ /* mobile needs gesture */ });
+        const ok = await tryPlayMusic();
+        if(!ok && fromUserTap){
+          showToast("If music didn’t start, tap Sound On again 🎵");
+        }
       }else{
         music.pause();
       }
     }
 
-    toggle.addEventListener("click", ()=>{
-      setSound(!soundOn);
+    toggle.addEventListener("click", async ()=>{
+      await setSound(!soundOn, true);
     });
 
-    $("playBtn").addEventListener("click", async ()=>{
-      try{
-        music.muted = false;
-        music.volume = 0.75;
-        await music.play();
-        setSound(true);
-      }catch(e){
-        // If still blocked, user can tap Sound Toggle again
-        setSound(true);
+    // Slide 1 button
+    $("goS2").addEventListener("click", async ()=>{
+      // ✅ also try start music here (counts as user gesture)
+      if(soundOn){
+        await tryPlayMusic();
       }
+      go(2);
     });
 
-    // ---------- Slide 1 -> Slide 2 ----------
-    $("goS2").addEventListener("click", ()=> go(2));
-
-    // ---------- hearts ----------
+    // ----- Hearts -----
     function heartAt(x,y){
       const h = document.createElement("div");
       h.className = "heart";
@@ -674,13 +641,11 @@
     }
     function heartsRain(count=10){
       for(let i=0;i<count;i++){
-        setTimeout(()=>{
-          heartAt(Math.random()*window.innerWidth, window.innerHeight-40);
-        }, i*70);
+        setTimeout(()=> heartAt(Math.random()*window.innerWidth, window.innerHeight-40), i*70);
       }
     }
 
-    // ---------- poppers ----------
+    // ----- Poppers -----
     function poppersBurst(count=30){
       for(let i=0;i<count;i++){
         setTimeout(()=>{
@@ -694,20 +659,15 @@
         }, i*40);
       }
     }
+    $("burst").addEventListener("click", ()=>{ poppersBurst(44); heartsRain(26); });
 
-    $("burst").addEventListener("click", ()=>{
-      poppersBurst(44);
-      heartsRain(26);
-    });
-
-    // ---------- Slide 2 swap (turning -> intro images) ----------
+    // ----- Swap turning -> intro images after "My champ." -----
     function swapToIntroImages(){
       const turning = $("turningWrap");
       const intro = $("introWrap");
       if(!turning || !intro) return;
 
       turning.classList.remove("show");
-
       setTimeout(()=>{
         turning.style.display = "none";
         intro.style.display = "block";
@@ -715,7 +675,7 @@
       }, 560);
     }
 
-    // ---------- typewriter ----------
+    // ----- Typewriter (line-by-line) -----
     function typeLines(targetEl, lines, {speed=28, gap=1100, onLineDone=null, onDone=null} = {}){
       let lineIndex = 0;
       let charIndex = 0;
@@ -729,10 +689,8 @@
         if(charIndex <= line.length){
           setTimeout(type, speed);
         }else{
-          // line done
           if(onLineDone) onLineDone(lineIndex, line);
           setTimeout(()=>{
-            // next line (clear)
             lineIndex++;
             if(lineIndex >= lines.length){
               if(onDone) onDone();
@@ -747,7 +705,7 @@
       type();
     }
 
-    // ---------- Intro typing ----------
+    // ----- Slide 2 typing -----
     let introStarted = false;
     function startIntro(){
       if(introStarted) return;
@@ -760,24 +718,18 @@
       btn.style.cursor = "not-allowed";
 
       const introLines = [
-        "Hi Yash,",
         "This is your younger self. Happy Happy Birthday elder one. My champ.",
         "You have spent whole 24 years — you’ve grown into a man living and handling life the best you could.",
-        "You’re doing a tremendous job. Keep growing towards your dream life.",
-        "And don’t forget to pause and rest — that doesn’t mean you’re behind."
+        "You’re doing a tremendous job. Keep growing and working towards your dream life.",
+        "Don’t forget to take pause and rest — that doesn’t mean you’re behind."
       ];
 
       typeLines(introType, introLines, {
         speed: 26,
         gap: 1400,
         onLineDone: (idx, line)=>{
-          // hearts each line end
           heartsRain(6);
-
-          // AFTER "My champ." line ends, swap the image -> 3 intro images
-          if(line.includes("My champ")){
-            swapToIntroImages();
-          }
+          if(line.includes("My champ")) swapToIntroImages();
         },
         onDone: ()=>{
           btn.disabled = false;
@@ -788,62 +740,38 @@
     }
 
     $("toQuestions").addEventListener("click", ()=>{
-      if($("toQuestions").disabled){
-        heartsRain(6);
-        return;
-      }
+      if($("toQuestions").disabled){ heartsRain(6); return; }
       go(3);
     });
 
-    // ---------- Questions data ----------
+    // ----- Questions -----
     const questions = [
-      {
-        q:"Do you remember me — the kid who wanted so many things but couldn’t have them?",
-        a:["Yes. I remember you every day.","Yes, and I carried you with me."]
-      },
-      {
-        q:"Did that lack break us… or did it make us stronger?",
-        a:["It hurt more than I admit.","It lit a fire that still burns."]
-      },
-      {
-        q:"When we worked so hard in competitions — who were we proving it to?",
-        a:["To myself.","To the world… and to me."]
-      },
-      {
-        q:"When you chose a path different from everyone else — were you scared like I used to be?",
-        a:["Terrified, but hopeful.","Scared, but determined."]
-      },
-      {
-        q:"When no one understood you — did you ever feel like giving up?",
-        a:["Yes… but I kept going.","Never. I had a promise to keep."]
-      },
-      {
-        q:"What kept you moving when life felt heavy?",
-        a:["The dream.","The love I wanted to give."]
-      },
-      {
-        q:"If I ask you one thing today… will you be kinder to yourself?",
-        a:["I’ll try — for you.","Yes. I’ll rest without guilt."]
-      }
+      { q:"Do you remember me — the kid who wanted so many things but couldn’t have them?", a:["Yes. I remember you every day.","Yes, and I carried you with me."] },
+      { q:"Did that lack break us… or did it make us stronger?", a:["It hurt more than I admit.","It lit a fire that still burns."] },
+      { q:"When we worked so hard in competitions — who were we proving it to?", a:["To myself.","To the world… and to me."] },
+      { q:"When you chose a path different from everyone else — were you scared like I used to be?", a:["Terrified, but hopeful.","Scared, but determined."] },
+      { q:"When no one understood you — did you ever feel like giving up?", a:["Yes… but I kept going.","Never. I had a promise to keep."] },
+      { q:"What kept you moving when life felt heavy?", a:["The dream.","The love I wanted to give."] },
+      { q:"If I ask you one thing today… will you be kinder to yourself?", a:["I’ll try — for you.","Yes. I’ll rest without guilt."] }
     ];
 
     function renderQuestions(containerId, start, count){
       const wrap = $(containerId);
       wrap.innerHTML = "";
-      questions.slice(start, start+count).forEach((item, qi)=>{
+      questions.slice(start, start+count).forEach((item)=>{
         const card = document.createElement("div");
         card.className = "qCard";
         card.innerHTML = `
           <p class="q">${item.q}</p>
           <div class="opts">
-            ${item.a.map((t, i)=> `<button class="opt" type="button">${t}</button>`).join("")}
+            ${item.a.map(t=> `<button class="opt" type="button">${t}</button>`).join("")}
           </div>
         `;
         wrap.appendChild(card);
 
         const opts = card.querySelectorAll(".opt");
         opts.forEach(btn=>{
-          btn.addEventListener("click", (e)=>{
+          btn.addEventListener("click", ()=>{
             opts.forEach(o=>o.classList.remove("picked"));
             btn.classList.add("picked");
             const r = btn.getBoundingClientRect();
@@ -859,7 +787,7 @@
     $("toQ2").addEventListener("click", ()=> go(4));
     $("toJourney").addEventListener("click", ()=> go(5));
 
-    // ---------- Letter typing ----------
+    // ----- Letter typing -----
     let letterStarted = false;
     const letterText =
 `It feels like I’ve known you forever.
@@ -931,32 +859,30 @@ Love, Always 🤍`;
       const el = $("letterType");
       el.textContent = "";
 
-      // type the whole letter, but keep slide scrollable
       let i = 0;
       const speed = 12;
       const timer = setInterval(()=>{
         el.textContent += letterText[i];
         i++;
+
         const activeInner = document.querySelector("#s10 .inner");
         if(activeInner) activeInner.scrollTop = activeInner.scrollHeight;
 
-        if(i >= letterText.length){
-          clearInterval(timer);
-        }
+        if(i >= letterText.length) clearInterval(timer);
       }, speed);
     }
 
     $("toFinal").addEventListener("click", ()=> go(11));
 
-    // ---------- start at slide 1 ----------
+    // Start
     go(1);
-
-    // Safety: if user taps anywhere, try to play if soundOn
-    document.addEventListener("click", ()=>{
-      if(soundOn){
-        music.play().catch(()=>{});
-      }
-    }, {passive:true});
   </script>
 </body>
 </html>
+
+
+  
+    
+
+   
+    
