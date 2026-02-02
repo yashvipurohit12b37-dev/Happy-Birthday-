@@ -5,34 +5,38 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Happy Birthday Yash 🎉</title>
 
-  <!-- Cute + modern fonts -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --bg1:#fff7fb;
       --bg2:#fffdf7;
       --bg3:#f3fbff;
+
       --ink:#1d1d1f;
       --muted:rgba(29,29,31,.72);
+
       --pink:#ff6fa8;
       --pink2:#ff8fbb;
       --lav:#bda7ff;
       --mint:#7fe8d6;
-      --card:rgba(255,255,255,.82);
+
+      --card:rgba(255,255,255,.86);
       --stroke:rgba(0,0,0,.07);
       --shadow:0 22px 70px rgba(0,0,0,.12);
-      --r:24px;
+
+      --r:26px;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      color:var(--ink);
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      color:var(--ink);
       overflow:hidden; /* one-screen flow */
       background:
         radial-gradient(1200px 700px at 12% 18%, rgba(255,111,168,.22), transparent 55%),
@@ -41,18 +45,19 @@
         linear-gradient(180deg,var(--bg1),var(--bg2),var(--bg3));
     }
 
-    /* floating doodles background */
+    /* floating doodles */
     .doodle{
       position:fixed;
       pointer-events:none;
-      opacity:.25;
+      opacity:.22;
       filter: blur(.2px);
       animation: drift 10s ease-in-out infinite alternate;
       z-index:0;
+      user-select:none;
     }
     @keyframes drift{
-      from{ transform: translateY(0) rotate(-2deg) }
-      to{ transform: translateY(-18px) rotate(2deg) }
+      from{ transform: translateY(0) rotate(-2deg); }
+      to{ transform: translateY(-18px) rotate(2deg); }
     }
     .d1{left:6vw; top:10vh; font-size:26px; animation-duration:11s}
     .d2{left:86vw; top:18vh; font-size:22px; animation-duration:9s}
@@ -60,7 +65,7 @@
     .d4{left:84vw; top:80vh; font-size:24px; animation-duration:10s}
     .d5{left:48vw; top:8vh; font-size:20px; animation-duration:13s}
 
-    /* app container */
+    /* app */
     .app{
       height:100vh;
       width:100vw;
@@ -72,9 +77,10 @@
       z-index:1;
     }
 
+    /* slides */
     .slide{
       width:min(980px, 100%);
-      height:min(720px, 100%);
+      height:min(730px, 100%);
       border-radius:var(--r);
       background:var(--card);
       border:1px solid var(--stroke);
@@ -89,175 +95,22 @@
       animation: enter .45s ease both;
     }
     @keyframes enter{
-      from{opacity:0; transform: translateY(14px) scale(.99)}
-      to{opacity:1; transform: translateY(0) scale(1)}
+      from{opacity:0; transform: translateY(14px) scale(.99);}
+      to{opacity:1; transform: translateY(0) scale(1);}
     }
 
-    /* top small sticker row */
-    .stickers{
+    /* top-right sound button */
+    .topBar{
       position:absolute;
       inset:14px 14px auto 14px;
       display:flex;
-      gap:8px;
-      justify-content:space-between;
-      pointer-events:none;
-      opacity:.9;
+      justify-content:flex-end;
+      z-index:10;
     }
-    .badge{
-      font-family:"Baloo 2", sans-serif;
-      font-weight:700;
-      font-size:14px;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(255,255,255,.85);
-      border:1px solid rgba(0,0,0,.06);
-      box-shadow:0 10px 30px rgba(0,0,0,.08);
-    }
-
-    /* slide inner */
-    .inner{
-      height:100%;
-      padding:24px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-
-    .title{
-      font-family:"Baloo 2", sans-serif;
-      font-size:clamp(26px,3.8vw,44px);
-      font-weight:800;
-      letter-spacing:.3px;
-      text-align:center;
-      margin-top:18px;
-      color:rgba(255,95,160,.95);
-      text-shadow: 0 10px 30px rgba(255,111,168,.25);
-    }
-
-    .subtitle{
-      text-align:center;
-      color:var(--muted);
-      line-height:1.65;
-      font-size:15px;
-      margin: -6px auto 2px;
-      max-width:760px;
-    }
-
-    .card{
-      background:rgba(255,255,255,.82);
-      border:1px solid rgba(0,0,0,.06);
-      border-radius:22px;
-      box-shadow:0 16px 50px rgba(0,0,0,.08);
-    }
-
-    .btnRow{
-      display:flex;
-      gap:12px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:auto;
-      padding-top:8px;
-    }
-
-    button{
-      border:none;
-      cursor:pointer;
-      font-family:Inter,system-ui;
-      font-weight:600;
-      font-size:15px;
-      padding:12px 18px;
-      border-radius:999px;
-      transition: transform .12s ease, opacity .12s ease, filter .12s ease;
-      user-select:none;
-    }
-    button:active{ transform: scale(.985); }
-
-    .primary{
-      color:white;
-      background: linear-gradient(135deg,var(--pink),var(--pink2));
-      box-shadow: 0 16px 40px rgba(255,111,168,.25);
-    }
-    .ghost{
-      background:rgba(255,255,255,.75);
-      border:1px solid rgba(0,0,0,.10);
-      color:var(--ink);
-    }
-
-    /* overlay for mobile music start */
-    #musicOverlay{
-      position:fixed;
-      inset:0;
-      z-index:9999;
-      background:
-        radial-gradient(900px 500px at 20% 20%, rgba(255,111,168,.25), transparent 60%),
-        radial-gradient(900px 500px at 80% 20%, rgba(127,232,214,.22), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.88));
+    .soundBtn{
       display:flex;
       align-items:center;
-      justify-content:center;
-      padding:22px;
-    }
-    .overlayCard{
-      width:min(520px, 96%);
-      border-radius:26px;
-      padding:22px 18px;
-      text-align:center;
-      background:rgba(255,255,255,.88);
-      border:1px solid rgba(0,0,0,.08);
-      box-shadow: 0 24px 80px rgba(0,0,0,.25);
-      position:relative;
-      overflow:hidden;
-    }
-    .overlayCard:before{
-      content:"";
-      position:absolute;
-      inset:-60px;
-      background:
-        radial-gradient(180px 140px at 20% 30%, rgba(255,111,168,.35), transparent 60%),
-        radial-gradient(180px 140px at 85% 40%, rgba(127,232,214,.30), transparent 60%),
-        radial-gradient(220px 160px at 55% 90%, rgba(189,167,255,.28), transparent 60%);
-      filter: blur(2px);
-      z-index:0;
-    }
-    .overlayCard > *{ position:relative; z-index:1; }
-
-    .overlayTitle{
-      font-family:"Baloo 2", sans-serif;
-      font-size:30px;
-      font-weight:800;
-      margin:6px 0 8px;
-      color:rgba(255,95,160,.95);
-    }
-    .overlayText{
-      color:rgba(29,29,31,.75);
-      line-height:1.65;
-      margin:0 0 14px;
-      font-size:14.5px;
-    }
-    .bigPlay{
-      padding:14px 22px;
-      font-size:16px;
-      border-radius:999px;
-      background: linear-gradient(135deg,var(--pink),var(--pink2));
-      color:white;
-      width:min(320px, 90%);
-      box-shadow: 0 16px 45px rgba(255,111,168,.28);
-    }
-    .tiny{
-      font-size:12.5px;
-      color:rgba(29,29,31,.62);
-      margin-top:12px;
-    }
-
-    /* mini music control (after overlay) */
-    .musicPill{
-      position:fixed;
-      right:14px;
-      bottom:14px;
-      z-index:50;
-      display:none;
       gap:8px;
-      align-items:center;
       padding:10px 12px;
       border-radius:999px;
       background:rgba(255,255,255,.86);
@@ -266,23 +119,88 @@
       backdrop-filter: blur(10px);
       font-size:13px;
       color:rgba(29,29,31,.8);
+      cursor:pointer;
+      user-select:none;
     }
-    .musicPill button{
-      padding:8px 12px;
-      font-size:13px;
+    .soundDot{
+      width:10px;height:10px;border-radius:50%;
+      background:rgba(255,111,168,.75);
+      box-shadow:0 0 0 6px rgba(255,111,168,.12);
+    }
+    .soundBtn.off .soundDot{
+      background:rgba(0,0,0,.25);
+      box-shadow:0 0 0 6px rgba(0,0,0,.08);
     }
 
-    /* Intro typing */
+    /* inner */
+    .inner{
+      height:100%;
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      text-align:center;
+    }
+
+    .title{
+      font-family:"Baloo 2", sans-serif;
+      font-size:clamp(30px,4.4vw,52px);
+      font-weight:900;
+      letter-spacing:.3px;
+      margin-top:46px;
+      color:rgba(255,95,160,.96);
+      text-shadow:0 16px 50px rgba(255,111,168,.22);
+    }
+    .subTitle{
+      margin:-8px auto 4px;
+      max-width:820px;
+      font-size:15.5px;
+      line-height:1.7;
+      color:var(--muted);
+    }
+
+    /* buttons */
+    .btnRow{
+      margin-top:auto;
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    button{
+      border:none;
+      cursor:pointer;
+      font-family:Inter,system-ui;
+      font-weight:600;
+      font-size:15px;
+      padding:12px 18px;
+      border-radius:999px;
+      transition: transform .12s ease, opacity .12s ease;
+      user-select:none;
+    }
+    button:active{ transform: scale(.985); }
+
+    .primary{
+      color:white;
+      background: linear-gradient(135deg,var(--pink),var(--pink2));
+      box-shadow: 0 16px 45px rgba(255,111,168,.28);
+    }
+    .ghost{
+      background:rgba(255,255,255,.78);
+      border:1px solid rgba(0,0,0,.10);
+      color:var(--ink);
+    }
+
+    /* typing box */
     .typingBox{
-      margin: 8px auto 0;
-      width:min(800px, 100%);
+      width:min(860px, 100%);
+      margin: 6px auto 0;
       padding:18px 16px;
       border-radius:22px;
       background:rgba(255,255,255,.78);
       border:1px solid rgba(0,0,0,.06);
-      box-shadow:0 16px 50px rgba(0,0,0,.08);
-      text-align:center;
-      min-height:112px;
+      box-shadow:0 16px 55px rgba(0,0,0,.08);
+      min-height:110px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -290,9 +208,10 @@
     .typingLine{
       font-family:"Baloo 2", sans-serif;
       font-size:clamp(18px, 3vw, 26px);
-      font-weight:700;
+      font-weight:800;
       line-height:1.25;
-      color:rgba(29,29,31,.90);
+      color:rgba(29,29,31,.92);
+      padding:0 6px;
     }
     .cursor{
       display:inline-block;
@@ -306,92 +225,126 @@
     }
     @keyframes blink{50%{opacity:0}}
 
-    .fadeOut{
-      animation: fadeOut .35s ease forwards;
-    }
+    .fadeOut{ animation: fadeOut .35s ease forwards; }
     @keyframes fadeOut{
-      to{opacity:0; transform: translateY(-6px)}
+      to{opacity:0; transform: translateY(-6px);}
     }
 
-    /* intro images row */
+    /* intro single image */
+    .heroImg{
+      width:min(720px, 100%);
+      height:220px;
+      object-fit:cover;
+      border-radius:26px;
+      border:1px solid rgba(0,0,0,.06);
+      box-shadow:0 18px 65px rgba(0,0,0,.12);
+      margin: 4px auto 0;
+    }
+
+    /* intro 3 images (not cropped) */
     .introImages{
+      width:min(860px,100%);
+      margin: 6px auto 0;
       display:grid;
       grid-template-columns: repeat(3,1fr);
-      gap:10px;
-      width:min(820px,100%);
-      margin: 6px auto 0;
+      gap:12px;
     }
-    .introImages img{
-      width:100%;
-      height:160px;
-      object-fit:cover;
-      border-radius:20px;
+    .introImages figure{
+      margin:0;
+      border-radius:22px;
       border:1px solid rgba(0,0,0,.06);
-      box-shadow:0 18px 52px rgba(0,0,0,.12);
+      background:rgba(255,255,255,.72);
+      box-shadow:0 18px 60px rgba(0,0,0,.10);
+      overflow:hidden;
       opacity:0;
       transform: translateY(12px);
     }
-    .introImages.show img{
-      animation: popIn .65s ease forwards;
+    .introImages figure img{
+      width:100%;
+      height:180px;
+      object-fit:contain;   /* KEY: do not crop */
+      background:rgba(255,255,255,.75);
+      display:block;
+      padding:10px;
     }
-    .introImages.show img:nth-child(1){animation-delay:.15s}
-    .introImages.show img:nth-child(2){animation-delay:.30s}
-    .introImages.show img:nth-child(3){animation-delay:.45s}
+    .introImages.show figure{
+      animation: popIn .75s ease forwards;
+    }
+    .introImages.show figure:nth-child(1){animation-delay:.15s}
+    .introImages.show figure:nth-child(2){animation-delay:.35s}
+    .introImages.show figure:nth-child(3){animation-delay:.55s}
     @keyframes popIn{
-      to{opacity:1; transform: translateY(0)}
+      to{opacity:1; transform: translateY(0);}
     }
 
-    /* Questions */
-    .qWrap{
-      width:min(820px,100%);
-      margin: 6px auto 0;
+    /* section heading (centered) */
+    .sectionHead{
+      font-family:"Baloo 2", sans-serif;
+      font-size:clamp(24px,3.6vw,42px);
+      font-weight:900;
+      color:rgba(255,95,160,.96);
+      margin-top:54px;
+      text-shadow:0 16px 50px rgba(255,111,168,.18);
+    }
+    .sectionSub{
+      max-width:820px;
+      margin:-10px auto 0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:15.5px;
+    }
+
+    /* Questions: scroll inside */
+    .qArea{
+      width:min(860px,100%);
+      margin: 8px auto 0;
+      flex:1;
       display:flex;
       flex-direction:column;
       gap:12px;
-      flex:1;
-      justify-content:center;
+      overflow:auto;   /* allows scroll inside */
+      padding-right:6px;
     }
     .qCard{
       padding:16px 14px;
       border-radius:22px;
-      background:rgba(255,255,255,.82);
+      background:rgba(255,255,255,.84);
       border:1px solid rgba(0,0,0,.06);
       box-shadow:0 16px 55px rgba(0,0,0,.08);
+      text-align:left;
     }
     .qTitle{
-      font-weight:600;
-      font-size:15.5px;
+      font-weight:700;
+      font-size:15.8px;
       line-height:1.55;
-      color:rgba(29,29,31,.9);
+      color:rgba(29,29,31,.92);
       margin-bottom:10px;
     }
-    .optRow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
+    .optRow{ display:flex; flex-wrap:wrap; gap:10px; }
     .optBtn{
       background:rgba(255,111,168,.10);
-      border:1px solid rgba(255,111,168,.24);
+      border:1px solid rgba(255,111,168,.26);
       color:rgba(29,29,31,.88);
-      font-weight:600;
+      font-weight:700;
+      border-radius:999px;
+      padding:11px 14px;
     }
     .optBtn.selected{
       background: linear-gradient(135deg, rgba(255,111,168,.20), rgba(189,167,255,.18));
       border-color: rgba(255,111,168,.35);
     }
 
-    /* Journey */
+    /* Journey card */
     .journeyStage{
       width:min(860px,100%);
       margin: 4px auto 0;
+      flex:1;
       display:flex;
       align-items:center;
       justify-content:center;
-      flex:1;
     }
     .journeyCard{
-      width:min(760px,100%);
+      width:min(780px,100%);
       padding:16px;
       border-radius:26px;
       background:rgba(255,255,255,.84);
@@ -399,92 +352,88 @@
       box-shadow:0 22px 70px rgba(0,0,0,.10);
       text-align:center;
       animation: enter .45s ease both;
+      position:relative;
     }
     .journeyTitle{
       font-family:"Baloo 2", sans-serif;
-      font-size:24px;
-      font-weight:800;
-      margin-top:2px;
+      font-size:26px;
+      font-weight:900;
+      margin:2px 0 8px;
       color:rgba(29,29,31,.92);
     }
     .journeyCard img{
-      width:min(480px,100%);
-      height:260px;
-      object-fit:cover;
+      width:min(520px,100%);
+      height:280px;
+      object-fit:contain; /* no crop */
       border-radius:22px;
       border:1px solid rgba(0,0,0,.06);
+      background:rgba(255,255,255,.75);
       box-shadow:0 18px 60px rgba(0,0,0,.14);
       margin:10px auto 12px;
       display:block;
+      padding:10px;
     }
     .journeyText{
       color:rgba(29,29,31,.76);
-      font-size:15.2px;
-      line-height:1.9;
-      padding:0 8px 4px;
+      font-size:15.3px;
+      line-height:1.95;
+      padding:0 10px 4px;
+      text-align:center;
     }
+    /* cute floating tiny stickers around journey */
+    .spark{
+      position:absolute;
+      pointer-events:none;
+      opacity:.7;
+      filter: drop-shadow(0 10px 20px rgba(255,111,168,.18));
+      animation: floaty 3.5s ease-in-out infinite alternate;
+    }
+    @keyframes floaty{
+      from{ transform: translateY(0) rotate(-3deg); }
+      to{ transform: translateY(-12px) rotate(3deg); }
+    }
+    .s1{ left:18px; top:70px; font-size:18px; }
+    .s2{ right:18px; top:90px; font-size:18px; animation-duration:4s; }
+    .s3{ right:26px; bottom:86px; font-size:18px; animation-duration:3.2s; }
+    .s4{ left:26px; bottom:96px; font-size:18px; animation-duration:4.4s; }
 
-    /* Letter */
-    .letterBox{
+    /* Letter page */
+    .letterWrap{
       width:min(860px,100%);
-      margin: 2px auto 0;
-      padding:18px 16px;
-      border-radius:26px;
-      background:rgba(255,255,255,.84);
-      border:1px solid rgba(0,0,0,.06);
-      box-shadow:0 22px 70px rgba(0,0,0,.10);
+      margin: 6px auto 0;
       flex:1;
       display:flex;
       flex-direction:column;
-      gap:10px;
-      overflow:hidden;
+      gap:12px;
     }
     .letterHead{
       font-family:"Baloo 2", sans-serif;
-      font-weight:800;
-      font-size:22px;
+      font-weight:900;
+      font-size:26px;
       color:rgba(29,29,31,.92);
-      text-align:center;
     }
-    .letterText{
-      background:rgba(255,255,255,.72);
+    .usImg{
+      width:min(650px,100%);
+      height:220px;
+      object-fit:cover;
+      border-radius:26px;
       border:1px solid rgba(0,0,0,.06);
-      border-radius:18px;
-      padding:14px 12px;
-      color:rgba(29,29,31,.78);
-      font-size:15px;
-      line-height:1.95;
-      white-space:pre-line;
-      overflow:auto;
+      box-shadow:0 18px 65px rgba(0,0,0,.12);
+      margin:0 auto;
+    }
+    .letterBox{
+      background:rgba(255,255,255,.80);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:22px;
+      box-shadow:0 16px 55px rgba(0,0,0,.08);
+      padding:14px 14px;
+      overflow:auto;  /* scroll */
       flex:1;
-    }
-
-    /* hearts float */
-    .heart{
-      position:fixed;
-      pointer-events:none;
-      z-index:200;
-      font-size:18px;
-      animation: floatHeart 2.2s ease forwards;
-      opacity:.95;
-      filter: drop-shadow(0 10px 20px rgba(255,111,168,.25));
-    }
-    @keyframes floatHeart{
-      0%{transform: translateY(0) scale(1); opacity:.95}
-      100%{transform: translateY(-160px) scale(1.35); opacity:0}
-    }
-
-    /* confetti/poppers */
-    .conf{
-      position:fixed;
-      pointer-events:none;
-      z-index:220;
-      font-size:28px;
-      animation: confetti 1.9s ease-out forwards;
-    }
-    @keyframes confetti{
-      0%{transform: translateY(0) scale(.2) rotate(0deg); opacity:1}
-      100%{transform: translateY(-220px) scale(1.4) rotate(24deg); opacity:0}
+      text-align:left;
+      white-space:pre-line;
+      color:rgba(29,29,31,.78);
+      font-size:15.2px;
+      line-height:1.95;
     }
 
     /* final */
@@ -495,10 +444,10 @@
       align-items:center;
       justify-content:center;
       gap:14px;
-      padding-bottom:4px;
+      padding-bottom:6px;
     }
     .finalImg{
-      width:min(520px, 92%);
+      width:min(600px, 96%);
       height:320px;
       object-fit:cover;
       border-radius:26px;
@@ -514,146 +463,178 @@
     }
     .finalBig{
       font-family:"Baloo 2", sans-serif;
-      font-size:clamp(28px, 5vw, 52px);
-      font-weight:900;
+      font-size:clamp(28px, 5vw, 56px);
+      font-weight:1000;
       color:rgba(255,95,160,.96);
       text-align:center;
-      text-shadow: 0 16px 50px rgba(255,111,168,.25);
+      text-shadow:0 16px 50px rgba(255,111,168,.22);
+      margin-top:-6px;
     }
     .finalSmall{
-      max-width:780px;
+      max-width:820px;
       text-align:center;
       color:rgba(29,29,31,.72);
-      font-size:15px;
+      font-size:15.5px;
       line-height:1.75;
-      margin-top:-6px;
       padding:0 10px;
+      margin-top:-8px;
     }
 
-    /* mobile tweaks */
-    @media (max-width:540px){
-      .inner{padding:18px}
-      .introImages img{height:118px}
-      .journeyCard img{height:220px}
-      .typingBox{min-height:104px}
-      .musicPill{right:10px; bottom:10px}
+    /* floating hearts */
+    .heart{
+      position:fixed;
+      pointer-events:none;
+      z-index:200;
+      font-size:18px;
+      animation: floatHeart 2.2s ease forwards;
+      opacity:.95;
+      filter: drop-shadow(0 10px 20px rgba(255,111,168,.25));
+    }
+    @keyframes floatHeart{
+      0%{transform: translateY(0) scale(1); opacity:.95;}
+      100%{transform: translateY(-160px) scale(1.35); opacity:0;}
+    }
+
+    /* party pop */
+    .conf{
+      position:fixed;
+      pointer-events:none;
+      z-index:220;
+      font-size:28px;
+      animation: confetti 1.9s ease-out forwards;
+    }
+    @keyframes confetti{
+      0%{transform: translateY(0) scale(.2) rotate(0deg); opacity:1;}
+      100%{transform: translateY(-220px) scale(1.4) rotate(24deg); opacity:0;}
+    }
+
+    /* small screens */
+    @media (max-width:560px){
+      .inner{ padding:16px; }
+      .title{ margin-top:52px; }
+      .heroImg{ height:180px; }
+      .introImages figure img{ height:120px; }
+      .journeyCard img{ height:220px; }
+      .usImg{ height:180px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- cute background doodles -->
+  <!-- background doodles -->
   <div class="doodle d1">🦋</div>
   <div class="doodle d2">✨</div>
   <div class="doodle d3">💫</div>
   <div class="doodle d4">🎀</div>
   <div class="doodle d5">⭐️</div>
 
-  <!-- MOBILE MUSIC START OVERLAY -->
-  <div id="musicOverlay">
-    <div class="overlayCard">
-      <div class="overlayTitle">Happy Birthday, Yash 🎉</div>
-      <div class="overlayText">
-        Before we begin… play the song for the vibe.  
-        (Music keeps playing till the end.)
-      </div>
-      <button class="bigPlay" onclick="startSite()">▶ Play the song for the vibe</button>
-      <div class="tiny">Tip: On iPhone, silent mode must be OFF 🔊</div>
-    </div>
-  </div>
-
-  <!-- MUSIC (must match your filename) -->
+  <!-- music -->
   <audio id="bgMusic" loop preload="auto">
-    <!-- If your file name is different, change it here -->
     <source src="birthday.mp3" type="audio/mpeg">
   </audio>
-
-  <!-- MINI MUSIC CONTROL -->
-  <div class="musicPill" id="musicPill">
-    <span id="musicState">🎵 Playing</span>
-    <button class="ghost" onclick="toggleMusic()">Pause</button>
-  </div>
 
   <div class="app">
 
     <!-- SLIDE 1: INTRO -->
     <section class="slide active" id="s1">
-      <div class="stickers">
-        <div class="badge">cute mode ✨</div>
-        <div class="badge">24th birthday 🎂</div>
+      <div class="topBar">
+        <div class="soundBtn off" id="soundBtn" onclick="toggleSound()">
+          <span class="soundDot"></span>
+          <span id="soundLabel">Sound Off</span>
+        </div>
       </div>
 
       <div class="inner">
         <div class="title">Happy Birthday, Yash 🥳</div>
-        <div class="subtitle">Here’s something special made just for your birthday — one step at a time.</div>
 
-        <div class="typingBox">
+        <div class="subTitle">
+          Here's something unique and special for your 24th birthday!<br>
+          Someone's here to meet you today.
+        </div>
+
+        <button class="primary" style="margin: 0 auto 6px;" onclick="startIntro()">Let’s see</button>
+
+        <!-- ONE image below title (optional) -->
+        <img class="heroImg" src="images/present.jpeg" alt="hero" />
+
+        <!-- typing -->
+        <div class="typingBox" style="margin-top:10px;">
           <div class="typingLine" id="introTyping"></div>
           <span class="cursor" id="introCursor"></span>
         </div>
 
+        <!-- 3 images row -->
         <div class="introImages" id="introImages">
-          <img src="images/intro1.jpeg" alt="intro 1">
-          <img src="images/intro2.jpeg" alt="intro 2">
-          <img src="images/intro3.jpeg" alt="intro 3">
+          <figure><img src="images/intro1.jpeg" alt="intro 1"></figure>
+          <figure><img src="images/intro2.jpeg" alt="intro 2"></figure>
+          <figure><img src="images/intro3.jpeg" alt="intro 3"></figure>
         </div>
 
         <div class="btnRow">
-          <button class="primary" id="introNext" onclick="go(2)" disabled style="opacity:.55;cursor:not-allowed">
-            Continue →
+          <button class="primary" id="introContinue" onclick="go(2)" disabled style="opacity:.55;cursor:not-allowed">
+            I have some questions to ask you →
           </button>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 2: QUESTIONS -->
+    <!-- SLIDE 2: QUESTIONS (page 1) -->
     <section class="slide" id="s2">
-      <div class="stickers">
-        <div class="badge">from your younger self 🧒</div>
-        <div class="badge">tap an answer 💗</div>
+      <div class="topBar">
+        <div class="soundBtn" id="soundBtn2" onclick="toggleSound()">
+          <span class="soundDot"></span>
+          <span id="soundLabel2">Sound On</span>
+        </div>
       </div>
 
       <div class="inner">
-        <div class="title" style="font-size:clamp(24px,3.6vw,40px)">A few questions…</div>
-        <div class="subtitle">Your younger self is asking softly — answer gently.</div>
+        <div class="sectionHead">A few questions…</div>
+        <div class="sectionSub">Your younger self is asking softly — answer gently.</div>
 
-        <div class="qWrap" id="qWrap"></div>
+        <div class="qArea" id="qArea1"></div>
 
         <div class="btnRow">
           <button class="ghost" onclick="go(1)">Back</button>
-          <button class="primary" onclick="go(3)">Continue →</button>
+          <button class="primary" onclick="go(3)">Next questions →</button>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 3: JOURNEY INTRO -->
+    <!-- SLIDE 3: QUESTIONS (page 2) -->
     <section class="slide" id="s3">
-      <div class="stickers">
-        <div class="badge">life journey 🧭</div>
-        <div class="badge">one card at a time</div>
+      <div class="topBar">
+        <div class="soundBtn" id="soundBtn3" onclick="toggleSound()">
+          <span class="soundDot"></span>
+          <span id="soundLabel3">Sound On</span>
+        </div>
       </div>
 
       <div class="inner">
-        <div class="title" style="font-size:clamp(24px,3.6vw,40px)">Now…</div>
-        <div class="subtitle">
-          Let’s see your life through our eyes — the boy who started it all, and the man who never stopped.
-        </div>
+        <div class="sectionHead">One more…</div>
+        <div class="sectionSub">The last ones — answer from your heart.</div>
+
+        <div class="qArea" id="qArea2"></div>
 
         <div class="btnRow">
           <button class="ghost" onclick="go(2)">Back</button>
-          <button class="primary" onclick="startJourney()">Start the story →</button>
+          <button class="primary" onclick="go(4)">Let’s see our journey so far →</button>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 4: JOURNEY -->
+    <!-- SLIDE 4: JOURNEY (one at a time) -->
     <section class="slide" id="s4">
-      <div class="stickers">
-        <div class="badge">chapter <span id="chapNum">1</span>/5</div>
-        <div class="badge">keep going 💫</div>
+      <div class="topBar">
+        <div class="soundBtn" id="soundBtn4" onclick="toggleSound()">
+          <span class="soundDot"></span>
+          <span id="soundLabel4">Sound On</span>
+        </div>
       </div>
 
       <div class="inner">
+        <div class="sectionHead">Your journey</div>
+        <div class="sectionSub">One chapter at a time — like a soft movie.</div>
+
         <div class="journeyStage">
           <div class="journeyCard" id="journeyCard"></div>
         </div>
@@ -667,42 +648,47 @@
 
     <!-- SLIDE 5: LETTER -->
     <section class="slide" id="s5">
-      <div class="stickers">
-        <div class="badge">a letter 🤍</div>
-        <div class="badge">scroll inside</div>
+      <div class="topBar">
+        <div class="soundBtn" id="soundBtn5" onclick="toggleSound()">
+          <span class="soundDot"></span>
+          <span id="soundLabel5">Sound On</span>
+        </div>
       </div>
 
       <div class="inner">
-        <div class="letterBox">
-          <div class="letterHead">A letter from someone who believes in you 🤍</div>
-          <div class="letterText" id="letterText"></div>
+        <div class="sectionHead">A letter for you ❤️</div>
+
+        <div class="letterWrap">
+          <div class="letterHead">A letter from someone who believes in you</div>
+          <img class="usImg" src="images/us.jpeg" alt="us">
+          <div class="letterBox" id="letterBox"></div>
         </div>
 
         <div class="btnRow">
           <button class="ghost" onclick="go(4)">Back</button>
-          <button class="primary" onclick="go(6); triggerFinal();">One last thing →</button>
+          <button class="primary" onclick="go(6); triggerFinal();">Next →</button>
         </div>
       </div>
     </section>
 
     <!-- SLIDE 6: FINAL -->
     <section class="slide" id="s6">
-      <div class="stickers">
-        <div class="badge">final surprise 🎉</div>
-        <div class="badge">champ energy 🏆</div>
+      <div class="topBar">
+        <div class="soundBtn" id="soundBtn6" onclick="toggleSound()">
+          <span class="soundDot"></span>
+          <span id="soundLabel6">Sound On</span>
+        </div>
       </div>
 
       <div class="inner">
         <div class="finalWrap">
+          <div class="finalBig">Happy 24th Birthday 💖</div>
           <img class="finalImg" id="finalImg" src="images/present.jpeg" alt="present">
-          <div class="finalBig">HAPPIEST BIRTHDAY AGAIN 🎉</div>
-          <div class="finalSmall">
-            You are rare. You are powerful. And this is only the beginning.
-          </div>
+          <div class="finalSmall">I hope you liked it ✨</div>
 
           <div class="btnRow">
             <button class="ghost" onclick="go(5)">Back</button>
-            <button class="primary" onclick="burst(42)">Celebrate 🎊</button>
+            <button class="primary" onclick="burst(55); heartsRain(16);">Celebrate 🎉</button>
           </div>
         </div>
       </div>
@@ -711,172 +697,175 @@
   </div>
 
 <script>
-  /* ------------------------------
-     SAFETY: no crash if missing
-  ------------------------------ */
-  function $(id){ return document.getElementById(id); }
-  function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+  /* helpers */
+  const $ = (id)=>document.getElementById(id);
+  const sleep = (ms)=>new Promise(r=>setTimeout(r,ms));
 
-  /* ------------------------------
-     MUSIC: mobile-safe start
-     must be triggered by button tap
-  ------------------------------ */
-  const music = $("bgMusic");
-  const overlay = $("musicOverlay");
-  const pill = $("musicPill");
-  const musicState = $("musicState");
-
-  window.startSite = async function(){
-    try{
-      await music.play(); // iPhone requires direct user tap
-    }catch(e){
-      alert("If music doesn’t play: turn OFF silent mode + increase volume 🔊");
-    }
-    overlay.style.display = "none";
-    pill.style.display = "flex";
-    runIntroSequence();
-  }
-
-  window.toggleMusic = function(){
-    if(music.paused){
-      music.play().catch(()=>{});
-      musicState.textContent = "🎵 Playing";
-      pill.querySelector("button").textContent = "Pause";
-    }else{
-      music.pause();
-      musicState.textContent = "🔇 Paused";
-      pill.querySelector("button").textContent = "Play";
-    }
-  }
-
-  /* ------------------------------
-     SLIDES: one screen at a time
-  ------------------------------ */
+  /* slides */
   function go(n){
     for(let i=1;i<=6;i++){
-      const el = $("s"+i);
-      if(el) el.classList.remove("active");
+      const s = $("s"+i);
+      if(s) s.classList.remove("active");
     }
     $("s"+n).classList.add("active");
   }
   window.go = go;
 
-  /* ------------------------------
-     INTRO typing sequence:
-     line types -> waits -> fades -> next
-     after done: show intro images + enable Continue
-  ------------------------------ */
+  /* MUSIC: top-right toggle */
+  const music = $("bgMusic");
+  let soundOn = false;
+
+  function setSoundUI(){
+    const labels = ["soundLabel","soundLabel2","soundLabel3","soundLabel4","soundLabel5","soundLabel6"];
+    const btns = ["soundBtn","soundBtn2","soundBtn3","soundBtn4","soundBtn5","soundBtn6"];
+
+    labels.forEach(id=>{
+      const el=$(id);
+      if(el) el.textContent = soundOn ? "Sound On" : "Sound Off";
+    });
+
+    btns.forEach(id=>{
+      const b=$(id);
+      if(b){
+        b.classList.toggle("off", !soundOn);
+      }
+    });
+  }
+
+  async function toggleSound(){
+    try{
+      if(!soundOn){
+        await music.play();   // iPhone rule: must be user click ✅
+        soundOn = true;
+      }else{
+        music.pause();
+        soundOn = false;
+      }
+    }catch(e){
+      alert("If sound doesn’t play: turn OFF silent mode + increase volume 🔊");
+    }
+    setSoundUI();
+  }
+  window.toggleSound = toggleSound;
+  setSoundUI();
+
+  /* Intro typing sequence */
   const introLines = [
-    "Hi Yash,",
-    "This is your younger self.",
-    "Happy happy birthday, elder one. My champ.",
-    "You have spent 24 years living and handling life the best you could.",
-    "You are doing a tremendous job. Keep growing towards your dream life.",
-    "And hey… take a pause and rest sometimes. Resting doesn’t mean you’re behind."
+    "This is your younger self, Happy Happy Birthday elder one. My champ.",
+    "You have spent whole 24 years, you have grown into a man living and handling life the best you could.",
+    "You're doing a tremendous job, keep growing and working towards your dream life.",
+    "Dont forget to take pause and rest — that doesn't mean you're behind…"
   ];
 
   const introTyping = $("introTyping");
   const introCursor = $("introCursor");
   const introImages = $("introImages");
-  const introNext = $("introNext");
+  const introContinue = $("introContinue");
 
-  async function typeLine(text, speed=38){
-    introTyping.textContent = "";
+  async function typeLine(text, speed=34){
+    introTyping.textContent="";
     introTyping.classList.remove("fadeOut");
+    introCursor.style.display="inline-block";
     for(let i=0;i<text.length;i++){
       introTyping.textContent += text[i];
       await sleep(speed);
     }
   }
 
-  async function runIntroSequence(){
-    // prevent double runs
-    if(runIntroSequence.done) return;
-    runIntroSequence.done = true;
+  let introStarted = false;
+  async function startIntro(){
+    if(introStarted) return;
+    introStarted = true;
 
-    introCursor.style.display = "inline-block";
+    // Show images slowly
+    introImages.classList.add("show");
 
+    // Type lines with disappear effect
     for(let i=0;i<introLines.length;i++){
-      await typeLine(introLines[i], 38);
+      await typeLine(introLines[i], 34);
       await sleep(1800);
       introTyping.classList.add("fadeOut");
       await sleep(450);
     }
 
-    introCursor.style.display = "none";
+    introCursor.style.display="none";
     introTyping.textContent = "Ready? 💗";
-    introImages.classList.add("show");
 
-    introNext.disabled = false;
-    introNext.style.opacity = "1";
-    introNext.style.cursor = "pointer";
+    introContinue.disabled = false;
+    introContinue.style.opacity = "1";
+    introContinue.style.cursor = "pointer";
   }
-  window.runIntroSequence = runIntroSequence;
+  window.startIntro = startIntro;
 
-  /* ------------------------------
-     QUESTIONS (emotional)
-     hearts float on click
-  ------------------------------ */
-  const questions = [
-    {
-      q: "Do you remember me — the kid who wanted so many things but couldn’t have them?",
-      a: ["Yes. I remember you every day.", "Yes, and I carried you with me."]
-    },
-    {
-      q: "Did that lack break us… or did it make us stronger?",
-      a: ["It hurt more than I admit.", "It lit a fire that still burns."]
-    },
-    {
-      q: "When we worked so hard in competitions — who were we proving it to?",
-      a: ["To myself.", "To the world… and to me."]
-    },
-    {
-      q: "When you chose a path different from everyone else — were you scared like I used to be?",
-      a: ["Terrified, but hopeful.", "Scared, but determined."]
-    },
-    {
-      q: "When no one understood you — did you ever feel like giving up?",
-      a: ["Yes… many times.", "Yes, but I kept going."]
-    },
-    {
-      q: "All those years of discipline… was it worth it?",
-      a: ["Every single sacrifice.", "More than words can say."]
-    },
-    {
-      q: "One last thing… are you proud of me?",
-      a: ["So proud it hurts.", "Always was. Always will be."]
-    }
-  ];
-
-  const qWrap = $("qWrap");
-
+  /* HEART FLOAT on option click */
   function heartFloat(){
-    const h = document.createElement("div");
-    h.className = "heart";
-    h.textContent = (Math.random() > .5) ? "💗" : "💞";
+    const h=document.createElement("div");
+    h.className="heart";
+    h.textContent = (Math.random()>.5) ? "💗" : "💞";
     h.style.left = (Math.random()*80 + 10) + "vw";
-    h.style.top = (Math.random()*18 + 70) + "vh";
+    h.style.top  = (Math.random()*20 + 70) + "vh";
     document.body.appendChild(h);
     setTimeout(()=>h.remove(), 2200);
   }
 
-  function buildQuestions(){
-    qWrap.innerHTML = "";
-    questions.forEach((item, idx) => {
-      const card = document.createElement("div");
-      card.className = "qCard";
-      card.innerHTML = `<div class="qTitle">${item.q}</div>`;
-      const row = document.createElement("div");
-      row.className = "optRow";
+  function heartsRain(n=10){
+    for(let i=0;i<n;i++){
+      setTimeout(()=>heartFloat(), i*120);
+    }
+  }
+  window.heartsRain = heartsRain;
 
-      item.a.forEach((opt) => {
-        const b = document.createElement("button");
-        b.className = "optBtn";
-        b.textContent = opt;
-        b.onclick = () => {
-          // visuals
-          heartFloat();
-          // selection highlight in that card
+  /* QUESTIONS (split into two pages: 4 + 3) */
+  const qPage1 = [
+    {
+      q:"Do you remember me — the kid who wanted so many things but couldn’t have them?",
+      a:["Yes. I remember you every day.","Yes, and I carried you with me."]
+    },
+    {
+      q:"Did that lack break us… or did it make us stronger?",
+      a:["It hurt more than I admit.","It lit a fire that still burns."]
+    },
+    {
+      q:"When we worked so hard in competitions — who were we proving it to?",
+      a:["To myself.","To the world… and to me."]
+    },
+    {
+      q:"When you chose a path different from everyone else — were you scared like I used to be?",
+      a:["Terrified, but hopeful.","Scared, but determined."]
+    }
+  ];
+
+  const qPage2 = [
+    {
+      q:"When no one understood you — did you ever feel like giving up?",
+      a:["Yes… many times.","Yes, but I kept going."]
+    },
+    {
+      q:"All those years of discipline… was it worth it?",
+      a:["Every single sacrifice.","More than words can say."]
+    },
+    {
+      q:"One last thing… are you proud of me?",
+      a:["So proud it hurts.","Always was. Always will be."]
+    }
+  ];
+
+  function buildQuestions(targetId, list){
+    const wrap = $(targetId);
+    wrap.innerHTML="";
+    list.forEach(item=>{
+      const card=document.createElement("div");
+      card.className="qCard";
+      card.innerHTML = `<div class="qTitle">${item.q}</div>`;
+      const row=document.createElement("div");
+      row.className="optRow";
+
+      item.a.forEach(opt=>{
+        const b=document.createElement("button");
+        b.className="optBtn";
+        b.textContent=opt;
+        b.onclick=()=>{
+          heartsRain(6);
           Array.from(row.querySelectorAll("button")).forEach(x=>x.classList.remove("selected"));
           b.classList.add("selected");
         };
@@ -884,29 +873,29 @@
       });
 
       card.appendChild(row);
-      qWrap.appendChild(card);
+      wrap.appendChild(card);
     });
   }
-  buildQuestions();
 
-  /* ------------------------------
-     JOURNEY cards (your text, poetic + subtle)
-  ------------------------------ */
+  buildQuestions("qArea1", qPage1);
+  buildQuestions("qArea2", qPage2);
+
+  /* JOURNEY (next button per image) */
   const journeyData = [
     {
       title:"A boy was born",
       img:"images/childhood.jpeg",
       text:
-`Born after eleven years, a child arrived and quietly rewired fate.
+`Born after eleven years, a child changed his family’s fate.
 Stubborn and notorious — wanting what he wanted, especially the rarest things.
-Who knew that same child would grow into such an inspiring man?`
+Who knew that same child would become such an inspiring man?`
     },
     {
       title:"The competitor",
       img:"images/competitions.jpeg",
       text:
-`A determined boy who studied with discipline and sharp belief.
-Not to impress anyone — but to prove: “I can win, no matter the lack.”
+`A determined boy who studied with discipline and belief.
+Not for anyone — for his own self: “I can win, no matter the lack.”
 UCMAS, nationals, every stage… the same zeal, the same hunger.
 And every win made the home a little prouder.`
     },
@@ -914,89 +903,94 @@ And every win made the home a little prouder.`
       title:"The turning point",
       img:"images/turning-point.jpeg",
       text:
-`One day, it was society’s safe path… or your own dreams.
-Something inside you knew your current life wasn’t meant for you.
-So you chose the uncommon road — where hardly anyone walks.
-Courage, ambition, belief — you had it all, and you chose yourself.`
+`One day it was society’s safe path… or his own dream life.
+Something inside him knew the ordinary road wasn’t meant for him.
+So he chose the uncommon way — where hardly anyone walks.
+Courage, ambition, belief — he had it all, and he chose himself.`
     },
     {
       title:"Success",
       img:"images/success.jpeg",
       text:
-`Then came the entry of your Godfather — Paul.
-Like you became light for others, he became hope for your future.
-Stars aligned, vibe matched… and you turned unstoppable.
-You grew — and with you, the people around you grew too.`
+`Then came the entry of his Godfather — Paul.
+Like he became light for others, Paul became hope for his future.
+Stars aligned, vibe matched… and he turned unstoppable.
+He grew — and with him, the people around him grew too.`
     },
     {
       title:"Present",
       img:"images/present.jpeg",
       text:
-`And here you are today, after 7–8 years of proving yourself.
-Moving mountains quietly.
-Changing lives — not just yours, but everyone who crossed your path.
+`And here he is today — after 7–8 years of proving himself.
+Quietly moving mountains.
+Changing lives — not just his, but everyone who crossed his path.
 Still hungry. Still humble. Still rising.`
     }
   ];
 
-  let j = 0;
+  let j=0;
   const journeyCard = $("journeyCard");
-  const chapNum = $("chapNum");
   const journeyNextBtn = $("journeyNextBtn");
 
-  window.startJourney = function(){
-    j = 0;
-    renderJourney();
-    go(4);
-  }
-
   function renderJourney(){
-    chapNum.textContent = (j+1);
     const it = journeyData[j];
+    const spark = `
+      <div class="spark s1">✨</div>
+      <div class="spark s2">🦋</div>
+      <div class="spark s3">🎀</div>
+      <div class="spark s4">💫</div>
+    `;
     journeyCard.innerHTML = `
+      ${spark}
       <div class="journeyTitle">${it.title}</div>
       <img src="${it.img}" alt="${it.title}">
       <div class="journeyText">${it.text.replaceAll("\n","<br>")}</div>
     `;
-    if(j === journeyData.length - 1){
-      journeyNextBtn.textContent = "Continue →";
-      journeyNextBtn.onclick = () => go(5);
+
+    if(j === journeyData.length-1){
+      journeyNextBtn.textContent = "A letter for you ❤️";
+      journeyNextBtn.onclick = ()=>{ go(5); startLetterTyping(); };
     }else{
       journeyNextBtn.textContent = "Next →";
       journeyNextBtn.onclick = nextJourney;
     }
   }
 
-  window.nextJourney = function(){
+  function nextJourney(){
+    heartsRain(6);
     if(j < journeyData.length-1){
       j++;
       renderJourney();
     }
   }
-  window.prevJourney = function(){
+  function prevJourney(){
     if(j > 0){
       j--;
       renderJourney();
     }
   }
+  window.nextJourney = nextJourney;
+  window.prevJourney = prevJourney;
 
-  /* ------------------------------
-     LETTER (content preserved, shorter & scrollable)
-  ------------------------------ */
-  const letter =
+  // Render first journey card when you open journey slide
+  // (safe: render at load)
+  renderJourney();
+
+  /* LETTER typing (scrollable) */
+  const letterText =
 `It feels like I’ve known you forever.
 Like I somehow knew your story even before you told me.
 
 I know I wasn’t there when you were a child,
-but the way you talk about your life —
+but the way you talk about your life,
 it feels like I’ve lived it with you.
 You always wanted everything, not because you were greedy,
 but because you saw others have what you couldn’t.
-And that lack lit a fire inside you —
+And that lack lit a fire inside you,
 a fire to give yourself and your family everything one day.
 
 You were always a champion.
-In school, in competitions, in life —
+In school, in competitions, in life,
 you never played small.
 You wanted to win, and you worked for it quietly, patiently.
 
@@ -1005,15 +999,15 @@ You didn’t follow the usual path.
 You chose something uncertain, risky, and completely yours.
 And that decision changed everything.
 
-The discipline you’ve shown for years —
-four, five, six, now so many years —
+The discipline you’ve shown for years ,
+four, five, six, now so many years ,
 I honestly don’t have words for how proud we are of you.
 Your family is grateful, protected, and standing strong
 because of you.
 
 Yes, you’re annoying sometimes.
 Yes, you’re stubborn.
-But that mischief, that madness —
+But that mischief, that madness ,
 we love it.
 You are the main character in our lives,
 and we cannot imagine life without you.
@@ -1021,15 +1015,15 @@ and we cannot imagine life without you.
 And then… there’s us.
 How destiny made us meet out of nowhere,
 right when I needed light the most.
-You showed up — just like that.
+You showed up, just like that.
 And somehow, everything shifted.
 
 You give me comfort, but you also push me to grow.
 You make me feel safe, but never stagnant.
-You walk ahead — but always holding everyone’s hand.
+You walk ahead, but always holding everyone’s hand.
 
 From our first conversations,
-to Rishikesh, Goa, Kerala, Dubai —
+to Rishikesh, Goa, Kerala, Dubai ,
 so many firsts, so many memories.
 Life with you has been magical in ways I can’t explain.
 
@@ -1044,34 +1038,48 @@ Happy happy 24th birthday.
 You are rare. You are powerful.
 And this is only the beginning.
 
-I love you so much. 🤍`;
+Love, Always 🤍`;
 
-  $("letterText").textContent = letter;
+  const letterBox = $("letterBox");
+  let letterStarted=false;
 
-  /* ------------------------------
-     FINAL: image pop + confetti
-  ------------------------------ */
+  async function startLetterTyping(){
+    if(letterStarted) return;
+    letterStarted=true;
+    letterBox.textContent="";
+    for(let i=0;i<letterText.length;i++){
+      letterBox.textContent += letterText[i];
+      // keep auto-scrolling as it types
+      letterBox.scrollTop = letterBox.scrollHeight;
+      await sleep(12);
+    }
+  }
+  window.startLetterTyping = startLetterTyping;
+
+  /* FINAL confetti + hearts */
   const finalImg = $("finalImg");
-  let finalPlayed = false;
+  let finalPlayed=false;
 
-  window.burst = function(count=36){
+  function burst(count=40){
     for(let i=0;i<count;i++){
-      const c = document.createElement("div");
-      c.className = "conf";
+      const c=document.createElement("div");
+      c.className="conf";
       c.textContent = (Math.random()>.5) ? "🎉" : "🥳";
       c.style.left = (Math.random()*100) + "vw";
-      c.style.top = (Math.random()*100) + "vh";
+      c.style.top  = (Math.random()*100) + "vh";
       document.body.appendChild(c);
       setTimeout(()=>c.remove(), 1900);
     }
   }
+  window.burst = burst;
 
-  window.triggerFinal = function(){
+  function triggerFinal(){
     if(finalPlayed) return;
-    finalPlayed = true;
+    finalPlayed=true;
     setTimeout(()=> finalImg.classList.add("show"), 180);
-    setTimeout(()=> burst(44), 520);
+    setTimeout(()=> { burst(55); heartsRain(18); }, 520);
   }
+  window.triggerFinal = triggerFinal;
 
 </script>
 </body>
