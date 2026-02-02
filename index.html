@@ -554,8 +554,8 @@
 
         <button class="primary" style="margin: 0 auto 6px;" onclick="startIntro()">Let’s see</button>
 
-        <!-- ONE image below title (optional) -->
-        <img class="heroImg" src="images/present.jpeg" alt="hero" />
+        <!-- ✅ INTRO SINGLE IMAGE = TURNING POINT -->
+        <img class="heroImg" src="images/turning-point.jpeg" alt="Turning point" />
 
         <!-- typing -->
         <div class="typingBox" style="margin-top:10px;">
@@ -972,8 +972,6 @@ Still hungry. Still humble. Still rising.`
   window.nextJourney = nextJourney;
   window.prevJourney = prevJourney;
 
-  // Render first journey card when you open journey slide
-  // (safe: render at load)
   renderJourney();
 
   /* LETTER typing (scrollable) */
@@ -1049,7 +1047,6 @@ Love, Always 🤍`;
     letterBox.textContent="";
     for(let i=0;i<letterText.length;i++){
       letterBox.textContent += letterText[i];
-      // keep auto-scrolling as it types
       letterBox.scrollTop = letterBox.scrollHeight;
       await sleep(12);
     }
@@ -1080,7 +1077,6 @@ Love, Always 🤍`;
     setTimeout(()=> { burst(55); heartsRain(18); }, 520);
   }
   window.triggerFinal = triggerFinal;
-
 </script>
 </body>
 </html>
