@@ -11,40 +11,45 @@
 
   <style>
     :root{
-      --bg1:#0b0b10;
-      --bg2:#10101a;
-      --glass: rgba(255,255,255,.06);
-      --glass2: rgba(255,255,255,.10);
-      --stroke: rgba(255,255,255,.12);
-      --text: rgba(255,255,255,.90);
-      --muted: rgba(255,255,255,.70);
-      --muted2: rgba(255,255,255,.55);
-      --accent:#ff5aa5;
-      --accent2:#ffd1e6;
+      --bgA:#fff7fb;
+      --bgB:#ffffff;
+      --card: rgba(255,255,255,.72);
+      --card2: rgba(255,255,255,.86);
+      --stroke: rgba(255,105,175,.18);
+      --shadow: 0 26px 70px rgba(20,10,25,.10);
+
+      --text: rgba(20,14,22,.92);
+      --muted: rgba(20,14,22,.70);
+      --muted2: rgba(20,14,22,.52);
+
+      --accent:#ff4aa0;
+      --accent2:#ff82bf;
+      --accentSoft: rgba(255,74,160,.12);
       --gold:#e9d7a5;
-      --shadow: 0 30px 70px rgba(0,0,0,.45);
+
       --radius: 26px;
       --maxw: 980px;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
+
     body{
       margin:0;
       font-family: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       color: var(--text);
       background:
-        radial-gradient(900px 700px at 20% 10%, rgba(255,90,165,.18), transparent 60%),
-        radial-gradient(900px 700px at 80% 10%, rgba(233,215,165,.14), transparent 62%),
-        radial-gradient(900px 700px at 50% 110%, rgba(140,180,255,.12), transparent 60%),
-        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+        radial-gradient(900px 700px at 20% 0%, rgba(255,74,160,.18), transparent 60%),
+        radial-gradient(900px 700px at 80% 0%, rgba(255,200,228,.22), transparent 62%),
+        radial-gradient(900px 700px at 50% 110%, rgba(255,233,245,.28), transparent 60%),
+        linear-gradient(180deg, var(--bgA) 0%, var(--bgB) 100%);
       overflow:hidden;
     }
 
     .grain{
-      position:fixed; inset:0; pointer-events:none; opacity:.10;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
-      mix-blend-mode: overlay;
+      position:fixed; inset:0; pointer-events:none; opacity:.08;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
     }
 
     .app{
@@ -53,7 +58,7 @@
       display:flex;
       justify-content:center;
       align-items:center;
-      padding: clamp(12px, 2.2vw, 24px);
+      padding: clamp(10px, 2vw, 22px);
       position:relative;
     }
 
@@ -61,33 +66,20 @@
       width:min(var(--maxw), 96vw);
       height:min(820px, 92vh);
       border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border: 1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.60));
+      border: 1px solid rgba(255,74,160,.14);
       box-shadow: var(--shadow);
       overflow:hidden;
       position:relative;
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(14px);
     }
 
     .topbar{
       position:absolute; left:0; right:0; top:0;
-      display:flex; align-items:center; justify-content:space-between;
-      padding: 16px 16px 0;
+      display:flex; align-items:center; justify-content:flex-end;
+      padding: 14px 14px 0;
       z-index:20;
       pointer-events:none;
-    }
-
-    .brand{
-      pointer-events:auto;
-      display:flex; gap:10px; align-items:center;
-      padding:10px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      color: var(--muted);
-      font-weight:700;
-      font-size:13px;
-      letter-spacing:.2px;
     }
 
     .musicBtn{
@@ -95,20 +87,21 @@
       display:flex; gap:10px; align-items:center;
       padding:10px 14px;
       border-radius:999px;
-      background: rgba(255,255,255,.07);
-      border:1px solid rgba(255,255,255,.12);
-      color: var(--text);
-      font-weight:800;
+      background: rgba(255,255,255,.88);
+      border:1px solid rgba(255,74,160,.18);
+      color: rgba(20,14,22,.88);
+      font-weight:900;
       font-size:13px;
       cursor:pointer;
       user-select:none;
-      transition: transform .12s ease, background .12s ease;
+      box-shadow: 0 16px 30px rgba(255,74,160,.10);
+      transition: transform .12s ease, filter .12s ease;
     }
     .musicBtn:active{ transform: scale(.98); }
     .dot{
       width:10px; height:10px; border-radius:999px;
-      background: rgba(255,255,255,.30);
-      box-shadow: 0 0 0 2px rgba(255,255,255,.08) inset;
+      background: rgba(20,14,22,.18);
+      box-shadow: 0 0 0 2px rgba(255,74,160,.10) inset;
     }
     .musicBtn.on .dot{ background: var(--accent); }
 
@@ -119,8 +112,8 @@
       display:flex;
       justify-content:center;
       align-items:stretch;
-      padding-top: 56px;
-      padding-bottom: 18px;
+      padding-top: 54px;
+      padding-bottom: 16px;
     }
 
     .page{
@@ -133,24 +126,25 @@
     .page.active{ display:flex; }
 
     .card{
-      width:min(880px, 94%);
+      width:min(900px, 94%);
       height:100%;
       border-radius: 24px;
-      background: rgba(0,0,0,.20);
-      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.56);
+      border: 1px solid rgba(255,74,160,.16);
       overflow:hidden;
       position:relative;
+      box-shadow: 0 18px 45px rgba(20,10,25,.08);
     }
 
     .scroll{
       height:100%;
       overflow:auto;
       -webkit-overflow-scrolling: touch;
-      padding: clamp(18px, 3vw, 28px);
+      padding: clamp(16px, 2.7vw, 26px);
     }
 
     .center{
-      min-height: calc(100% - 10px);
+      min-height: calc(100% - 8px);
       display:flex;
       flex-direction:column;
       justify-content:center;
@@ -162,13 +156,13 @@
     .title{
       font-family: "Playfair Display", serif;
       font-weight:700;
-      letter-spacing:.6px;
-      font-size: clamp(28px, 4.0vw, 52px);
+      letter-spacing:.8px;
+      font-size: clamp(28px, 3.6vw, 50px);
       margin:0;
-      color: rgba(255,255,255,.95);
+      color: rgba(20,14,22,.92);
     }
-    .title .gold{
-      background: linear-gradient(90deg, rgba(233,215,165,1), rgba(255,209,230,1));
+    .title .pink{
+      background: linear-gradient(90deg, rgba(255,74,160,1), rgba(255,130,191,1));
       -webkit-background-clip: text;
       background-clip:text;
       color: transparent;
@@ -176,25 +170,18 @@
 
     .sub{
       margin:0;
-      max-width: 660px;
+      max-width: 700px;
       color: var(--muted);
-      line-height:1.7;
-      font-size: 15.5px;
+      line-height:1.75;
+      font-size: 15.6px;
     }
 
-    .heroImg{
-      width:min(720px, 92%);
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      box-shadow: 0 22px 55px rgba(0,0,0,.40);
-      overflow:hidden;
-    }
-    .heroImg img{
-      width:100%;
-      height:auto;
-      display:block;
-      object-fit: contain;
+    .divider{
+      width: 120px;
+      height: 1px;
+      background: rgba(255,74,160,.22);
+      margin: 4px auto 0;
+      border-radius:999px;
     }
 
     .btnRow{
@@ -202,28 +189,28 @@
       justify-content:center;
       gap:12px;
       flex-wrap:wrap;
-      margin-top: 8px;
+      margin-top: 6px;
     }
 
     .btn{
       border:none;
-      padding: 13px 18px;
+      padding: 13px 20px;
       border-radius: 999px;
       cursor:pointer;
-      font-weight:900;
+      font-weight:950;
       letter-spacing:.2px;
       font-size: 14px;
-      color: rgba(15,15,20,.95);
-      background: linear-gradient(135deg, rgba(233,215,165,1), rgba(255,209,230,1));
-      box-shadow: 0 18px 40px rgba(255,90,165,.16);
+      color: #fff;
+      background: linear-gradient(135deg, rgba(255,74,160,1), rgba(255,130,191,1));
+      box-shadow: 0 18px 38px rgba(255,74,160,.22);
       transition: transform .12s ease, filter .12s ease;
     }
     .btn:active{ transform: scale(.98); }
 
     .btnGhost{
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.14);
-      color: rgba(255,255,255,.88);
+      background: rgba(255,74,160,.10);
+      border: 1px solid rgba(255,74,160,.26);
+      color: rgba(255,74,160,.95);
       box-shadow:none;
     }
 
@@ -231,71 +218,108 @@
       margin:0;
       color: var(--muted2);
       font-size: 12.5px;
-      font-weight:700;
+      font-weight:800;
     }
 
-    .divider{
-      width: 120px;
-      height: 1px;
-      background: rgba(255,255,255,.14);
-      margin: 8px auto 0;
+    /* Medium images everywhere */
+    .imgWrap{
+      width:min(720px, 92%);
+      border-radius: 22px;
+      border: 1px solid rgba(255,74,160,.16);
+      background: rgba(255,255,255,.74);
+      box-shadow: 0 18px 40px rgba(20,10,25,.10);
+      overflow:hidden;
+    }
+    .imgWrap img{
+      width:100%;
+      height:auto;
+      display:block;
+      object-fit: contain;
     }
 
-    .typeHeading{
-      font-family: "Playfair Display", serif;
+    .imgFull{
+      width:min(760px, 94%);
+      border-radius: 22px;
+      border: 1px solid rgba(255,74,160,.16);
+      background: rgba(255,255,255,.80);
+      box-shadow: 0 18px 40px rgba(20,10,25,.10);
+      overflow:hidden;
+      margin: 10px auto 0;
+    }
+    .imgFull img{
+      width:100%;
+      height:auto;
+      display:block;
+      object-fit:contain;
+    }
+
+    .softCard{
+      max-width: 820px;
+      margin: 14px auto 0;
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.78);
+      border:1px solid rgba(255,74,160,.16);
+      box-shadow: 0 14px 34px rgba(20,10,25,.06);
+      color: rgba(20,14,22,.86);
+      line-height:1.85;
+      font-size: 15.6px;
+      text-align:left;
+    }
+
+    .headingSmall{
+      font-family:"Playfair Display", serif;
       font-weight:700;
-      margin:0;
+      margin: 0;
       text-align:center;
-      font-size: clamp(20px, 2.6vw, 30px);
-      color: rgba(255,255,255,.92);
+      font-size: clamp(20px, 2.4vw, 30px);
+      color: rgba(20,14,22,.92);
     }
 
     .typeBox{
-      max-width: 780px;
+      max-width: 820px;
       margin: 14px auto 0;
-      padding: 16px 16px;
+      padding: 16px 18px;
       border-radius: 20px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.12);
-      color: rgba(255,255,255,.86);
-      line-height:1.8;
-      font-size: 15.5px;
+      background: rgba(255,255,255,.78);
+      border:1px solid rgba(255,74,160,.16);
+      box-shadow: 0 14px 34px rgba(20,10,25,.06);
+      color: rgba(20,14,22,.86);
+      line-height:1.9;
+      font-size: 15.6px;
+      text-align:left;
       position:relative;
       overflow:hidden;
     }
 
-    .cursor{
-      display:inline-block;
-      width:8px; height:16px;
-      border-radius: 6px;
-      background: rgba(255,209,230,.8);
-      vertical-align:middle;
-      margin-left:6px;
-      animation: blink 1s steps(1) infinite;
-    }
-    @keyframes blink{ 50%{ opacity:0; } }
-
     .qWrap{
-      max-width: 820px;
-      margin: 18px auto 0;
+      max-width: 860px;
+      margin: 16px auto 0;
       display:flex;
       flex-direction:column;
       gap: 14px;
     }
 
     .qCard{
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.76);
+      border:1px solid rgba(255,74,160,.16);
       border-radius: 20px;
       padding: 16px;
+      box-shadow: 0 12px 28px rgba(20,10,25,.06);
+      animation: riseIn .45s ease both;
+    }
+
+    @keyframes riseIn{
+      from{ opacity:0; transform: translateY(10px); }
+      to{ opacity:1; transform: translateY(0); }
     }
 
     .q{
       margin:0 0 10px;
-      font-weight:900;
+      font-weight:950;
       letter-spacing:.1px;
-      color: rgba(255,255,255,.92);
-      font-size: 15.5px;
+      color: rgba(20,14,22,.92);
+      font-size: 15.6px;
     }
 
     .opts{
@@ -307,52 +331,17 @@
     .opt{
       padding: 11px 14px;
       border-radius: 999px;
-      border:1px solid rgba(255,209,230,.22);
-      background: rgba(255,255,255,.05);
-      color: rgba(255,255,255,.86);
-      font-weight:900;
+      border:1px solid rgba(255,74,160,.22);
+      background: rgba(255,74,160,.08);
+      color: rgba(255,74,160,.95);
+      font-weight:950;
       cursor:pointer;
-      transition: transform .12s ease, background .12s ease;
+      transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
     }
     .opt:active{ transform: scale(.98); }
     .opt.picked{
-      background: rgba(255,90,165,.18);
-      border-color: rgba(255,209,230,.35);
-    }
-
-    .imgFull{
-      width: min(860px, 96%);
-      margin: 14px auto 0;
-      border-radius: 22px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-      box-shadow: 0 22px 55px rgba(0,0,0,.40);
-      overflow:hidden;
-    }
-    .imgFull img{
-      width:100%;
-      height:auto;
-      display:block;
-      object-fit:contain;
-    }
-
-    .story{
-      max-width: 820px;
-      margin: 14px auto 0;
-      padding: 16px 16px;
-      border-radius: 20px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.12);
-      line-height:1.85;
-      color: rgba(255,255,255,.84);
-      font-size: 15.5px;
-    }
-
-    .rightBottom{
-      position:absolute;
-      right: 16px;
-      bottom: 16px;
-      z-index: 10;
+      background: rgba(255,74,160,.16);
+      box-shadow: 0 10px 22px rgba(255,74,160,.14);
     }
 
     .toast{
@@ -362,15 +351,16 @@
       transform: translateX(-50%);
       padding: 10px 14px;
       border-radius: 999px;
-      background: rgba(0,0,0,.65);
-      border: 1px solid rgba(255,255,255,.10);
-      color: rgba(255,255,255,.92);
-      font-weight:800;
+      background: rgba(255,255,255,.86);
+      border: 1px solid rgba(255,74,160,.18);
+      color: rgba(20,14,22,.86);
+      font-weight:900;
       font-size: 13px;
       opacity:0;
       pointer-events:none;
       transition: opacity .25s ease, transform .25s ease;
       z-index: 50;
+      box-shadow: 0 16px 30px rgba(20,10,25,.08);
     }
     .toast.show{
       opacity:1;
@@ -383,13 +373,65 @@
       pointer-events:none;
       font-size:18px;
       animation: floatUp 1.5s ease forwards;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
+      filter: drop-shadow(0 10px 18px rgba(20,10,25,.15));
     }
     @keyframes floatUp{
       from{ transform: translateY(0) scale(.95); opacity:1; }
       to{ transform: translateY(-160px) scale(1.15); opacity:0; }
     }
 
+    /* Page 1 sparkles */
+    .sparkleField{
+      position:absolute; inset:0; pointer-events:none; overflow:hidden;
+    }
+    .sparkle{
+      position:absolute;
+      width:10px; height:10px;
+      border-radius:999px;
+      background: radial-gradient(circle, rgba(255,74,160,.45), rgba(255,74,160,0));
+      animation: drift 7s linear infinite;
+      opacity:.7;
+    }
+    @keyframes drift{
+      from{ transform: translateY(100%) translateX(0) scale(.8); opacity:.0; }
+      15%{ opacity:.75; }
+      to{ transform: translateY(-120%) translateX(60px) scale(1.2); opacity:0; }
+    }
+
+    /* Page 3 image swap animation */
+    .swapRow{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
+    .swapImg{
+      width: min(240px, 92vw);
+      border-radius: 18px;
+      border:1px solid rgba(255,74,160,.16);
+      background: rgba(255,255,255,.85);
+      box-shadow: 0 14px 30px rgba(20,10,25,.08);
+      overflow:hidden;
+      opacity:0;
+      transform: translateY(10px);
+      animation: popIn .55s ease forwards;
+    }
+    .swapImg img{ width:100%; height:auto; display:block; object-fit:contain; }
+    @keyframes popIn{
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    /* Gentle page float on page 4 */
+    .floatCard{
+      animation: floaty 6s ease-in-out infinite;
+    }
+    @keyframes floaty{
+      50%{ transform: translateY(-6px); }
+    }
+
+    /* Confetti final page */
     .confetti{
       position:fixed; inset:0; pointer-events:none; z-index:55; overflow:hidden;
       opacity: 0;
@@ -403,14 +445,14 @@
       opacity:.85;
       animation: fall linear infinite;
       transform: translateY(-30px) rotate(0deg);
-      filter: drop-shadow(0 8px 14px rgba(0,0,0,.35));
+      filter: drop-shadow(0 8px 14px rgba(20,10,25,.10));
     }
     @keyframes fall{
       to{ transform: translateY(110vh) rotate(360deg); opacity:.95; }
     }
 
-    @media (min-width: 980px){
-      .card{ background: rgba(0,0,0,.16); }
+    @media (min-width: 1000px){
+      .card{ background: rgba(255,255,255,.52); }
     }
   </style>
 </head>
@@ -429,7 +471,6 @@
     <div class="shell">
 
       <div class="topbar">
-        <div class="brand">Premium Birthday Experience</div>
         <button class="musicBtn" id="musicBtn" type="button">
           <span class="dot"></span>
           <span id="musicLabel">Play the music</span>
@@ -439,15 +480,13 @@
       <div class="viewport">
 
         <!-- Page 1 -->
-        <section class="page active" id="p1" data-page="1">
+        <section class="page active" id="p1">
           <div class="card">
+            <div class="sparkleField" id="sparkleField"></div>
+
             <div class="scroll">
               <div class="center">
-                <h1 class="title"><span class="gold">HAPPY BIRTHDAY YASH 🤍</span></h1>
-
-                <div class="heroImg" style="max-width:720px;">
-                  <img src="images/intro2.jpeg" alt="intro image" />
-                </div>
+                <h1 class="title"><span class="pink">HAPPY BIRTHDAY YASH 🤍</span></h1>
 
                 <p class="sub">
                   Here’s a little birthday experience, made just for you.<br>
@@ -460,18 +499,18 @@
                 <div class="btnRow">
                   <button class="btn" type="button" data-next>Let’s see ✨</button>
                 </div>
+
+                <p class="hint">Tap Play the music in the top right</p>
               </div>
             </div>
           </div>
         </section>
 
         <!-- Page 2 Questions -->
-        <section class="page" id="p2" data-page="2">
+        <section class="page" id="p2">
           <div class="card">
             <div class="scroll" id="qScroll">
-              <h2 class="typeHeading">
-                <span id="qHeading"></span><span class="cursor"></span>
-              </h2>
+              <h2 class="headingSmall" id="qHeading"></h2>
 
               <div class="qWrap" id="questions"></div>
 
@@ -482,20 +521,22 @@
           </div>
         </section>
 
-        <!-- Page 3 Younger self letter -->
-        <section class="page" id="p3" data-page="3">
+        <!-- Page 3 Younger self -->
+        <section class="page" id="p3">
           <div class="card">
             <div class="scroll" id="ysScroll">
               <div class="center" style="justify-content:flex-start; padding-top:8px;">
-                <h1 class="title"><span class="gold">HAPPY BIRTHDAY MY HERO 🤍</span></h1>
+                <h1 class="title"><span class="pink">HAPPY BIRTHDAY MY HERO 🤍</span></h1>
 
-                <div class="imgFull" style="max-width:860px;">
-                  <img src="images/turningpoint.jpeg" alt="younger self" />
+                <div class="imgFull" id="ysImageWrap" style="max-width:680px;">
+                  <img id="ysMainImg" src="images/turning-point.jpeg" alt="younger self" />
                 </div>
 
-                <div class="typeBox" id="ysBox">
-                  <span id="ysText"></span><span class="cursor"></span>
+                <div class="typeBox" style="max-width:820px;">
+                  <div id="ysText"></div>
                 </div>
+
+                <div class="swapRow" id="introRow" style="display:none;"></div>
 
                 <div class="btnRow" style="margin-top:18px;">
                   <button class="btn" type="button" data-next>Let’s see what’s next</button>
@@ -506,20 +547,21 @@
         </section>
 
         <!-- Page 4 Journey intro -->
-        <section class="page" id="p4" data-page="4">
-          <div class="card">
+        <section class="page" id="p4">
+          <div class="card floatCard">
             <div class="scroll">
               <div class="center">
-                <h1 class="title"><span class="gold">Our Journey So Far</span></h1>
-                <p class="sub" style="max-width:740px;">
-                  <span id="journeyTyped"></span><span class="cursor"></span>
-                </p>
+                <h1 class="title"><span class="pink">Our Journey So Far</span></h1>
 
-                <div class="imgFull" style="max-width:860px;">
+                <div class="softCard" style="text-align:center; max-width:760px;">
+                  <div id="journeyTyped"></div>
+                </div>
+
+                <div class="imgWrap" style="max-width:640px;">
                   <img src="images/intro1.jpeg" alt="journey start" />
                 </div>
 
-                <div class="story" style="text-align:center; max-width:760px;">
+                <div class="softCard" style="text-align:center; max-width:760px;">
                   You did not wake up one day and become this person. You grew into him slowly. Through small wins. Through quiet sacrifices. Through days no one saw. This journey did not happen overnight. It happened because you never stopped showing up.
                 </div>
 
@@ -532,17 +574,20 @@
         </section>
 
         <!-- Page 5 Childhood -->
-        <section class="page" id="p5" data-page="5">
+        <section class="page" id="p5">
           <div class="card">
             <div class="scroll">
               <div class="center" style="justify-content:flex-start; padding-top:8px;">
-                <h1 class="title"><span class="gold">Where It All Began</span></h1>
-                <div class="imgFull">
+                <h1 class="title"><span class="pink">Where It All Began</span></h1>
+
+                <div class="imgWrap">
                   <img src="images/childhood.jpeg" alt="childhood" />
                 </div>
-                <div class="story">
+
+                <div class="softCard">
                   Born after eleven years, he grew up knowing that not everything came easy. He was the most loved and the most notorious child, always wanting more, not out of greed, but because he saw others having what he could not. Some wishes stayed unfulfilled, some dreams stayed quiet, but that lack lit a fire inside him. Instead of breaking him, it taught him to dream bigger and promise himself that one day, life would be different.
                 </div>
+
                 <div class="btnRow">
                   <button class="btn btnGhost" type="button" data-next>And then…</button>
                 </div>
@@ -552,17 +597,20 @@
         </section>
 
         <!-- Page 6 Competitions -->
-        <section class="page" id="p6" data-page="6">
+        <section class="page" id="p6">
           <div class="card">
             <div class="scroll">
               <div class="center" style="justify-content:flex-start; padding-top:8px;">
-                <h1 class="title"><span class="gold">Competitions</span></h1>
-                <div class="imgFull">
+                <h1 class="title"><span class="pink">Competitions</span></h1>
+
+                <div class="imgWrap">
                   <img src="images/competitions.jpeg" alt="competitions" />
                 </div>
-                <div class="story">
+
+                <div class="softCard">
                   From a very young age, he carried a quiet determination. He studied with focus, practiced with discipline, and competed with belief. It was never only about winning for others, it was about proving to himself that he could do it. From UCMAS to stages, states, and every challenge that came his way, he showed up with the same fire. Even with limitations, even with pressure, he chose effort over excuses. Every win made the family proud, and every loss made him stronger.
                 </div>
+
                 <div class="btnRow">
                   <button class="btn" type="button" data-next>Next</button>
                 </div>
@@ -572,17 +620,20 @@
         </section>
 
         <!-- Page 7 Turning point -->
-        <section class="page" id="p7" data-page="7">
+        <section class="page" id="p7">
           <div class="card">
             <div class="scroll">
               <div class="center" style="justify-content:flex-start; padding-top:8px;">
-                <h1 class="title"><span class="gold">Turning Point</span></h1>
-                <div class="imgFull">
-                  <img src="images/turningpoint.jpeg" alt="turning point" />
+                <h1 class="title"><span class="pink">Turning Point</span></h1>
+
+                <div class="imgWrap">
+                  <img src="images/turning-point.jpeg" alt="turning point" />
                 </div>
-                <div class="story">
+
+                <div class="softCard">
                   There came a moment when life asked him to choose. The usual path everyone follows, or the dream that quietly lived inside him. It was not an easy choice. There was fear, doubt, and the weight of expectations. But something inside him knew that the ordinary life was not meant for him. So he chose himself. He chose uncertainty over comfort, belief over approval, and courage over fear. That one decision changed everything.
                 </div>
+
                 <div class="btnRow">
                   <button class="btn btnGhost" type="button" data-next>Then what happened?</button>
                 </div>
@@ -592,17 +643,20 @@
         </section>
 
         <!-- Page 8 Success -->
-        <section class="page" id="p8" data-page="8">
+        <section class="page" id="p8">
           <div class="card">
             <div class="scroll">
               <div class="center" style="justify-content:flex-start; padding-top:8px;">
-                <h1 class="title"><span class="gold">Success</span></h1>
-                <div class="imgFull">
+                <h1 class="title"><span class="pink">Success</span></h1>
+
+                <div class="imgWrap">
                   <img src="images/success.jpeg" alt="success" />
                 </div>
-                <div class="story">
+
+                <div class="softCard">
                   Slowly, things began to change. The hard work started showing results. The discipline, the long days, and the silent effort finally found direction. With the right guidance at the right time, his growth accelerated. He did not grow alone. He lifted others with him. What once felt impossible started becoming real, and the life he had imagined quietly began taking shape.
                 </div>
+
                 <div class="btnRow">
                   <button class="btn btnGhost" type="button" data-next>Then…</button>
                 </div>
@@ -612,17 +666,20 @@
         </section>
 
         <!-- Page 9 Present -->
-        <section class="page" id="p9" data-page="9">
+        <section class="page" id="p9">
           <div class="card">
             <div class="scroll">
               <div class="center" style="justify-content:flex-start; padding-top:8px;">
-                <h1 class="title"><span class="gold">Present</span></h1>
-                <div class="imgFull">
+                <h1 class="title"><span class="pink">Present</span></h1>
+
+                <div class="imgWrap">
                   <img src="images/present.jpeg" alt="present" />
                 </div>
-                <div class="story">
+
+                <div class="softCard">
                   And here you are today, after seven to eight years of showing up for yourself again and again. You proved that consistency changes everything. You moved forward quietly, handled responsibilities with strength, and kept growing without seeking validation. You did not just change your own life, but in many ways, you changed the lives of everyone who crossed your path. And this is only a stronger beginning.
                 </div>
+
                 <div class="btnRow">
                   <button class="btn" type="button" data-next>A letter for you</button>
                 </div>
@@ -632,21 +689,26 @@
         </section>
 
         <!-- Page 10 Letter -->
-        <section class="page" id="p10" data-page="10">
+        <section class="page" id="p10">
           <div class="card">
             <div class="scroll" id="letterScroll">
               <div class="center" style="justify-content:flex-start; padding-top:8px;">
-                <h1 class="title"><span class="gold">A Letter From Someone Who Believes In You</span></h1>
+                <h1 class="title"><span class="pink">A Letter From Someone Who Believes In You</span></h1>
 
-                <div class="imgFull">
+                <div class="imgWrap" style="max-width:640px;">
                   <img src="images/us.jpeg" alt="us" />
                 </div>
 
-                <div class="typeBox" id="letterBox" style="max-width:820px; width:100%;">
+                <div class="softCard" style="text-align:center; max-width:760px;">
+                  <span style="font-weight:900; color:rgba(255,74,160,.95);">Read slowly.</span>
+                  <span style="color:rgba(20,14,22,.75);">Let it sink in.</span>
+                </div>
+
+                <div class="typeBox" id="letterBox" style="max-width:860px; width:100%;">
                   <div id="letterLines"></div>
                 </div>
 
-                <div class="rightBottom">
+                <div class="btnRow" style="margin-top:18px;">
                   <button class="btn" type="button" id="continueBtn">Continue</button>
                 </div>
               </div>
@@ -655,17 +717,17 @@
         </section>
 
         <!-- Page 11 Final -->
-        <section class="page" id="p11" data-page="11">
+        <section class="page" id="p11">
           <div class="card">
             <div class="scroll">
               <div class="center">
-                <h1 class="title"><span class="gold">HAPPY BIRTHDAY YASH 🤍</span></h1>
+                <h1 class="title"><span class="pink">HAPPY BIRTHDAY YASH 🤍</span></h1>
 
-                <div class="imgFull" style="max-width:860px;">
-                  <img src="images/intro3.jpeg" alt="final" />
+                <div class="imgWrap" style="max-width:700px;">
+                  <img src="images/present.jpeg" alt="final" />
                 </div>
 
-                <div class="story" style="text-align:center; max-width:760px;">
+                <div class="softCard" style="text-align:center; max-width:760px;">
                   This is your moment.<br>
                   And you deserve every bit of it.
                 </div>
@@ -677,8 +739,6 @@
                 <div class="btnRow">
                   <button class="btn btnGhost" type="button" id="replayBtn">Replay</button>
                 </div>
-
-                <p class="hint">Tap Play the music anytime if sound is off</p>
               </div>
             </div>
           </div>
@@ -708,8 +768,9 @@
       const sc = pages[pageIndex].querySelector(".scroll");
       if(sc) sc.scrollTop = 0;
 
+      if(pageIndex === 0) startSparkles();
       if(pageIndex === 1) startQuestionHeading();
-      if(pageIndex === 2) startYoungerSelfTyping();
+      if(pageIndex === 2) startYoungerSelfTypingAndSwap();
       if(pageIndex === 3) startJourneyTyped();
       if(pageIndex === 9) startLetterTyping();
       if(pageIndex === 10) startFinalCelebration();
@@ -738,7 +799,7 @@
     async function tryPlay(){
       try{
         music.muted = false;
-        music.volume = 0.75;
+        music.volume = 0.80;
         await music.play();
         return true;
       }catch(err){
@@ -794,9 +855,10 @@
     function renderQuestions(){
       const wrap = $("questions");
       wrap.innerHTML = "";
-      questionsData.forEach((item) => {
+      questionsData.forEach((item, idx) => {
         const card = document.createElement("div");
         card.className = "qCard";
+        card.style.animationDelay = (idx * 35) + "ms";
         card.innerHTML = `
           <div class="q">${item.q}</div>
           <div class="opts">
@@ -839,32 +901,63 @@
     function startQuestionHeading(){
       if(qHeadingDone) return;
       qHeadingDone = true;
-      typeText($("qHeading"), "Before we go ahead, someone wants to ask a few things…", 26);
+      typeText($("qHeading"), "Before we go ahead, someone wants to ask a few things…", 22);
     }
 
-    // Page 3 younger self typing with slow auto scroll
+    // Page 3 younger self typing and then swap to intro images
     const youngerText =
 `Hi Yash.
+
 It’s me. Your younger self.
+
 How are you? I know you’ve grown up now. You’re handling life. Being responsible. Still a little naughty… just like me.
+
 You’ve lived 24 whole years. And you’ve done the best you could. I see how hard you try every day. I’m really proud of you for that. Please keep chasing your dreams.
+
 But don’t forget to stop sometimes. Resting doesn’t mean you’re behind. It just means you’re human.
+
 Happy Birthday, elder one. You became everything I dreamed of. I’m always proud of you. And I’m really happy that you finally have all the toys and things I once wished for. 😊`;
 
     let ysDone = false;
-    function startYoungerSelfTyping(){
+    function startYoungerSelfTypingAndSwap(){
       if(ysDone) return;
       ysDone = true;
+
       const el = $("ysText");
       const sc = $("ysScroll");
+      const mainImg = $("ysMainImg");
+      const introRow = $("introRow");
+      introRow.style.display = "none";
+      introRow.innerHTML = "";
+
       let i = 0;
       const speed = 18;
+
       function tick(){
         el.textContent = youngerText.slice(0, i);
         i++;
         if(sc) sc.scrollTop = sc.scrollHeight;
+
         if(i <= youngerText.length){
           setTimeout(tick, speed);
+        }else{
+          // after typing ends, keep turning-point visible for a moment then swap to 3 images
+          setTimeout(() => {
+            // hide the single image
+            $("ysImageWrap").style.display = "none";
+
+            // show the 3 intro images in the same place
+            introRow.style.display = "flex";
+
+            const files = ["images/intro1.jpeg","images/intro2.jpeg","images/intro3.jpeg"];
+            files.forEach((src, idx) => {
+              const box = document.createElement("div");
+              box.className = "swapImg";
+              box.style.animationDelay = (idx * 180) + "ms";
+              box.innerHTML = `<img src="${src}" alt="intro ${idx+1}" />`;
+              introRow.appendChild(box);
+            });
+          }, 900);
         }
       }
       tick();
@@ -875,10 +968,10 @@ Happy Birthday, elder one. You became everything I dreamed of. I’m always prou
     function startJourneyTyped(){
       if(journeyDone) return;
       journeyDone = true;
-      typeText($("journeyTyped"), "Let’s look at the life we built, one step at a time.", 26);
+      typeText($("journeyTyped"), "Let’s look at the life we built, one step at a time.", 22);
     }
 
-    // Letter typing line by line with smooth scroll
+    // Letter typing line by line slow with smooth scroll
     const letterLines = [
       "It feels like I’ve known you forever.",
       "Like I somehow knew your story even before you told me.",
@@ -952,16 +1045,17 @@ Happy Birthday, elder one. You became everything I dreamed of. I’m always prou
       box.innerHTML = "";
 
       let idx = 0;
-      const pace = 520;
+      const pace = 650;
 
       function addLine(){
         if(idx >= letterLines.length) return;
+
         const line = document.createElement("div");
         line.style.opacity = "0";
-        line.style.transform = "translateY(8px)";
-        line.style.transition = "opacity .45s ease, transform .45s ease";
+        line.style.transform = "translateY(10px)";
+        line.style.transition = "opacity .55s ease, transform .55s ease";
         line.style.whiteSpace = "pre-wrap";
-        line.style.margin = "0 0 10px";
+        line.style.margin = "0 0 12px";
         line.textContent = letterLines[idx];
         box.appendChild(line);
 
@@ -971,7 +1065,7 @@ Happy Birthday, elder one. You became everything I dreamed of. I’m always prou
         });
 
         if(sc){
-          sc.scrollTop = sc.scrollHeight;
+          sc.scrollTo({ top: sc.scrollHeight, behavior: "smooth" });
         }
 
         idx++;
@@ -980,9 +1074,9 @@ Happy Birthday, elder one. You became everything I dreamed of. I’m always prou
       addLine();
     }
 
-    // Confetti for final page
+    // Final confetti
     const confetti = $("confetti");
-    const confColors = ["#ff5aa5","#ffd1e6","#e9d7a5","#9bd1ff","#b9a6ff"];
+    const confColors = ["#ff4aa0","#ff82bf","#ffd1e6","#e9d7a5","#ffffff"];
     let confBuilt = false;
 
     function buildConfetti(){
@@ -994,7 +1088,7 @@ Happy Birthday, elder one. You became everything I dreamed of. I’m always prou
         p.style.animationDuration = (6 + Math.random()*6) + "s";
         p.style.animationDelay = (-Math.random()*6) + "s";
         p.style.background = confColors[Math.floor(Math.random()*confColors.length)];
-        p.style.opacity = (0.55 + Math.random()*0.4);
+        p.style.opacity = (0.60 + Math.random()*0.35);
         confetti.appendChild(p);
       }
     }
@@ -1002,10 +1096,10 @@ Happy Birthday, elder one. You became everything I dreamed of. I’m always prou
     function startFinalCelebration(){
       buildConfetti();
       confetti.classList.add("on");
-      for(let i=0;i<20;i++){
+      for(let i=0;i<18;i++){
         setTimeout(() => {
           heartAt(Math.random()*window.innerWidth, window.innerHeight - 40);
-        }, i*90);
+        }, i*120);
       }
     }
 
@@ -1013,15 +1107,56 @@ Happy Birthday, elder one. You became everything I dreamed of. I’m always prou
       confetti.classList.remove("on");
     }
 
-    // Initial page
+    // Sparkles for page 1 only
+    let sparklesMade = false;
+    function startSparkles(){
+      if(sparklesMade) return;
+      sparklesMade = true;
+      const field = $("sparkleField");
+      for(let i=0;i<14;i++){
+        const s = document.createElement("div");
+        s.className = "sparkle";
+        s.style.left = Math.random()*100 + "%";
+        s.style.bottom = (-10 - Math.random()*40) + "px";
+        s.style.animationDelay = (Math.random()*5) + "s";
+        s.style.animationDuration = (6 + Math.random()*5) + "s";
+        s.style.width = (8 + Math.random()*10) + "px";
+        s.style.height = s.style.width;
+        field.appendChild(s);
+      }
+    }
+
+    // Navigation
+    function showPage(i){
+      pageIndex = Math.max(0, Math.min(pages.length - 1, i));
+      pages.forEach((p, idx) => p.classList.toggle("active", idx === pageIndex));
+
+      const sc = pages[pageIndex].querySelector(".scroll");
+      if(sc) sc.scrollTop = 0;
+
+      if(pageIndex === 0) startSparkles();
+      if(pageIndex === 1) startQuestionHeading();
+      if(pageIndex === 2) startYoungerSelfTypingAndSwap();
+      if(pageIndex === 3) startJourneyTyped();
+      if(pageIndex === 9) startLetterTyping();
+      if(pageIndex === 10) startFinalCelebration();
+    }
+
+    document.body.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-next]");
+      if(btn) showPage(pageIndex + 1);
+    });
+
+    // Initial
     showPage(0);
 
-    // If user forgets to start music, give a gentle hint once after a few seconds
     setTimeout(() => {
       if(!musicOn){
         showToast("Tap Play the music");
       }
-    }, 1800);
+    }, 1500);
   </script>
+
+  <div class="confetti" id="confetti2" style="display:none;"></div>
 </body>
 </html>
