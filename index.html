@@ -7,7 +7,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&family=Playfair+Display:wght@500;700&display=swap"
+    rel="stylesheet">
 
   <style>
     :root{
@@ -30,6 +32,7 @@
 
     *{box-sizing:border-box}
     html,body{height:100%}
+
     body{
       margin:0;
       font-family: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial;
@@ -65,7 +68,6 @@
       to{ transform: translateY(110vh) rotate(360deg); opacity:.75; }
     }
 
-    /* Extra wow layer: sparkles */
     .sparkles{
       position:fixed; inset:0; pointer-events:none; z-index:2; overflow:hidden;
       opacity:1;
@@ -82,7 +84,7 @@
       animation: sparkleFloat linear infinite;
     }
     @keyframes sparkleFloat{
-      0%{ transform: translateY(110vh) translateX(0px) scale(.85); opacity:.0; }
+      0%{ transform: translateY(110vh) translateX(0px) scale(.85); opacity:0; }
       10%{ opacity:.55; }
       60%{ opacity:.45; }
       100%{ transform: translateY(-20vh) translateX(40px) scale(1.15); opacity:0; }
@@ -98,7 +100,6 @@
       position:relative;
       z-index:3;
     }
-
     .shell{
       width:min(var(--maxw), 96vw);
       height:min(860px, 92vh);
@@ -110,14 +111,12 @@
       position:relative;
       backdrop-filter: blur(16px);
     }
-
     .topbar{
       position:absolute; left:0; right:0; top:0;
       display:flex; align-items:center; justify-content:flex-end;
       padding: 16px 16px 0;
       z-index:20;
     }
-
     .musicBtn{
       display:flex; gap:10px; align-items:center;
       padding:10px 14px;
@@ -172,13 +171,13 @@
       box-shadow: var(--shadow2);
     }
 
-    /* subtle premium glow */
     .card:before{
       content:"";
       position:absolute; inset:-2px;
       border-radius: 28px;
-      background: radial-gradient(900px 320px at 30% 0%, rgba(255,90,165,.12), transparent 60%),
-                  radial-gradient(900px 320px at 70% 0%, rgba(255,170,210,.14), transparent 62%);
+      background:
+        radial-gradient(900px 320px at 30% 0%, rgba(255,90,165,.12), transparent 60%),
+        radial-gradient(900px 320px at 70% 0%, rgba(255,170,210,.14), transparent 62%);
       opacity:.9;
       pointer-events:none;
       animation: glowMove 7s ease-in-out infinite;
@@ -225,6 +224,9 @@
       color: var(--muted);
       line-height:1.75;
       font-size: 15.5px;
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
     }
 
     .divider{
@@ -234,7 +236,6 @@
       margin: 6px auto 0;
     }
 
-    /* Vertical images everywhere, no cropping, no zoom */
     .imgFrame{
       width:min(880px, 96%);
       border-radius: 22px;
@@ -244,7 +245,9 @@
       overflow:hidden;
       position:relative;
       padding: 14px;
+      transform: translateZ(0);
     }
+
     .imgInner{
       border-radius: 18px;
       background: rgba(255,255,255,.65);
@@ -253,40 +256,44 @@
       position:relative;
       height:auto;
     }
-   /* Images in real shape no crop no forced height */
-.imgInner{
-  border-radius: 18px;
-  background: rgba(255,255,255,.65);
-  border: 1px solid rgba(255,209,230,.70);
-  overflow:hidden;
-  position:relative;
-  height:auto;
-}
 
-/* No max height constraint so image stays in its original aspect ratio */
-.imgInner.wide{
-  height:auto;
-  max-height:none;
-}
+    .imgInner.wide{
+      height:auto;
+      max-height:none;
+    }
+    .imgInner.portrait{
+      height:auto;
+      max-height:none;
+      max-width: 520px;
+      margin: 0 auto;
+    }
 
-.imgInner.portrait{
-  height:auto;
-  max-height:none;
-  max-width: 520px;
-  margin: 0 auto;
-}
+    .imgInner img{
+      width:100%;
+      height:auto;
+      display:block;
+      object-fit: initial;
+      object-position: 50% 50%;
+      background: transparent;
+      transform: scale(1);
+      transition: transform 1.6s ease, filter 1.6s ease;
+      will-change: transform;
+    }
 
-/* Real shape */
-.imgInner img{
-  width:100%;
-  height:auto;
-  display:block;
-  object-fit: initial;
-  object-position: 50% 50%;
-  transform:none;
-  background: transparent;
-}
-
+    /* Fun premium image zoom */
+    .imgFrame:hover .imgInner img{
+      transform: scale(1.045);
+      filter: saturate(1.04);
+    }
+    .imgFrame:active .imgInner img{
+      transform: scale(1.02);
+    }
+    .imgZoomIntro .imgInner img{
+      animation: imgIntro 1.4s ease both;
+    }
+    @keyframes imgIntro{
+      0%{ transform: scale(1.02); filter: blur(1px) saturate(.98); }
+      100%{ transform: scale(1); filter: blur(0) saturate(1); }
     }
 
     .btnRow{
@@ -298,7 +305,6 @@
       position:relative;
       z-index:2;
     }
-
     .btn{
       border:none;
       padding: 13px 20px;
@@ -328,7 +334,6 @@
       flex-direction:column;
       gap: 14px;
     }
-
     .qCard{
       background: rgba(255,255,255,.72);
       border:1px solid rgba(255,209,230,.95);
@@ -349,14 +354,14 @@
       letter-spacing:.1px;
       color: var(--text);
       font-size: 15.5px;
+      text-align:left;
     }
-
     .opts{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
+      justify-content:flex-start;
     }
-
     .opt{
       padding: 11px 14px;
       border-radius: 999px;
@@ -386,6 +391,9 @@
       box-shadow: 0 14px 34px rgba(30,10,20,.05);
       position:relative;
       z-index:2;
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
     }
     .story p{ margin:0 0 12px; }
     .story p:last-child{ margin:0; }
@@ -423,11 +431,14 @@
     }
     .letterBody{
       padding: 18px 18px;
-      text-align:left;
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
       color:#2f2f36;
       line-height:1.95;
       font-size: 15.5px;
     }
+
     .para{
       margin:0 0 18px;
       opacity:0;
@@ -450,6 +461,7 @@
     .para:nth-child(15){ animation-delay:.84s }
     .para:nth-child(16){ animation-delay:.90s }
     .para:last-child{ margin:0; }
+
     @keyframes fadeUp{
       to{ opacity:1; transform: translateY(0); }
     }
@@ -489,6 +501,80 @@
       from{ transform: translateY(0) scale(.95); opacity:1; }
       to{ transform: translateY(-160px) scale(1.15); opacity:0; }
     }
+
+    /* Scroll reveal for premium feel */
+    .reveal{
+      opacity:0;
+      transform: translateY(12px);
+      transition: opacity .7s ease, transform .7s ease;
+      will-change: opacity, transform;
+    }
+    .reveal.show{
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    /* Typing blocks */
+    .typeBox{
+      max-width: 860px;
+      margin: 14px auto 0;
+      padding: 16px 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,.78);
+      border:1px solid rgba(255,209,230,.95);
+      line-height:1.9;
+      color: #3a3a42;
+      font-size: 15.5px;
+      box-shadow: 0 14px 34px rgba(30,10,20,.05);
+      position:relative;
+      z-index:2;
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+    }
+    .typeLine{
+      margin:0 0 12px;
+      opacity:0;
+      transform: translateY(8px);
+      animation: typeFade .55s ease forwards;
+    }
+    .typeLine:last-child{ margin:0; }
+    @keyframes typeFade{
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    /* Subtle floating glow dots inside cards */
+    .luxDots{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      z-index:1;
+      overflow:hidden;
+      opacity:.55;
+      mix-blend-mode: screen;
+    }
+    .luxDots i{
+      position:absolute;
+      width:10px; height:10px;
+      border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,90,165,.18) 55%, rgba(255,255,255,0) 70%);
+      filter: blur(.2px);
+      animation: dotFloat linear infinite;
+      opacity:.5;
+    }
+    @keyframes dotFloat{
+      0%{ transform: translateY(110%) translateX(0) scale(.9); opacity:0; }
+      12%{ opacity:.55; }
+      55%{ opacity:.35; }
+      100%{ transform: translateY(-20%) translateX(42px) scale(1.15); opacity:0; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .petals i, .sparkles i, .card:before, .imgZoomIntro .imgInner img, .reveal, .typeLine, .luxDots i{
+        animation:none !important;
+        transition:none !important;
+      }
+    }
   </style>
 </head>
 
@@ -505,7 +591,6 @@
 
   <div class="app">
     <div class="shell">
-
       <div class="topbar">
         <button class="musicBtn" id="musicBtn" type="button">
           <span class="dot"></span>
@@ -518,25 +603,26 @@
         <!-- Page 1 -->
         <section class="page active" id="p1" data-page="1">
           <div class="card">
+            <div class="luxDots" aria-hidden="true" data-dots></div>
             <div class="scroll">
               <div class="center">
-                <h1 class="title">HAPPY BIRTHDAY YASH 💗 🎉</h1>
+                <h1 class="title reveal">HAPPY BIRTHDAY YASH 💗 🎉</h1>
 
-                <div class="imgFrame">
+                <div class="imgFrame reveal imgZoomIntro">
                   <div class="imgInner wide">
                     <img src="images/intro2.jpeg" alt="intro image">
                   </div>
                 </div>
 
-                <p class="sub">
+                <p class="sub reveal">
                   Here’s a little birthday experience, made just for you. 🎀<br><br>
                   For your 24th, something small but meaningful. 💗<br><br>
                   Someone has been waiting to meet you. ✨
                 </p>
 
-                <div class="divider"></div>
+                <div class="divider reveal"></div>
 
-                <div class="btnRow">
+                <div class="btnRow reveal">
                   <button class="btn" type="button" data-next>Let’s see ✨</button>
                 </div>
               </div>
@@ -547,42 +633,39 @@
         <!-- Page 2 Questions -->
         <section class="page" id="p2" data-page="2">
           <div class="card">
+            <div class="luxDots" aria-hidden="true" data-dots></div>
             <div class="scroll" id="qScroll">
-              <h2 class="title" style="font-size:clamp(24px,3.2vw,44px); margin-top:6px;">
+              <h2 class="title reveal" style="font-size:clamp(24px,3.2vw,44px); margin-top:6px;">
                 Before we go ahead, someone wants to ask a few things… 💬
               </h2>
 
               <div class="qWrap" id="questions"></div>
 
-              <div class="btnRow" style="margin-top:18px;">
+              <div class="btnRow reveal" style="margin-top:18px;">
                 <button class="btn" type="button" data-next>Next 💗</button>
               </div>
             </div>
           </div>
         </section>
 
-        <!-- Page 3 Younger self letter -->
+        <!-- Page 3 Younger self letter with typing (manual scroll allowed) -->
         <section class="page" id="p3" data-page="3">
           <div class="card">
+            <div class="luxDots" aria-hidden="true" data-dots></div>
             <div class="scroll" id="ysScroll">
               <div class="center" style="justify-content:flex-start; padding-top:10px;">
-                <h1 class="title">HAPPY BIRTHDAY MY HERO 💗</h1>
+                <h1 class="title reveal">HAPPY BIRTHDAY MY HERO 💗</h1>
 
-                <div class="imgFrame">
+                <div class="imgFrame reveal imgZoomIntro">
                   <div class="imgInner portrait">
                     <img src="images/turning-point.jpeg" alt="younger self">
                   </div>
                 </div>
 
-                <div class="story" style="max-width:880px;">
-                  <p>Hi Yash. It’s me. Your younger self. 🧸</p>
-                  <p>How are you? I know you’ve grown up now. You’re handling life. Being responsible. Still a little naughty… just like me. 😄</p>
-                  <p>You’ve lived 24 whole years. And you’ve done the best you could. I see how hard you try every day. I’m really proud of you for that. 🫶</p>
-                  <p>Please keep chasing your dreams. But don’t forget to stop sometimes. Resting doesn’t mean you’re behind. It just means you’re human. 🌙</p>
-                  <p>Happy Birthday, elder one. You became everything I dreamed of. I’m always proud of you. And I’m really happy that you finally have all the toys and things I once wished for. 😊</p>
-                </div>
+                <!-- typing container -->
+                <div class="typeBox reveal" id="p3Type" aria-live="polite"></div>
 
-                <div class="btnRow" style="margin-top:16px;">
+                <div class="btnRow reveal" style="margin-top:16px;">
                   <button class="btn" type="button" data-next>Let’s see what’s next ✨</button>
                 </div>
               </div>
@@ -593,27 +676,28 @@
         <!-- Page 4 Journey intro -->
         <section class="page" id="p4" data-page="4">
           <div class="card">
+            <div class="luxDots" aria-hidden="true" data-dots></div>
             <div class="scroll">
               <div class="center">
-                <h1 class="title">Our Journey So Far ✨</h1>
+                <h1 class="title reveal">Our Journey So Far ✨</h1>
 
-                <p class="sub" style="max-width:740px;">
+                <p class="sub reveal" style="max-width:740px;">
                   Let’s look at the life we built, one step at a time. 💗
                 </p>
 
-                <div class="imgFrame">
+                <div class="imgFrame reveal imgZoomIntro">
                   <div class="imgInner wide">
                     <img src="images/intro1.jpeg" alt="journey start">
                   </div>
                 </div>
 
-                <div class="story" style="text-align:center; max-width:880px;">
+                <div class="story reveal" style="max-width:880px;">
                   <p>You did not wake up one day and become this person. 💗</p>
                   <p>You grew into him slowly. Through small wins. Through quiet sacrifices. Through days no one saw. ✨</p>
                   <p>This journey did not happen overnight. It happened because you never stopped showing up. 🌙</p>
                 </div>
 
-                <div class="btnRow">
+                <div class="btnRow reveal">
                   <button class="btn" type="button" data-next>Let’s see ✨</button>
                 </div>
               </div>
@@ -624,23 +708,24 @@
         <!-- Page 5 Childhood -->
         <section class="page" id="p5" data-page="5">
           <div class="card">
+            <div class="luxDots" aria-hidden="true" data-dots></div>
             <div class="scroll">
               <div class="center" style="justify-content:flex-start; padding-top:10px;">
-                <h1 class="title">Where It All Began 🧸</h1>
+                <h1 class="title reveal">Where It All Began 🧸</h1>
 
-                <div class="imgFrame">
+                <div class="imgFrame reveal imgZoomIntro">
                   <div class="imgInner portrait">
                     <img src="images/childhood.jpeg" alt="childhood">
                   </div>
                 </div>
 
-                <div class="story">
+                <div class="story reveal">
                   <p>Born after eleven years, he grew up knowing that not everything came easy. 💗</p>
                   <p>He was the most loved and the most notorious child, always wanting more, not out of greed, but because he saw others having what he could not. 🫶</p>
                   <p>Some wishes stayed unfulfilled, some dreams stayed quiet, but that lack lit a fire inside him. Instead of breaking him, it taught him to dream bigger and promise himself that one day, life would be different. ✨</p>
                 </div>
 
-                <div class="btnRow">
+                <div class="btnRow reveal">
                   <button class="btn btnGhost" type="button" data-next>And then… 💗</button>
                 </div>
               </div>
@@ -651,17 +736,18 @@
         <!-- Page 6 Competitions -->
         <section class="page" id="p6" data-page="6">
           <div class="card">
+            <div class="luxDots" aria-hidden="true" data-dots></div>
             <div class="scroll">
               <div class="center" style="justify-content:flex-start; padding-top:10px;">
-                <h1 class="title">Competitions 🏆</h1>
+                <h1 class="title reveal">Competitions 🏆</h1>
 
-                <div class="imgFrame">
+                <div class="imgFrame reveal imgZoomIntro">
                   <div class="imgInner portrait">
                     <img src="images/competitions.jpeg" alt="competitions">
                   </div>
                 </div>
 
-                <div class="story">
+                <div class="story reveal">
                   <p>From a very young age, he carried a quiet determination. ✨</p>
                   <p>He studied with focus, practiced with discipline, and competed with belief. 💗</p>
                   <p>It was never only about winning for others, it was about proving to himself that he could do it. 🫶</p>
@@ -669,7 +755,7 @@
                   <p>Even with limitations, even with pressure, he chose effort over excuses. Every win made the family proud, and every loss made him stronger. 🌙</p>
                 </div>
 
-                <div class="btnRow">
+                <div class="btnRow reveal">
                   <button class="btn" type="button" data-next>Next 💗</button>
                 </div>
               </div>
@@ -680,17 +766,18 @@
         <!-- Page 7 Turning point -->
         <section class="page" id="p7" data-page="7">
           <div class="card">
+            <div class="luxDots" aria-hidden="true" data-dots></div>
             <div class="scroll">
               <div class="center" style="justify-content:flex-start; padding-top:10px;">
-                <h1 class="title">Turning Point 🌙</h1>
+                <h1 class="title reveal">Turning Point 🌙</h1>
 
-                <div class="imgFrame">
+                <div class="imgFrame reveal imgZoomIntro">
                   <div class="imgInner portrait">
                     <img src="images/turning-point.jpeg" alt="turning point">
                   </div>
                 </div>
 
-                <div class="story">
+                <div class="story reveal">
                   <p>There came a moment when life asked him to choose. ✨</p>
                   <p>The usual path everyone follows, or the dream that quietly lived inside him. 💗</p>
                   <p>It was not an easy choice. There was fear, doubt, and the weight of expectations. 🌙</p>
@@ -698,7 +785,7 @@
                   <p>So he chose himself. He chose uncertainty over comfort, belief over approval, and courage over fear. That one decision changed everything. 🔥</p>
                 </div>
 
-                <div class="btnRow">
+                <div class="btnRow reveal">
                   <button class="btn btnGhost" type="button" data-next>Then what happened? ✨</button>
                 </div>
               </div>
@@ -709,17 +796,18 @@
         <!-- Page 8 Success -->
         <section class="page" id="p8" data-page="8">
           <div class="card">
+            <div class="luxDots" aria-hidden="true" data-dots></div>
             <div class="scroll">
               <div class="center" style="justify-content:flex-start; padding-top:10px;">
-                <h1 class="title">Success 🌟</h1>
+                <h1 class="title reveal">Success 🌟</h1>
 
-                <div class="imgFrame">
+                <div class="imgFrame reveal imgZoomIntro">
                   <div class="imgInner portrait">
                     <img src="images/success.jpeg" alt="success">
                   </div>
                 </div>
 
-                <div class="story">
+                <div class="story reveal">
                   <p>Slowly, things began to change. ✨</p>
                   <p>The hard work started showing results. 💗</p>
                   <p>The discipline, the long days, and the silent effort finally found direction. 🌙</p>
@@ -727,7 +815,7 @@
                   <p>He did not grow alone. He lifted others with him. What once felt impossible started becoming real, and the life he had imagined quietly began taking shape. 🌟</p>
                 </div>
 
-                <div class="btnRow">
+                <div class="btnRow reveal">
                   <button class="btn btnGhost" type="button" data-next>Then… 💗</button>
                 </div>
               </div>
@@ -738,17 +826,18 @@
         <!-- Page 9 Present -->
         <section class="page" id="p9" data-page="9">
           <div class="card">
+            <div class="luxDots" aria-hidden="true" data-dots></div>
             <div class="scroll">
               <div class="center" style="justify-content:flex-start; padding-top:10px;">
-                <h1 class="title">Present 🤍</h1>
+                <h1 class="title reveal">Present 🤍</h1>
 
-                <div class="imgFrame">
+                <div class="imgFrame reveal imgZoomIntro">
                   <div class="imgInner wide">
                     <img src="images/present.jpeg" alt="present">
                   </div>
                 </div>
 
-                <div class="story">
+                <div class="story reveal">
                   <p>And here you are today, after seven to eight years of showing up for yourself again and again. 💗</p>
                   <p>You proved that consistency changes everything. ✨</p>
                   <p>You moved forward quietly, handled responsibilities with strength, and kept growing without seeking validation. 🌙</p>
@@ -756,7 +845,7 @@
                   <p>And this is only a stronger beginning. 🌟</p>
                 </div>
 
-                <div class="btnRow">
+                <div class="btnRow reveal">
                   <button class="btn" type="button" data-next>A letter for you 💌</button>
                 </div>
               </div>
@@ -767,58 +856,44 @@
         <!-- Page 10 Letter -->
         <section class="page" id="p10" data-page="10">
           <div class="card">
+            <div class="luxDots" aria-hidden="true" data-dots></div>
             <div class="scroll">
               <div class="center" style="justify-content:flex-start; padding-top:10px;">
-                <h1 class="title">A Letter From Someone Who Believes In You 🤍</h1>
+                <h1 class="title reveal">A Letter From Someone Who Believes In You 🤍</h1>
 
-                <div class="imgFrame">
+                <div class="imgFrame reveal imgZoomIntro">
                   <div class="imgInner wide">
                     <img src="images/us.jpeg" alt="us">
                   </div>
                 </div>
 
-                <div class="pillRow">
+                <div class="pillRow reveal">
                   <div class="pill">Read slowly ✨</div>
                   <div class="pill">Let it sink in 💗</div>
                 </div>
 
-                <div class="letterBox">
+                <div class="letterBox reveal">
                   <div class="letterBody">
                     <p class="para">It feels like I’ve known you forever.<br>Like I somehow knew your story even before you told me. ✨</p>
-
                     <p class="para">I know I wasn’t there when you were a child,<br>but the way you talk about your life,<br>it feels like I’ve lived it with you. 🫶</p>
-
                     <p class="para">You always wanted everything, not because you were greedy,<br>but because you saw others have what you couldn’t.<br>And that lack lit a fire inside you,<br>a fire to give yourself and your family everything one day. 🔥</p>
-
                     <p class="para">You are always a champion.<br>In school, in competitions, in life,<br>you never played small. 🏆</p>
-
                     <p class="para">You want to win, and you worked for it quietly, patiently. 🌙</p>
-
                     <p class="para">Then came the moment where you chose yourself.<br>You didn’t follow the usual path.<br>You chose something uncertain, risky, and completely yours.<br>And that decision changed everything. ✨</p>
-
                     <p class="para">The discipline you’ve shown for years,<br>Seven, eight, now so many years,<br>I honestly don’t have words for how proud we are of you. 🤍</p>
-
                     <p class="para">Your family is grateful, protected, and standing strong<br>because of you. 🫶</p>
-
                     <p class="para">Yes, you’re annoying sometimes.<br>Yes, you’re stubborn.<br>But that mischief, that madness,<br>we love it. 😄</p>
-
                     <p class="para">You are the main character in our lives,<br>and we cannot imagine life without you. 💗</p>
-
                     <p class="para">And then… there’s us.<br>How destiny made us meet out of nowhere,<br>right when I needed light the most.<br>You showed up, just like that.<br>And somehow, everything shifted. ✨</p>
-
                     <p class="para">You give me comfort, but you also push me to grow.<br>You make me feel safe, but never stagnant.<br>You walk ahead, but always holding everyone’s hand. 🫶</p>
-
                     <p class="para">From our first conversations,<br>to Rishikesh, Goa, Kerala, Dubai,<br>so many firsts, so many memories.<br>Life with you has been magical in ways I can’t explain. 🌟</p>
-
                     <p class="para">You feel like home to me.<br>Safe. Warm. Real.<br>And still challenging me to become better. 🤍</p>
-
                     <p class="para">I don’t know what good karma brought us together,<br>but I’m grateful every single day. 🌙</p>
-
                     <p class="para">Happy happy 24th birthday.<br>You are rare. You are powerful. You are loved.<br>And this is only the beginning.<br>Love, Always 🤍</p>
                   </div>
                 </div>
 
-                <div class="btnRow" style="margin-top:16px;">
+                <div class="btnRow reveal" style="margin-top:16px;">
                   <button class="btn" type="button" data-next>Continue 💞</button>
                 </div>
               </div>
@@ -826,29 +901,28 @@
           </div>
         </section>
 
-        <!-- Page 11 Final -->
+        <!-- Page 11 Final with typing (manual scroll allowed) -->
         <section class="page" id="p11" data-page="11">
           <div class="card">
-            <div class="scroll">
+            <div class="luxDots" aria-hidden="true" data-dots></div>
+            <div class="scroll" id="finalScroll">
               <div class="center">
-                <h1 class="title">HAPPY BIRTHDAY YASH 💗 🎉</h1>
+                <h1 class="title reveal">HAPPY BIRTHDAY YASH 💗 🎉</h1>
 
-                <div class="imgFrame">
+                <div class="imgFrame reveal imgZoomIntro">
                   <div class="imgInner wide">
                     <img src="images/intro3.jpeg" alt="final">
                   </div>
                 </div>
 
-                <div class="story" style="text-align:center; max-width:880px;">
-                  <p>This is your moment. 💗</p>
-                  <p>And you deserve every bit of it. ✨</p>
-                </div>
+                <!-- typing container -->
+                <div class="typeBox reveal" id="p11Type" aria-live="polite"></div>
 
-                <p class="sub" style="max-width:720px; margin-top:4px;">
+                <p class="sub reveal" style="max-width:720px; margin-top:4px;">
                   I hope you liked it ✨
                 </p>
 
-                <div class="btnRow">
+                <div class="btnRow reveal">
                   <button class="btn btnGhost" type="button" id="replayBtn">Replay 💗</button>
                 </div>
               </div>
@@ -872,28 +946,143 @@
       setTimeout(() => t.classList.remove("show"), 1400);
     }
 
+    /* Reveal on scroll inside each .scroll */
+    function setupRevealObserver(){
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            entry.target.classList.add("show");
+          }
+        });
+      }, { root: null, threshold: 0.12 });
+
+      document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+    }
+
+    /* Premium floating dots inside cards */
+    function setupLuxDots(){
+      document.querySelectorAll("[data-dots]").forEach(host => {
+        if(host.dataset.ready === "1") return;
+        host.dataset.ready = "1";
+        const count = 14;
+        for(let i=0;i<count;i++){
+          const el = document.createElement("i");
+          const left = Math.random()*100;
+          const top = 70 + Math.random()*40;
+          const dur = 10 + Math.random()*10;
+          const delay = Math.random()*-10;
+          const size = 7 + Math.random()*8;
+          el.style.left = left + "%";
+          el.style.top = top + "%";
+          el.style.width = size + "px";
+          el.style.height = size + "px";
+          el.style.animationDuration = dur + "s";
+          el.style.animationDelay = delay + "s";
+          host.appendChild(el);
+        }
+      });
+    }
+
+    /* Typing line by line, no auto scroll so user can scroll manually */
+    const typingState = {
+      p3: { started:false, done:false, timers:[] },
+      p11:{ started:false, done:false, timers:[] }
+    };
+
+    function clearTyping(key, container){
+      typingState[key].timers.forEach(t => clearTimeout(t));
+      typingState[key].timers = [];
+      typingState[key].started = false;
+      typingState[key].done = false;
+      if(container) container.innerHTML = "";
+    }
+
+    function typeLines({key, container, lines, startDelay=200, gap=650}){
+      if(!container || typingState[key].started) return;
+      typingState[key].started = true;
+
+      let at = startDelay;
+      lines.forEach((line) => {
+        const timer = setTimeout(() => {
+          const p = document.createElement("p");
+          p.className = "typeLine";
+          p.textContent = line;
+          container.appendChild(p);
+        }, at);
+        typingState[key].timers.push(timer);
+        at += gap;
+      });
+
+      const endTimer = setTimeout(() => {
+        typingState[key].done = true;
+      }, at + 50);
+      typingState[key].timers.push(endTimer);
+    }
+
     function showPage(i){
-  pageIndex = Math.max(0, Math.min(pages.length - 1, i));
-  pages.forEach((p, idx) => p.classList.toggle("active", idx === pageIndex));
+      pageIndex = Math.max(0, Math.min(pages.length - 1, i));
+      pages.forEach((p, idx) => p.classList.toggle("active", idx === pageIndex));
 
-  const sc = pages[pageIndex].querySelector(".scroll");
-  if(sc) sc.scrollTop = 0;
+      const sc = pages[pageIndex].querySelector(".scroll");
+      if(sc) sc.scrollTop = 0;
 
-  // trigger reveal animations on story blocks
-  document.querySelectorAll(".reveal").forEach(el => el.classList.remove("show"));
-  const activeReveal = pages[pageIndex].querySelectorAll(".reveal");
-  activeReveal.forEach(el => {
-    void el.offsetWidth;
-    el.classList.add("show");
-  });
-}
+      // refresh intro zoom animation
+      pages[pageIndex].querySelectorAll(".imgFrame").forEach(frame => {
+        frame.classList.remove("imgZoomIntro");
+        void frame.offsetWidth;
+        frame.classList.add("imgZoomIntro");
+      });
+
+      // start typing for page 3 and 11
+      if(pages[pageIndex].id === "p3"){
+        typeLines({
+          key: "p3",
+          container: $("p3Type"),
+          lines: [
+            "Hi Yash. It’s me. Your younger self. 🧸",
+            "How are you? I know you’ve grown up now. You’re handling life. Being responsible.",
+            "Still a little naughty… just like me. 😄",
+            "You’ve lived 24 whole years. And you’ve done the best you could.",
+            "I see how hard you try every day. I’m really proud of you for that. 🫶",
+            "Please keep chasing your dreams. But don’t forget to stop sometimes.",
+            "Resting doesn’t mean you’re behind. It just means you’re human. 🌙",
+            "Happy Birthday, elder one. You became everything I dreamed of.",
+            "I’m always proud of you. And I’m really happy that you finally have all the toys and things I once wished for. 😊"
+          ],
+          startDelay: 250,
+          gap: 720
+        });
+      }
+
+      if(pages[pageIndex].id === "p11"){
+        typeLines({
+          key: "p11",
+          container: $("p11Type"),
+          lines: [
+            "This is your moment. 💗",
+            "And you deserve every bit of it. ✨"
+          ],
+          startDelay: 220,
+          gap: 800
+        });
+      }
+    }
 
     document.body.addEventListener("click", (e) => {
       const btn = e.target.closest("[data-next]");
       if(btn) showPage(pageIndex + 1);
     });
 
-    $("replayBtn").addEventListener("click", () => showPage(0));
+    $("replayBtn").addEventListener("click", () => {
+      // reset typing blocks for replay
+      clearTyping("p3", $("p3Type"));
+      clearTyping("p11", $("p11Type"));
+
+      // reset picked options
+      document.querySelectorAll(".opt").forEach(o => o.classList.remove("picked"));
+
+      showPage(0);
+    });
 
     // Music controls
     const music = $("bgMusic");
@@ -927,7 +1116,6 @@
         music.pause();
       }
     }
-
     musicBtn.addEventListener("click", () => setMusic(!musicOn));
 
     // Hearts on option click
@@ -936,7 +1124,7 @@
       h.className = "heart";
       h.textContent = Math.random() > 0.5 ? "💗" : "💖";
       h.style.left = (x + (Math.random()*24-12)) + "px";
-      h.style.top  = (y + (Math.random()*10-10)) + "px";
+      h.style.top = (y + (Math.random()*10-10)) + "px";
       document.body.appendChild(h);
       setTimeout(()=>h.remove(), 1500);
     }
@@ -964,10 +1152,12 @@
         card.style.animationDelay = (idx * 0.04) + "s";
 
         const optsHtml = item.a.map(txt => `<button class="opt" type="button">${txt}</button>`).join("");
+
         card.innerHTML = `
           <div class="q">${item.q}</div>
           <div class="opts">${optsHtml}</div>
         `;
+
         wrap.appendChild(card);
 
         const buttons = Array.from(card.querySelectorAll(".opt"));
@@ -981,13 +1171,17 @@
         });
       });
     }
-
     renderQuestions();
 
     // Premium background petals
     (function makePetals(){
       const host = $("petals");
-      const colors = ["rgba(255,90,165,.85)","rgba(255,170,210,.80)","rgba(255,210,230,.85)","rgba(255,255,255,.85)"];
+      const colors = [
+        "rgba(255,90,165,.85)",
+        "rgba(255,170,210,.80)",
+        "rgba(255,210,230,.85)",
+        "rgba(255,255,255,.85)"
+      ];
       const count = 26;
       for(let i=0;i<count;i++){
         const el = document.createElement("i");
@@ -1024,7 +1218,12 @@
         host.appendChild(el);
       }
     })();
+
+    setupLuxDots();
+    setupRevealObserver();
+
+    // Ensure first page reveals and intro zoom runs
+    showPage(0);
   </script>
 </body>
 </html>
-
