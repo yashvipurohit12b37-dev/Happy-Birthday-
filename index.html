@@ -1,888 +1,1027 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-  <title>Happy Birthday, Yash 🎉</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Happy Birthday Yash 🤍</title>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --pink:#ff5aa5;
-      --pink2:#ff87c0;
-      --text:#2b2b2b;
-      --muted:#6e6e6e;
-      --card:rgba(255,255,255,.72);
-      --border:rgba(0,0,0,.06);
-      --shadow:0 18px 45px rgba(0,0,0,.08);
-      --radius:28px;
+      --bg1:#0b0b10;
+      --bg2:#10101a;
+      --glass: rgba(255,255,255,.06);
+      --glass2: rgba(255,255,255,.10);
+      --stroke: rgba(255,255,255,.12);
+      --text: rgba(255,255,255,.90);
+      --muted: rgba(255,255,255,.70);
+      --muted2: rgba(255,255,255,.55);
+      --accent:#ff5aa5;
+      --accent2:#ffd1e6;
+      --gold:#e9d7a5;
+      --shadow: 0 30px 70px rgba(0,0,0,.45);
+      --radius: 26px;
+      --maxw: 980px;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family:Nunito, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      color:var(--text);
-      overflow:hidden; /* slide mode */
+      font-family: Manrope, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color: var(--text);
       background:
-        radial-gradient(1200px 600px at 10% 10%, rgba(255,160,200,.28), transparent 55%),
-        radial-gradient(900px 600px at 90% 10%, rgba(160,220,255,.25), transparent 55%),
-        radial-gradient(900px 700px at 50% 100%, rgba(255,220,160,.22), transparent 60%),
-        linear-gradient(180deg, #fff 0%, #faf7fb 100%);
+        radial-gradient(900px 700px at 20% 10%, rgba(255,90,165,.18), transparent 60%),
+        radial-gradient(900px 700px at 80% 10%, rgba(233,215,165,.14), transparent 62%),
+        radial-gradient(900px 700px at 50% 110%, rgba(140,180,255,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      overflow:hidden;
     }
 
-    .sparkle{
-      position:fixed; inset:0; pointer-events:none; opacity:.25;
-      background-image:
-        radial-gradient(circle at 15% 20%, rgba(255,90,165,.35) 0 6px, transparent 7px),
-        radial-gradient(circle at 85% 30%, rgba(90,200,255,.35) 0 6px, transparent 7px),
-        radial-gradient(circle at 70% 80%, rgba(255,200,90,.28) 0 7px, transparent 8px),
-        radial-gradient(circle at 25% 85%, rgba(180,120,255,.22) 0 7px, transparent 8px);
-      filter: blur(.2px);
-      animation: drift 10s ease-in-out infinite alternate;
-    }
-    @keyframes drift{
-      from{ transform: translateY(-8px); }
-      to{ transform: translateY(10px); }
+    .grain{
+      position:fixed; inset:0; pointer-events:none; opacity:.10;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
     }
 
-    /* top-right sound toggle */
-    .soundToggle{
-      position:fixed; top:18px; right:18px; z-index:50;
+    .app{
+      height:100vh;
+      width:100vw;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding: clamp(12px, 2.2vw, 24px);
+      position:relative;
+    }
+
+    .shell{
+      width:min(var(--maxw), 96vw);
+      height:min(820px, 92vh);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      backdrop-filter: blur(16px);
+    }
+
+    .topbar{
+      position:absolute; left:0; right:0; top:0;
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 16px 16px 0;
+      z-index:20;
+      pointer-events:none;
+    }
+
+    .brand{
+      pointer-events:auto;
+      display:flex; gap:10px; align-items:center;
+      padding:10px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color: var(--muted);
+      font-weight:700;
+      font-size:13px;
+      letter-spacing:.2px;
+    }
+
+    .musicBtn{
+      pointer-events:auto;
       display:flex; gap:10px; align-items:center;
       padding:10px 14px;
       border-radius:999px;
-      background:rgba(255,255,255,.78);
-      border:1px solid var(--border);
-      box-shadow:0 10px 24px rgba(0,0,0,.07);
-      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.12);
+      color: var(--text);
+      font-weight:800;
+      font-size:13px;
       cursor:pointer;
       user-select:none;
-      font-weight:800;
+      transition: transform .12s ease, background .12s ease;
     }
+    .musicBtn:active{ transform: scale(.98); }
     .dot{
       width:10px; height:10px; border-radius:999px;
-      background: #bbb;
-      box-shadow: inset 0 0 0 2px rgba(0,0,0,.05);
+      background: rgba(255,255,255,.30);
+      box-shadow: 0 0 0 2px rgba(255,255,255,.08) inset;
     }
-    .soundToggle.on .dot{ background: var(--pink); }
+    .musicBtn.on .dot{ background: var(--accent); }
 
-    /* small toast */
-    .toast{
-      position:fixed; left:50%; bottom:18px; transform:translateX(-50%);
-      z-index:80;
-      padding:10px 14px;
-      border-radius:999px;
-      background:rgba(0,0,0,.72);
-      color:#fff;
-      font-weight:700;
-      font-size:13px;
-      opacity:0;
-      pointer-events:none;
-      transition:opacity .25s ease, transform .25s ease;
-    }
-    .toast.show{
-      opacity:1;
-      transform:translateX(-50%) translateY(-6px);
-    }
-
-    /* slides */
-    .app{
-      height:100vh; width:100vw;
-      display:flex; align-items:center; justify-content:center;
-      padding:18px;
-    }
-
-    .slide{
-      display:none;
-      width:min(980px, 96vw);
-      height:min(760px, 92vh);
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      backdrop-filter: blur(12px);
-      overflow:hidden; /* we scroll INSIDE .inner */
-      position:relative;
-      transform: translateY(8px);
-      opacity:0;
-      animation: slideIn .45s ease forwards;
-    }
-    @keyframes slideIn{ to{ opacity:1; transform: translateY(0); } }
-    .slide.active{ display:block; }
-
-    /* ✅ Scroll happens here for every page */
-    .inner{
+    .viewport{
       height:100%;
-      padding:28px 22px 36px; /* bottom space so buttons never stuck */
-      overflow-y:auto;
-      -webkit-overflow-scrolling:touch;
+      width:100%;
+      position:relative;
+      display:flex;
+      justify-content:center;
+      align-items:stretch;
+      padding-top: 56px;
+      padding-bottom: 18px;
     }
 
-    h1,h2{ margin:0; font-family:"Playfair Display", serif; letter-spacing:.2px; }
-    .title{
-      text-align:center;
-      font-size: clamp(32px, 4.8vw, 56px);
-      color: var(--pink);
-      font-weight:700;
-      margin-top:6px;
+    .page{
+      width:100%;
+      height:100%;
+      display:none;
+      justify-content:center;
+      align-items:center;
     }
-    .subtitle{
-      text-align:center;
-      margin:12px auto 0;
-      max-width: 680px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height:1.6;
+    .page.active{ display:flex; }
+
+    .card{
+      width:min(880px, 94%);
+      height:100%;
+      border-radius: 24px;
+      background: rgba(0,0,0,.20);
+      border: 1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+      position:relative;
     }
 
-    .primary{
-      border:none;
-      padding:14px 22px;
-      border-radius:999px;
-      background: linear-gradient(135deg, var(--pink), var(--pink2));
-      color:white;
-      font-weight:900;
-      font-size:16px;
-      box-shadow:0 16px 34px rgba(255,90,165,.22);
-      cursor:pointer;
-      transition: transform .12s ease;
+    .scroll{
+      height:100%;
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+      padding: clamp(18px, 3vw, 28px);
     }
-    .primary:active{ transform: scale(.98); }
 
-    .centerFull{
+    .center{
       min-height: calc(100% - 10px);
       display:flex;
       flex-direction:column;
       justify-content:center;
       align-items:center;
       text-align:center;
-      gap:14px;
-      padding:8px 0;
+      gap: 14px;
     }
 
-    /* typing box */
-    .typeBox{
-      width:min(760px, 92vw);
-      background:rgba(255,255,255,.82);
-      border:1px solid var(--border);
-      border-radius:22px;
-      padding:16px 16px;
-      box-shadow:0 14px 30px rgba(0,0,0,.06);
-      text-align:center;
-      min-height:72px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      line-height:1.55;
-      font-size:16px;
-      color:#2e2e2e;
+    .title{
+      font-family: "Playfair Display", serif;
+      font-weight:700;
+      letter-spacing:.6px;
+      font-size: clamp(28px, 4.0vw, 52px);
+      margin:0;
+      color: rgba(255,255,255,.95);
     }
-    .cursor{
-      display:inline-block;
-      width:8px;
-      height:18px;
-      margin-left:6px;
-      background:rgba(255,90,165,.75);
-      border-radius:6px;
-      animation: blink 1s steps(1) infinite;
-      vertical-align:middle;
+    .title .gold{
+      background: linear-gradient(90deg, rgba(233,215,165,1), rgba(255,209,230,1));
+      -webkit-background-clip: text;
+      background-clip:text;
+      color: transparent;
     }
-    @keyframes blink{ 50%{opacity:0;} }
 
-    /* swap stage */
-    .swapStage{
-      width:min(900px, 92vw);
-      margin:18px auto 0;
-      display:flex;
-      justify-content:center;
-      align-items:center;
+    .sub{
+      margin:0;
+      max-width: 660px;
+      color: var(--muted);
+      line-height:1.7;
+      font-size: 15.5px;
     }
-    .swapItem{ display:none; opacity:0; transform: translateY(10px) scale(.98); transition: all .6s ease; width:100%; }
-    .swapItem.show{ display:block; opacity:1; transform: translateY(0) scale(1); }
 
-    .fullImg{
+    .heroImg{
+      width:min(720px, 92%);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 22px 55px rgba(0,0,0,.40);
+      overflow:hidden;
+    }
+    .heroImg img{
       width:100%;
       height:auto;
-      max-height:48vh;
-      object-fit:contain; /* fully visible */
-      border-radius:26px;
-      background:rgba(255,255,255,.65);
-      padding:14px;
-      box-shadow:0 18px 40px rgba(0,0,0,.08);
+      display:block;
+      object-fit: contain;
     }
 
-    .introRow{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap:14px;
-    }
-    .introRow img{
-      width:100%;
-      height:220px;
-      object-fit:contain; /* full visible */
-      background:rgba(255,255,255,.78);
-      padding:12px;
-      border-radius:22px;
-      box-shadow:0 14px 30px rgba(0,0,0,.06);
-      animation:introPop .7s ease both;
-    }
-    .introRow img:nth-child(1){ animation-delay:.05s; }
-    .introRow img:nth-child(2){ animation-delay:.18s; }
-    .introRow img:nth-child(3){ animation-delay:.32s; }
-
-    @keyframes introPop{
-      from{ opacity:0; transform:translateY(12px) scale(.96); }
-      to{ opacity:1; transform:translateY(0) scale(1); }
-    }
-
-    @media (max-width:760px){
-      .introRow{ grid-template-columns: 1fr; }
-      .introRow img{ height:250px; }
-      .typeBox{ font-size:15px; }
-    }
-
-    /* questions */
-    .qWrap{ max-width:820px; margin:18px auto 0; display:flex; flex-direction:column; gap:14px; }
-    .qCard{
-      background:rgba(255,255,255,.82);
-      border:1px solid var(--border);
-      border-radius:22px;
-      padding:16px;
-      box-shadow:0 14px 28px rgba(0,0,0,.05);
-    }
-    .q{ font-weight:900; margin:0 0 10px; font-size:16px; }
-    .opts{ display:flex; gap:10px; flex-wrap:wrap; }
-    .opt{
-      padding:12px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,90,165,.25);
-      background:rgba(255,255,255,.75);
-      cursor:pointer;
-      font-weight:800;
-      transition: transform .12s ease, background .12s ease;
-    }
-    .opt:active{ transform: scale(.98); }
-    .opt.picked{ background: rgba(255,90,165,.12); border-color: rgba(255,90,165,.35); }
-
-    /* journey */
-    .journeyImg{
-      width:100%;
-      height:auto;
-      max-height:52vh;
-      object-fit:contain;
-      background:rgba(255,255,255,.75);
-      padding:14px;
-      border-radius:26px;
-      box-shadow:0 18px 40px rgba(0,0,0,.08);
-    }
-    .storyText{
-      margin:14px auto 0;
-      max-width:820px;
-      background:rgba(255,255,255,.82);
-      border:1px solid var(--border);
-      border-radius:22px;
-      padding:16px;
-      line-height:1.75;
-      color:#2e2e2e;
-      box-shadow:0 14px 28px rgba(0,0,0,.05);
-      font-size:16px;
-    }
-
-    /* letter */
-    .letterImg{
-      width:100%;
-      height:auto;
-      max-height:42vh;
-      object-fit:contain;
-      background:rgba(255,255,255,.75);
-      padding:14px;
-      border-radius:26px;
-      box-shadow:0 18px 40px rgba(0,0,0,.08);
-    }
-    .letterBox{
-      margin:14px auto 0;
-      max-width:820px;
-      background:rgba(255,255,255,.82);
-      border:1px solid var(--border);
-      border-radius:22px;
-      padding:16px;
-      line-height:1.9;
-      color:#2e2e2e;
-      box-shadow:0 14px 28px rgba(0,0,0,.05);
-      font-size:16px;
-      white-space:pre-wrap;
-    }
-
-    .nav{
-      margin:18px auto 0;
+    .btnRow{
       display:flex;
       justify-content:center;
       gap:12px;
       flex-wrap:wrap;
+      margin-top: 8px;
     }
 
-    /* floating hearts */
+    .btn{
+      border:none;
+      padding: 13px 18px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-weight:900;
+      letter-spacing:.2px;
+      font-size: 14px;
+      color: rgba(15,15,20,.95);
+      background: linear-gradient(135deg, rgba(233,215,165,1), rgba(255,209,230,1));
+      box-shadow: 0 18px 40px rgba(255,90,165,.16);
+      transition: transform .12s ease, filter .12s ease;
+    }
+    .btn:active{ transform: scale(.98); }
+
+    .btnGhost{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.88);
+      box-shadow:none;
+    }
+
+    .hint{
+      margin:0;
+      color: var(--muted2);
+      font-size: 12.5px;
+      font-weight:700;
+    }
+
+    .divider{
+      width: 120px;
+      height: 1px;
+      background: rgba(255,255,255,.14);
+      margin: 8px auto 0;
+    }
+
+    .typeHeading{
+      font-family: "Playfair Display", serif;
+      font-weight:700;
+      margin:0;
+      text-align:center;
+      font-size: clamp(20px, 2.6vw, 30px);
+      color: rgba(255,255,255,.92);
+    }
+
+    .typeBox{
+      max-width: 780px;
+      margin: 14px auto 0;
+      padding: 16px 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.86);
+      line-height:1.8;
+      font-size: 15.5px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .cursor{
+      display:inline-block;
+      width:8px; height:16px;
+      border-radius: 6px;
+      background: rgba(255,209,230,.8);
+      vertical-align:middle;
+      margin-left:6px;
+      animation: blink 1s steps(1) infinite;
+    }
+    @keyframes blink{ 50%{ opacity:0; } }
+
+    .qWrap{
+      max-width: 820px;
+      margin: 18px auto 0;
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+    }
+
+    .qCard{
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: 20px;
+      padding: 16px;
+    }
+
+    .q{
+      margin:0 0 10px;
+      font-weight:900;
+      letter-spacing:.1px;
+      color: rgba(255,255,255,.92);
+      font-size: 15.5px;
+    }
+
+    .opts{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .opt{
+      padding: 11px 14px;
+      border-radius: 999px;
+      border:1px solid rgba(255,209,230,.22);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.86);
+      font-weight:900;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease;
+    }
+    .opt:active{ transform: scale(.98); }
+    .opt.picked{
+      background: rgba(255,90,165,.18);
+      border-color: rgba(255,209,230,.35);
+    }
+
+    .imgFull{
+      width: min(860px, 96%);
+      margin: 14px auto 0;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 22px 55px rgba(0,0,0,.40);
+      overflow:hidden;
+    }
+    .imgFull img{
+      width:100%;
+      height:auto;
+      display:block;
+      object-fit:contain;
+    }
+
+    .story{
+      max-width: 820px;
+      margin: 14px auto 0;
+      padding: 16px 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      line-height:1.85;
+      color: rgba(255,255,255,.84);
+      font-size: 15.5px;
+    }
+
+    .rightBottom{
+      position:absolute;
+      right: 16px;
+      bottom: 16px;
+      z-index: 10;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom: 16px;
+      transform: translateX(-50%);
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.65);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.92);
+      font-weight:800;
+      font-size: 13px;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .25s ease, transform .25s ease;
+      z-index: 50;
+    }
+    .toast.show{
+      opacity:1;
+      transform: translateX(-50%) translateY(-6px);
+    }
+
     .heart{
       position:fixed;
-      font-size:18px;
       z-index:60;
-      animation: floatUp 1.4s ease forwards;
       pointer-events:none;
-      filter: drop-shadow(0 6px 10px rgba(0,0,0,.10));
+      font-size:18px;
+      animation: floatUp 1.5s ease forwards;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.35));
     }
     @keyframes floatUp{
-      from{ transform: translateY(0) scale(.9); opacity:1; }
-      to{ transform: translateY(-140px) scale(1.2); opacity:0; }
+      from{ transform: translateY(0) scale(.95); opacity:1; }
+      to{ transform: translateY(-160px) scale(1.15); opacity:0; }
     }
 
-    /* final poppers */
-    .popper{
-      position:fixed;
-      z-index:70;
-      font-size:24px;
-      animation: pop 1.9s ease forwards;
-      pointer-events:none;
+    .confetti{
+      position:fixed; inset:0; pointer-events:none; z-index:55; overflow:hidden;
+      opacity: 0;
+      transition: opacity .35s ease;
     }
-    @keyframes pop{
-      from{ transform:translateY(0) scale(.9); opacity:1; }
-      to{ transform:translateY(-220px) scale(1.25); opacity:0; }
+    .confetti.on{ opacity: 1; }
+    .confetti i{
+      position:absolute;
+      width:8px; height:12px;
+      border-radius:2px;
+      opacity:.85;
+      animation: fall linear infinite;
+      transform: translateY(-30px) rotate(0deg);
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,.35));
+    }
+    @keyframes fall{
+      to{ transform: translateY(110vh) rotate(360deg); opacity:.95; }
+    }
+
+    @media (min-width: 980px){
+      .card{ background: rgba(0,0,0,.16); }
     }
   </style>
 </head>
 
 <body>
-  <div class="sparkle"></div>
+  <div class="grain"></div>
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
 
-  <!-- SOUND TOGGLE -->
-  <div class="soundToggle" id="soundToggle">
-    <div class="dot"></div>
-    <span id="soundLabel">Sound Off</span>
-  </div>
-
-  <div class="toast" id="toast">Tap Sound On to start music 🎵</div>
-
-  <!-- AUDIO -->
-  <audio id="bgMusic" loop preload="auto">
-    <!-- ✅ uses your current filename -->
-    <source src="Birthday.mp3.mp3" type="audio/mpeg" />
+  <audio id="bgMusic" preload="auto" loop>
+    <source src="birthday.mp3" type="audio/mpeg" />
   </audio>
 
+  <div class="toast" id="toast">Tap Play the music</div>
+
   <div class="app">
+    <div class="shell">
 
-    <!-- SLIDE 1 (Centered) -->
-    <section class="slide active" id="s1">
-      <div class="inner">
-        <div class="centerFull">
-          <h1 class="title">Happy Birthday, Yash 🥳</h1>
-          <p class="subtitle">
-            Here’s something unique and special for your 24th birthday!<br/>
-            Someone’s here to meet you today.
-          </p>
-          <button class="primary" id="goS2">Let’s see →</button>
-          <p class="subtitle" style="font-size:13px; opacity:.8; margin-top:2px;">
-            (Tip: tap “Sound On” on the top-right for music)
-          </p>
-        </div>
+      <div class="topbar">
+        <div class="brand">Premium Birthday Experience</div>
+        <button class="musicBtn" id="musicBtn" type="button">
+          <span class="dot"></span>
+          <span id="musicLabel">Play the music</span>
+        </button>
       </div>
-    </section>
 
-    <!-- SLIDE 2 -->
-    <section class="slide" id="s2">
-      <div class="inner">
-        <h1 class="title">From your younger self 👦</h1>
-        <p class="subtitle">He wanted to meet you first…</p>
+      <div class="viewport">
 
-        <div class="swapStage">
-          <div class="swapItem show" id="turningWrap">
-            <img class="fullImg" src="images/turning-point.jpeg" alt="Turning point" />
-          </div>
+        <!-- Page 1 -->
+        <section class="page active" id="p1" data-page="1">
+          <div class="card">
+            <div class="scroll">
+              <div class="center">
+                <h1 class="title"><span class="gold">HAPPY BIRTHDAY YASH 🤍</span></h1>
 
-          <div class="swapItem" id="introWrap">
-            <div class="introRow">
-              <img src="images/intro1.jpeg" alt="intro1">
-              <img src="images/intro2.jpeg" alt="intro2">
-              <img src="images/intro3.jpeg" alt="intro3">
+                <div class="heroImg" style="max-width:720px;">
+                  <img src="images/intro2.jpeg" alt="intro image" />
+                </div>
+
+                <p class="sub">
+                  Here’s a little birthday experience, made just for you.<br>
+                  For your 24th, something small but meaningful.<br>
+                  Someone has been waiting to meet you.
+                </p>
+
+                <div class="divider"></div>
+
+                <div class="btnRow">
+                  <button class="btn" type="button" data-next>Let’s see ✨</button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div style="margin-top:16px; display:flex; flex-direction:column; align-items:center; gap:14px;">
-          <div class="typeBox">
-            <span id="introType"></span><span class="cursor"></span>
+        <!-- Page 2 Questions -->
+        <section class="page" id="p2" data-page="2">
+          <div class="card">
+            <div class="scroll" id="qScroll">
+              <h2 class="typeHeading">
+                <span id="qHeading"></span><span class="cursor"></span>
+              </h2>
+
+              <div class="qWrap" id="questions"></div>
+
+              <div class="btnRow" style="margin-top:18px;">
+                <button class="btn" type="button" data-next>Next</button>
+              </div>
+            </div>
           </div>
+        </section>
 
-          <button class="primary" id="toQuestions" disabled style="opacity:.55;cursor:not-allowed">
-            I have some questions to ask you →
-          </button>
-        </div>
+        <!-- Page 3 Younger self letter -->
+        <section class="page" id="p3" data-page="3">
+          <div class="card">
+            <div class="scroll" id="ysScroll">
+              <div class="center" style="justify-content:flex-start; padding-top:8px;">
+                <h1 class="title"><span class="gold">HAPPY BIRTHDAY MY HERO 🤍</span></h1>
+
+                <div class="imgFull" style="max-width:860px;">
+                  <img src="images/turningpoint.jpeg" alt="younger self" />
+                </div>
+
+                <div class="typeBox" id="ysBox">
+                  <span id="ysText"></span><span class="cursor"></span>
+                </div>
+
+                <div class="btnRow" style="margin-top:18px;">
+                  <button class="btn" type="button" data-next>Let’s see what’s next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page 4 Journey intro -->
+        <section class="page" id="p4" data-page="4">
+          <div class="card">
+            <div class="scroll">
+              <div class="center">
+                <h1 class="title"><span class="gold">Our Journey So Far</span></h1>
+                <p class="sub" style="max-width:740px;">
+                  <span id="journeyTyped"></span><span class="cursor"></span>
+                </p>
+
+                <div class="imgFull" style="max-width:860px;">
+                  <img src="images/intro1.jpeg" alt="journey start" />
+                </div>
+
+                <div class="story" style="text-align:center; max-width:760px;">
+                  You did not wake up one day and become this person. You grew into him slowly. Through small wins. Through quiet sacrifices. Through days no one saw. This journey did not happen overnight. It happened because you never stopped showing up.
+                </div>
+
+                <div class="btnRow">
+                  <button class="btn" type="button" data-next>Let’s see</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page 5 Childhood -->
+        <section class="page" id="p5" data-page="5">
+          <div class="card">
+            <div class="scroll">
+              <div class="center" style="justify-content:flex-start; padding-top:8px;">
+                <h1 class="title"><span class="gold">Where It All Began</span></h1>
+                <div class="imgFull">
+                  <img src="images/childhood.jpeg" alt="childhood" />
+                </div>
+                <div class="story">
+                  Born after eleven years, he grew up knowing that not everything came easy. He was the most loved and the most notorious child, always wanting more, not out of greed, but because he saw others having what he could not. Some wishes stayed unfulfilled, some dreams stayed quiet, but that lack lit a fire inside him. Instead of breaking him, it taught him to dream bigger and promise himself that one day, life would be different.
+                </div>
+                <div class="btnRow">
+                  <button class="btn btnGhost" type="button" data-next>And then…</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page 6 Competitions -->
+        <section class="page" id="p6" data-page="6">
+          <div class="card">
+            <div class="scroll">
+              <div class="center" style="justify-content:flex-start; padding-top:8px;">
+                <h1 class="title"><span class="gold">Competitions</span></h1>
+                <div class="imgFull">
+                  <img src="images/competitions.jpeg" alt="competitions" />
+                </div>
+                <div class="story">
+                  From a very young age, he carried a quiet determination. He studied with focus, practiced with discipline, and competed with belief. It was never only about winning for others, it was about proving to himself that he could do it. From UCMAS to stages, states, and every challenge that came his way, he showed up with the same fire. Even with limitations, even with pressure, he chose effort over excuses. Every win made the family proud, and every loss made him stronger.
+                </div>
+                <div class="btnRow">
+                  <button class="btn" type="button" data-next>Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page 7 Turning point -->
+        <section class="page" id="p7" data-page="7">
+          <div class="card">
+            <div class="scroll">
+              <div class="center" style="justify-content:flex-start; padding-top:8px;">
+                <h1 class="title"><span class="gold">Turning Point</span></h1>
+                <div class="imgFull">
+                  <img src="images/turningpoint.jpeg" alt="turning point" />
+                </div>
+                <div class="story">
+                  There came a moment when life asked him to choose. The usual path everyone follows, or the dream that quietly lived inside him. It was not an easy choice. There was fear, doubt, and the weight of expectations. But something inside him knew that the ordinary life was not meant for him. So he chose himself. He chose uncertainty over comfort, belief over approval, and courage over fear. That one decision changed everything.
+                </div>
+                <div class="btnRow">
+                  <button class="btn btnGhost" type="button" data-next>Then what happened?</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page 8 Success -->
+        <section class="page" id="p8" data-page="8">
+          <div class="card">
+            <div class="scroll">
+              <div class="center" style="justify-content:flex-start; padding-top:8px;">
+                <h1 class="title"><span class="gold">Success</span></h1>
+                <div class="imgFull">
+                  <img src="images/success.jpeg" alt="success" />
+                </div>
+                <div class="story">
+                  Slowly, things began to change. The hard work started showing results. The discipline, the long days, and the silent effort finally found direction. With the right guidance at the right time, his growth accelerated. He did not grow alone. He lifted others with him. What once felt impossible started becoming real, and the life he had imagined quietly began taking shape.
+                </div>
+                <div class="btnRow">
+                  <button class="btn btnGhost" type="button" data-next>Then…</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page 9 Present -->
+        <section class="page" id="p9" data-page="9">
+          <div class="card">
+            <div class="scroll">
+              <div class="center" style="justify-content:flex-start; padding-top:8px;">
+                <h1 class="title"><span class="gold">Present</span></h1>
+                <div class="imgFull">
+                  <img src="images/present.jpeg" alt="present" />
+                </div>
+                <div class="story">
+                  And here you are today, after seven to eight years of showing up for yourself again and again. You proved that consistency changes everything. You moved forward quietly, handled responsibilities with strength, and kept growing without seeking validation. You did not just change your own life, but in many ways, you changed the lives of everyone who crossed your path. And this is only a stronger beginning.
+                </div>
+                <div class="btnRow">
+                  <button class="btn" type="button" data-next>A letter for you</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page 10 Letter -->
+        <section class="page" id="p10" data-page="10">
+          <div class="card">
+            <div class="scroll" id="letterScroll">
+              <div class="center" style="justify-content:flex-start; padding-top:8px;">
+                <h1 class="title"><span class="gold">A Letter From Someone Who Believes In You</span></h1>
+
+                <div class="imgFull">
+                  <img src="images/us.jpeg" alt="us" />
+                </div>
+
+                <div class="typeBox" id="letterBox" style="max-width:820px; width:100%;">
+                  <div id="letterLines"></div>
+                </div>
+
+                <div class="rightBottom">
+                  <button class="btn" type="button" id="continueBtn">Continue</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Page 11 Final -->
+        <section class="page" id="p11" data-page="11">
+          <div class="card">
+            <div class="scroll">
+              <div class="center">
+                <h1 class="title"><span class="gold">HAPPY BIRTHDAY YASH 🤍</span></h1>
+
+                <div class="imgFull" style="max-width:860px;">
+                  <img src="images/intro3.jpeg" alt="final" />
+                </div>
+
+                <div class="story" style="text-align:center; max-width:760px;">
+                  This is your moment.<br>
+                  And you deserve every bit of it.
+                </div>
+
+                <p class="sub" style="max-width:720px; margin-top:4px;">
+                  I hope you liked it ✨
+                </p>
+
+                <div class="btnRow">
+                  <button class="btn btnGhost" type="button" id="replayBtn">Replay</button>
+                </div>
+
+                <p class="hint">Tap Play the music anytime if sound is off</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </div>
-    </section>
-
-    <!-- SLIDE 3 (Questions 1/2) -->
-    <section class="slide" id="s3">
-      <div class="inner">
-        <h1 class="title">A few questions… 💗</h1>
-        <p class="subtitle">Your younger self is asking softly — answer gently.</p>
-        <div class="qWrap" id="qPart1"></div>
-        <div class="nav">
-          <button class="primary" id="toQ2">Next →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLIDE 4 (Questions 2/2) -->
-    <section class="slide" id="s4">
-      <div class="inner">
-        <h1 class="title">Just a little more… 💗</h1>
-        <p class="subtitle">And then… we’ll look at our journey.</p>
-        <div class="qWrap" id="qPart2"></div>
-        <div class="nav">
-          <button class="primary" id="toJourney">Let’s see our journey so far →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLIDE 5 -->
-    <section class="slide" id="s5">
-      <div class="inner">
-        <h1 class="title">Childhood 🌱</h1>
-        <img class="journeyImg" src="images/childhood.jpeg" alt="childhood">
-        <div class="storyText">
-          Born after eleven years — a boy who quietly shifted destiny.<br/>
-          Stubborn, notorious, and so sure of what he wanted… even if it was the rarest thing.<br/>
-          Who knew that same “I want it” energy would grow into the man who inspires everyone today?
-        </div>
-        <div class="nav">
-          <button class="primary" onclick="go(6)">Next →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLIDE 6 -->
-    <section class="slide" id="s6">
-      <div class="inner">
-        <h1 class="title">Competitions 🏆</h1>
-        <img class="journeyImg" src="images/competitions.jpeg" alt="competitions">
-        <div class="storyText">
-          A determined boy with discipline in his bones.<br/>
-          Not just to prove it to the world — but to protect his own belief: “I can.”<br/>
-          From UCMAS wins to stages, states, nationals — the goal was simple: win with heart, every time.
-        </div>
-        <div class="nav">
-          <button class="primary" onclick="go(7)">Next →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLIDE 7 -->
-    <section class="slide" id="s7">
-      <div class="inner">
-        <h1 class="title">Turning Point ✨</h1>
-        <img class="journeyImg" src="images/turning-point.jpeg" alt="turning point">
-        <div class="storyText">
-          One day, you stood between “normal life”… and your dreams.<br/>
-          You chose the path nobody dared to take — uncertain, risky, and completely yours.<br/>
-          That courage wasn’t ordinary. That ambition wasn’t common. And you proved it — again.
-        </div>
-        <div class="nav">
-          <button class="primary" onclick="go(8)">Next →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLIDE 8 -->
-    <section class="slide" id="s8">
-      <div class="inner">
-        <h1 class="title">Success 🌟</h1>
-        <img class="journeyImg" src="images/success.jpeg" alt="success">
-        <div class="storyText">
-          Then came a turning of stars — and a guide entered your world: Paul.<br/>
-          Just like you became light for others, he became a quiet hope for your future.<br/>
-          The vibe matched, the vision aligned… and you became unstoppable — growing, and making everyone around you rise too.
-        </div>
-        <div class="nav">
-          <button class="primary" onclick="go(9)">Next →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLIDE 9 -->
-    <section class="slide" id="s9">
-      <div class="inner">
-        <h1 class="title">Present 🚀</h1>
-        <img class="journeyImg" src="images/present.jpeg" alt="present">
-        <div class="storyText">
-          And here you are — after 7–8 years of showing up, again and again.<br/>
-          Moving mountains quietly. Changing lives without making noise.<br/>
-          You didn’t just transform your own story — you became a reason others believe in theirs.
-        </div>
-        <div class="nav">
-          <button class="primary" onclick="go(10)">A letter for you 🤍</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLIDE 10 -->
-    <section class="slide" id="s10">
-      <div class="inner">
-        <h1 class="title">A letter from someone who believes in you 🤍</h1>
-        <img class="letterImg" src="images/us.jpeg" alt="us">
-        <div class="letterBox" id="letterBox"><span id="letterType"></span><span class="cursor"></span></div>
-
-        <div class="nav">
-          <button class="primary" id="toFinal">Next →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- SLIDE 11 -->
-    <section class="slide" id="s11">
-      <div class="inner">
-        <h1 class="title">Happy 24th Birthday 💖</h1>
-        <p class="subtitle">You are rare. You are powerful. And this is only the beginning.</p>
-        <img class="journeyImg" src="images/present.jpeg" alt="final">
-        <div class="nav">
-          <button class="primary" id="burst">🎉 Party time</button>
-        </div>
-        <p class="subtitle" style="margin-top:12px;">I hope you liked it ✨</p>
-      </div>
-    </section>
-
+    </div>
   </div>
 
   <script>
-    const $ = (id)=>document.getElementById(id);
-    const slides = ["s1","s2","s3","s4","s5","s6","s7","s8","s9","s10","s11"];
-    let current = 0;
+    const $ = (id) => document.getElementById(id);
 
-    function go(n){
-      current = n-1;
-      slides.forEach((sid,i)=>{
-        const el = $(sid);
-        if(!el) return;
-        el.classList.toggle("active", i===current);
-      });
-      const activeInner = document.querySelector(".slide.active .inner");
-      if(activeInner) activeInner.scrollTop = 0;
-
-      if(n===2) startIntro();
-      if(n===10) startLetter();
-      if(n===11){ poppersBurst(26); heartsRain(18); }
-    }
-
-    // ----- Music (iPhone-safe) -----
-    const music = $("bgMusic");
-    const toggle = $("soundToggle");
-    const soundLabel = $("soundLabel");
-    const toast = $("toast");
-    let soundOn = false;
+    const pages = Array.from(document.querySelectorAll(".page"));
+    let pageIndex = 0;
 
     function showToast(msg){
-      toast.textContent = msg;
-      toast.classList.add("show");
-      setTimeout(()=>toast.classList.remove("show"), 1600);
+      const t = $("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 1400);
     }
 
-    async function tryPlayMusic(){
-      // must be called from a user action click/tap
+    function showPage(i){
+      pageIndex = Math.max(0, Math.min(pages.length - 1, i));
+      pages.forEach((p, idx) => p.classList.toggle("active", idx === pageIndex));
+
+      const sc = pages[pageIndex].querySelector(".scroll");
+      if(sc) sc.scrollTop = 0;
+
+      if(pageIndex === 1) startQuestionHeading();
+      if(pageIndex === 2) startYoungerSelfTyping();
+      if(pageIndex === 3) startJourneyTyped();
+      if(pageIndex === 9) startLetterTyping();
+      if(pageIndex === 10) startFinalCelebration();
+    }
+
+    document.body.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-next]");
+      if(btn){
+        showPage(pageIndex + 1);
+      }
+    });
+
+    $("continueBtn").addEventListener("click", () => showPage(10));
+    $("replayBtn").addEventListener("click", () => {
+      stopConfetti();
+      showPage(0);
+      window.scrollTo(0,0);
+    });
+
+    // Music controls
+    const music = $("bgMusic");
+    const musicBtn = $("musicBtn");
+    const musicLabel = $("musicLabel");
+    let musicOn = false;
+
+    async function tryPlay(){
       try{
         music.muted = false;
         music.volume = 0.75;
         await music.play();
         return true;
-      }catch(e){
+      }catch(err){
         return false;
       }
     }
 
-    async function setSound(on, fromUserTap=false){
-      soundOn = on;
-      toggle.classList.toggle("on", on);
-      soundLabel.textContent = on ? "Sound On" : "Sound Off";
-
+    function setMusic(on){
+      musicOn = on;
+      musicBtn.classList.toggle("on", on);
+      musicLabel.textContent = on ? "Music is on" : "Play the music";
       if(on){
-        const ok = await tryPlayMusic();
-        if(!ok && fromUserTap){
-          showToast("If music didn’t start, tap Sound On again 🎵");
-        }
+        tryPlay().then(ok => {
+          if(!ok){
+            setMusic(false);
+            showToast("Tap Play the music again");
+          }
+        });
       }else{
         music.pause();
       }
     }
 
-    toggle.addEventListener("click", async ()=>{
-      await setSound(!soundOn, true);
+    musicBtn.addEventListener("click", () => {
+      setMusic(!musicOn);
     });
 
-    // Slide 1 button
-    $("goS2").addEventListener("click", async ()=>{
-      // ✅ also try start music here (counts as user gesture)
-      if(soundOn){
-        await tryPlayMusic();
-      }
-      go(2);
-    });
-
-    // ----- Hearts -----
+    // Hearts on option click
     function heartAt(x,y){
       const h = document.createElement("div");
       h.className = "heart";
-      h.textContent = (Math.random() > .5) ? "💗" : "💖";
-      h.style.left = (x + (Math.random()*30-15)) + "px";
+      h.textContent = Math.random() > 0.5 ? "💗" : "💖";
+      h.style.left = (x + (Math.random()*24-12)) + "px";
       h.style.top  = (y + (Math.random()*10-10)) + "px";
       document.body.appendChild(h);
-      setTimeout(()=>h.remove(), 1400);
-    }
-    function heartsRain(count=10){
-      for(let i=0;i<count;i++){
-        setTimeout(()=> heartAt(Math.random()*window.innerWidth, window.innerHeight-40), i*70);
-      }
+      setTimeout(()=>h.remove(), 1500);
     }
 
-    // ----- Poppers -----
-    function poppersBurst(count=30){
-      for(let i=0;i<count;i++){
-        setTimeout(()=>{
-          const p = document.createElement("div");
-          p.className = "popper";
-          p.textContent = (Math.random()>0.5) ? "🎉" : "🎊";
-          p.style.left = (Math.random()*window.innerWidth) + "px";
-          p.style.top  = (window.innerHeight - 30) + "px";
-          document.body.appendChild(p);
-          setTimeout(()=>p.remove(), 1900);
-        }, i*40);
-      }
-    }
-    $("burst").addEventListener("click", ()=>{ poppersBurst(44); heartsRain(26); });
-
-    // ----- Swap turning -> intro images after "My champ." -----
-    function swapToIntroImages(){
-      const turning = $("turningWrap");
-      const intro = $("introWrap");
-      if(!turning || !intro) return;
-
-      turning.classList.remove("show");
-      setTimeout(()=>{
-        turning.style.display = "none";
-        intro.style.display = "block";
-        requestAnimationFrame(()=> intro.classList.add("show"));
-      }, 560);
-    }
-
-    // ----- Typewriter (line-by-line) -----
-    function typeLines(targetEl, lines, {speed=28, gap=1100, onLineDone=null, onDone=null} = {}){
-      let lineIndex = 0;
-      let charIndex = 0;
-      targetEl.textContent = "";
-
-      function type(){
-        const line = lines[lineIndex];
-        targetEl.textContent = line.slice(0, charIndex);
-        charIndex++;
-
-        if(charIndex <= line.length){
-          setTimeout(type, speed);
-        }else{
-          if(onLineDone) onLineDone(lineIndex, line);
-          setTimeout(()=>{
-            lineIndex++;
-            if(lineIndex >= lines.length){
-              if(onDone) onDone();
-              return;
-            }
-            charIndex = 0;
-            targetEl.textContent = "";
-            setTimeout(type, 50);
-          }, gap);
-        }
-      }
-      type();
-    }
-
-    // ----- Slide 2 typing -----
-    let introStarted = false;
-    function startIntro(){
-      if(introStarted) return;
-      introStarted = true;
-
-      const introType = $("introType");
-      const btn = $("toQuestions");
-      btn.disabled = true;
-      btn.style.opacity = ".55";
-      btn.style.cursor = "not-allowed";
-
-      const introLines = [
-        "This is your younger self. Happy Happy Birthday elder one. My champ.",
-        "You have spent whole 24 years — you’ve grown into a man living and handling life the best you could.",
-        "You’re doing a tremendous job. Keep growing and working towards your dream life.",
-        "Don’t forget to take pause and rest — that doesn’t mean you’re behind."
-      ];
-
-      typeLines(introType, introLines, {
-        speed: 26,
-        gap: 1400,
-        onLineDone: (idx, line)=>{
-          heartsRain(6);
-          if(line.includes("My champ")) swapToIntroImages();
-        },
-        onDone: ()=>{
-          btn.disabled = false;
-          btn.style.opacity = "1";
-          btn.style.cursor = "pointer";
-        }
-      });
-    }
-
-    $("toQuestions").addEventListener("click", ()=>{
-      if($("toQuestions").disabled){ heartsRain(6); return; }
-      go(3);
-    });
-
-    // ----- Questions -----
-    const questions = [
-      { q:"Do you remember me — the kid who wanted so many things but couldn’t have them?", a:["Yes. I remember you every day.","Yes, and I carried you with me."] },
-      { q:"Did that lack break us… or did it make us stronger?", a:["It hurt more than I admit.","It lit a fire that still burns."] },
-      { q:"When we worked so hard in competitions — who were we proving it to?", a:["To myself.","To the world… and to me."] },
-      { q:"When you chose a path different from everyone else — were you scared like I used to be?", a:["Terrified, but hopeful.","Scared, but determined."] },
-      { q:"When no one understood you — did you ever feel like giving up?", a:["Yes… but I kept going.","Never. I had a promise to keep."] },
-      { q:"What kept you moving when life felt heavy?", a:["The dream.","The love I wanted to give."] },
-      { q:"If I ask you one thing today… will you be kinder to yourself?", a:["I’ll try — for you.","Yes. I’ll rest without guilt."] }
+    // Questions data
+    const questionsData = [
+      { q:"Did we become the person we always dreamed of becoming?", a:["I am still becoming","Yes, and I am proud"] },
+      { q:"When life got really hard, did you keep going for me?", a:["Yes, every single time","Sometimes I felt tired, but I continued"] },
+      { q:"Were you scared when you chose your own path?", a:["Yes, but I trusted myself","I was scared, but I never looked back"] },
+      { q:"Did you protect our dreams when no one believed in them?", a:["Always, even in silence","Yes, they were my strength"] },
+      { q:"Did you take care of our family the way you promised?", a:["Yes, with all my heart","I am still trying my best"] },
+      { q:"When you failed or felt low, were you kind to yourself?", a:["I am learning to be","I am kinder now"] },
+      { q:"Are you happy with the life you are creating?", a:["I am grateful and growing","I am building it step by step"] },
+      { q:"Do you remember how far we have come from those days?", a:["Yes, and it humbles me","I remind myself often"] },
+      { q:"Are you proud of yourself today?", a:["Yes, I truly am","I am learning to be proud"] },
+      { q:"Will you promise me one thing? To never stop believing in us.", a:["I promise","Always and forever"] }
     ];
 
-    function renderQuestions(containerId, start, count){
-      const wrap = $(containerId);
+    function renderQuestions(){
+      const wrap = $("questions");
       wrap.innerHTML = "";
-      questions.slice(start, start+count).forEach((item)=>{
+      questionsData.forEach((item) => {
         const card = document.createElement("div");
         card.className = "qCard";
         card.innerHTML = `
-          <p class="q">${item.q}</p>
+          <div class="q">${item.q}</div>
           <div class="opts">
-            ${item.a.map(t=> `<button class="opt" type="button">${t}</button>`).join("")}
+            ${item.a.map(txt => `<button class="opt" type="button">${txt}</button>`).join("")}
           </div>
         `;
         wrap.appendChild(card);
 
         const opts = card.querySelectorAll(".opt");
-        opts.forEach(btn=>{
-          btn.addEventListener("click", ()=>{
-            opts.forEach(o=>o.classList.remove("picked"));
+        opts.forEach(btn => {
+          btn.addEventListener("click", () => {
+            opts.forEach(o => o.classList.remove("picked"));
             btn.classList.add("picked");
             const r = btn.getBoundingClientRect();
-            heartAt(r.left + r.width/2, r.top + 10);
+            heartAt(r.left + r.width/2, r.top + 12);
           });
         });
       });
     }
+    renderQuestions();
 
-    renderQuestions("qPart1", 0, 4);
-    renderQuestions("qPart2", 4, 3);
-
-    $("toQ2").addEventListener("click", ()=> go(4));
-    $("toJourney").addEventListener("click", ()=> go(5));
-
-    // ----- Letter typing -----
-    let letterStarted = false;
-    const letterText =
-`It feels like I’ve known you forever.
-Like I somehow knew your story even before you told me.
-
-I know I wasn’t there when you were a child,
-but the way you talk about your life,
-it feels like I’ve lived it with you.
-You always wanted everything, not because you were greedy,
-but because you saw others have what you couldn’t.
-And that lack lit a fire inside you,
-a fire to give yourself and your family everything one day.
-
-You were always a champion.
-In school, in competitions, in life,
-you never played small.
-You wanted to win, and you worked for it quietly, patiently.
-
-Then came the moment where you chose yourself.
-You didn’t follow the usual path.
-You chose something uncertain, risky, and completely yours.
-And that decision changed everything.
-
-The discipline you’ve shown for years,
-four, five, six, now so many years,
-I honestly don’t have words for how proud we are of you.
-Your family is grateful, protected, and standing strong
-because of you.
-
-Yes, you’re annoying sometimes.
-Yes, you’re stubborn.
-But that mischief, that madness,
-we love it.
-You are the main character in our lives,
-and we cannot imagine life without you.
-
-And then… there’s us.
-How destiny made us meet out of nowhere,
-right when I needed light the most.
-You showed up, just like that.
-And somehow, everything shifted.
-
-You give me comfort, but you also push me to grow.
-You make me feel safe, but never stagnant.
-You walk ahead, but always holding everyone’s hand.
-
-From our first conversations,
-to Rishikesh, Goa, Kerala, Dubai,
-so many firsts, so many memories.
-Life with you has been magical in ways I can’t explain.
-
-You feel like home to me.
-Safe. Warm. Real.
-And still challenging me to become better.
-
-I don’t know what good karma brought us together,
-but I’m grateful every single day.
-
-Happy happy 24th birthday.
-You are rare. You are powerful.
-And this is only the beginning.
-
-Love, Always 🤍`;
-
-    function startLetter(){
-      if(letterStarted) return;
-      letterStarted = true;
-
-      const el = $("letterType");
-      el.textContent = "";
-
+    // Typing helpers
+    function typeText(el, text, speed=28, done){
       let i = 0;
-      const speed = 12;
-      const timer = setInterval(()=>{
-        el.textContent += letterText[i];
+      el.textContent = "";
+      function tick(){
+        el.textContent = text.slice(0, i);
         i++;
-
-        const activeInner = document.querySelector("#s10 .inner");
-        if(activeInner) activeInner.scrollTop = activeInner.scrollHeight;
-
-        if(i >= letterText.length) clearInterval(timer);
-      }, speed);
+        if(i <= text.length){
+          setTimeout(tick, speed);
+        }else{
+          if(done) done();
+        }
+      }
+      tick();
     }
 
-    $("toFinal").addEventListener("click", ()=> go(11));
+    // Page 2 heading typed once
+    let qHeadingDone = false;
+    function startQuestionHeading(){
+      if(qHeadingDone) return;
+      qHeadingDone = true;
+      typeText($("qHeading"), "Before we go ahead, someone wants to ask a few things…", 26);
+    }
 
-    // Start
-    go(1);
+    // Page 3 younger self typing with slow auto scroll
+    const youngerText =
+`Hi Yash.
+It’s me. Your younger self.
+How are you? I know you’ve grown up now. You’re handling life. Being responsible. Still a little naughty… just like me.
+You’ve lived 24 whole years. And you’ve done the best you could. I see how hard you try every day. I’m really proud of you for that. Please keep chasing your dreams.
+But don’t forget to stop sometimes. Resting doesn’t mean you’re behind. It just means you’re human.
+Happy Birthday, elder one. You became everything I dreamed of. I’m always proud of you. And I’m really happy that you finally have all the toys and things I once wished for. 😊`;
+
+    let ysDone = false;
+    function startYoungerSelfTyping(){
+      if(ysDone) return;
+      ysDone = true;
+      const el = $("ysText");
+      const sc = $("ysScroll");
+      let i = 0;
+      const speed = 18;
+      function tick(){
+        el.textContent = youngerText.slice(0, i);
+        i++;
+        if(sc) sc.scrollTop = sc.scrollHeight;
+        if(i <= youngerText.length){
+          setTimeout(tick, speed);
+        }
+      }
+      tick();
+    }
+
+    // Page 4 typed line
+    let journeyDone = false;
+    function startJourneyTyped(){
+      if(journeyDone) return;
+      journeyDone = true;
+      typeText($("journeyTyped"), "Let’s look at the life we built, one step at a time.", 26);
+    }
+
+    // Letter typing line by line with smooth scroll
+    const letterLines = [
+      "It feels like I’ve known you forever.",
+      "Like I somehow knew your story even before you told me.",
+      "",
+      "I know I wasn’t there when you were a child,",
+      "but the way you talk about your life,",
+      "it feels like I’ve lived it with you.",
+      "You always wanted everything, not because you were greedy,",
+      "but because you saw others have what you couldn’t.",
+      "And that lack lit a fire inside you,",
+      "a fire to give yourself and your family everything one day.",
+      "",
+      "You are always a champion.",
+      "In school, in competitions, in life,",
+      "you never played small.",
+      "You want to win, and you worked for it quietly, patiently.",
+      "",
+      "Then came the moment where you chose yourself.",
+      "You didn’t follow the usual path.",
+      "You chose something uncertain, risky, and completely yours.",
+      "And that decision changed everything.",
+      "",
+      "The discipline you’ve shown for years,",
+      "Seven, eight, now so many years,",
+      "I honestly don’t have words for how proud we are of you.",
+      "Your family is grateful, protected, and standing strong",
+      "because of you.",
+      "",
+      "Yes, you’re annoying sometimes.",
+      "Yes, you’re stubborn.",
+      "But that mischief, that madness,",
+      "we love it.",
+      "You are the main character in our lives,",
+      "and we cannot imagine life without you.",
+      "",
+      "And then… there’s us.",
+      "How destiny made us meet out of nowhere,",
+      "right when I needed light the most.",
+      "You showed up, just like that.",
+      "And somehow, everything shifted.",
+      "",
+      "You give me comfort, but you also push me to grow.",
+      "You make me feel safe, but never stagnant.",
+      "You walk ahead, but always holding everyone’s hand.",
+      "",
+      "From our first conversations,",
+      "to Rishikesh, Goa, Kerala, Dubai,",
+      "so many firsts, so many memories.",
+      "Life with you has been magical in ways I can’t explain.",
+      "",
+      "You feel like home to me.",
+      "Safe. Warm. Real.",
+      "And still challenging me to become better.",
+      "",
+      "I don’t know what good karma brought us together,",
+      "but I’m grateful every single day.",
+      "",
+      "Happy happy 24th birthday.",
+      "You are rare. You are powerful. You are loved",
+      "And this is only the beginning.",
+      "Love, Always 🤍"
+    ];
+
+    let letterDone = false;
+    function startLetterTyping(){
+      if(letterDone) return;
+      letterDone = true;
+
+      const box = $("letterLines");
+      const sc = $("letterScroll");
+      box.innerHTML = "";
+
+      let idx = 0;
+      const pace = 520;
+
+      function addLine(){
+        if(idx >= letterLines.length) return;
+        const line = document.createElement("div");
+        line.style.opacity = "0";
+        line.style.transform = "translateY(8px)";
+        line.style.transition = "opacity .45s ease, transform .45s ease";
+        line.style.whiteSpace = "pre-wrap";
+        line.style.margin = "0 0 10px";
+        line.textContent = letterLines[idx];
+        box.appendChild(line);
+
+        requestAnimationFrame(() => {
+          line.style.opacity = "1";
+          line.style.transform = "translateY(0)";
+        });
+
+        if(sc){
+          sc.scrollTop = sc.scrollHeight;
+        }
+
+        idx++;
+        setTimeout(addLine, pace);
+      }
+      addLine();
+    }
+
+    // Confetti for final page
+    const confetti = $("confetti");
+    const confColors = ["#ff5aa5","#ffd1e6","#e9d7a5","#9bd1ff","#b9a6ff"];
+    let confBuilt = false;
+
+    function buildConfetti(){
+      if(confBuilt) return;
+      confBuilt = true;
+      for(let i=0;i<42;i++){
+        const p = document.createElement("i");
+        p.style.left = (Math.random()*100) + "vw";
+        p.style.animationDuration = (6 + Math.random()*6) + "s";
+        p.style.animationDelay = (-Math.random()*6) + "s";
+        p.style.background = confColors[Math.floor(Math.random()*confColors.length)];
+        p.style.opacity = (0.55 + Math.random()*0.4);
+        confetti.appendChild(p);
+      }
+    }
+
+    function startFinalCelebration(){
+      buildConfetti();
+      confetti.classList.add("on");
+      for(let i=0;i<20;i++){
+        setTimeout(() => {
+          heartAt(Math.random()*window.innerWidth, window.innerHeight - 40);
+        }, i*90);
+      }
+    }
+
+    function stopConfetti(){
+      confetti.classList.remove("on");
+    }
+
+    // Initial page
+    showPage(0);
+
+    // If user forgets to start music, give a gentle hint once after a few seconds
+    setTimeout(() => {
+      if(!musicOn){
+        showToast("Tap Play the music");
+      }
+    }, 1800);
   </script>
 </body>
 </html>
-
-
-  
-    
-
-   
-    
