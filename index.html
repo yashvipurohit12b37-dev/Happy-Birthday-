@@ -1,291 +1,292 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Happy Birthday Yash</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Yash | An Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #fce4ec;
+            --accent-pink: #ff80ab;
+            --text-dark: #2d2d2d;
+            --bg-white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.8);
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-<style>
-body{
-  margin:0;
-  font-family:Manrope, sans-serif;
-  background:#fff3f8;
-  color:#444;
-}
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:20px;
-}
+        h1, h2, .premium-serif {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
 
-.card{
-  background:#fff;
-  border-radius:26px;
-  padding:30px 20px;
-  margin-bottom:30px;
-  box-shadow:0 10px 30px rgba(255,105,180,.12);
-}
+        /* Background Elements */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background: radial-gradient(circle at top right, #fff5f8, #ffffff);
+        }
 
-h1,h2{
-  font-family:"Playfair Display", serif;
-  color:#ff4fa3;
-  text-align:center;
-}
+        /* Audio Control */
+        .audio-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--glass);
+            border: 1px solid var(--primary-pink);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
 
-h1{ font-size:42px; }
-h2{ font-size:36px; }
+        .audio-toggle:hover { transform: scale(1.1); }
 
-.mediaBlock{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:18px;
-  margin-top:16px;
-}
+        /* Page Management */
+        .page {
+            display: none;
+            min-height: 100vh;
+            width: 100%;
+            padding: 40px 20px;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
 
-.imgFrame{
-  width:100%;
-  max-width:820px;
-  border-radius:22px;
-  background:#fff;
-  padding:16px;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
-}
+        .page.active {
+            display: flex;
+            opacity: 1;
+        }
 
-.imgInner{
-  width:100%;
-  height:520px; /* increased height for vertical photos */
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
+        /* Image Styling */
+        .vertical-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(255, 128, 171, 0.15);
+            animation: imageZoom 10s infinite alternate ease-in-out;
+        }
 
-.imgInner img{
-  max-height:100%;
-  max-width:100%;
-  object-fit:contain;
-  border-radius:18px;
-}
+        @keyframes imageZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.03); }
+        }
 
-.textBlock{
-  max-width:820px;
-  background:#fff7fb;
-  border-radius:20px;
-  padding:24px 22px;
-  line-height:1.7;
-  font-size:16px;
-}
+        /* Typography & Typing */
+        .typing-text {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 20px auto;
+            white-space: pre-line;
+        }
 
-.textBlock p{
-  margin-bottom:18px;
-}
+        .heading-main {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--accent-pink);
+        }
 
-button{
-  background:#ff4fa3;
-  color:white;
-  border:none;
-  border-radius:999px;
-  padding:14px 26px;
-  font-weight:600;
-  font-size:15px;
-  cursor:pointer;
-}
+        /* Buttons */
+        .btn-premium {
+            margin-top: 40px;
+            padding: 15px 35px;
+            background: var(--bg-white);
+            border: 1px solid var(--accent-pink);
+            color: var(--accent-pink);
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
 
-.musicBtn{
-  position:fixed;
-  top:18px;
-  right:18px;
-  background:white;
-  color:#ff4fa3;
-  border:2px solid #ffb7d6;
-}
+        .btn-premium:hover {
+            background: var(--accent-pink);
+            color: white;
+            box-shadow: 0 5px 20px rgba(255, 128, 171, 0.4);
+        }
 
-audio{ display:none; }
-</style>
+        /* Question Options */
+        .options-container {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .option-btn {
+            padding: 15px;
+            border: 1px solid #eee;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .option-btn:hover { border-color: var(--accent-pink); background: #fff9fb; }
+
+        /* Floating Hearts Animation */
+        .heart {
+            position: fixed;
+            color: var(--accent-pink);
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 999;
+            animation: floatUp 3s linear forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .heading-main { font-size: 2rem; }
+            .vertical-image { max-width: 85%; }
+        }
+    </style>
 </head>
-
 <body>
 
-<button class="musicBtn" onclick="toggleMusic()">Play the music</button>
-<audio id="bgMusic" loop>
-  <source src="birthday.mp3" type="audio/mpeg">
-</audio>
+    <div id="canvas-container"></div>
 
-<div class="container">
+    <button class="audio-toggle" onclick="toggleAudio()">
+        <span id="audio-icon">🔇</span>
+    </button>
 
-<!-- PAGE 1 -->
-<div class="card">
-  <h1>HAPPY BIRTHDAY YASH 💗</h1>
+    <audio id="bg-music" loop>
+        <source src="birthday.mp3" type="audio/mpeg">
+    </audio>
 
-  <div class="mediaBlock">
-    <div class="imgFrame">
-      <div class="imgInner">
-        <img src="images/intro2.jpeg">
-      </div>
-    </div>
+    <section id="page1" class="page active">
+        <h1 class="heading-main">HAPPY BIRTHDAY YASH</h1>
+        <img src="intro2.jpeg" alt="Yash" class="vertical-image">
+        <div class="typing-text" id="text1"></div>
+        <button class="btn-premium" onclick="nextPage(1, 2)">Let's see ✨</button>
+    </section>
 
-    <div class="textBlock">
-      <p>Here’s a little birthday experience, made just for you 🎀</p>
-      <p>For your 24th, something small but meaningful 💗</p>
-      <p>Someone has been waiting to meet you ✨</p>
-    </div>
-  </div>
-</div>
+    <section id="page2" class="page">
+        <h2 class="premium-serif">Before we go ahead, someone wants to ask a few things...</h2>
+        <div class="typing-text"><b>Did we become the person we always dreamed of becoming?</b></div>
+        <div class="options-container">
+            <div class="option-btn" onclick="spawnHeart(event); nextPage(2, 3)">I am still becoming</div>
+            <div class="option-btn" onclick="spawnHeart(event); nextPage(2, 3)">Yes, and I am proud</div>
+        </div>
+    </section>
 
-<!-- PAGE 3 YOUNGER SELF -->
-<div class="card">
-  <h2>HAPPY BIRTHDAY MY HERO 💞</h2>
+    <section id="page3" class="page">
+        <img src="image1.jpeg" alt="Memory" class="vertical-image">
+        <div class="typing-text">You walk ahead, but always holding everyone's hand. From our first conversations... to memories made in Goa and Dubai.</div>
+        <button class="btn-premium" onclick="nextPage(3, 4)">Continue</button>
+    </section>
 
-  <div class="mediaBlock">
-    <div class="imgFrame">
-      <div class="imgInner">
-        <img src="images/turning-point.jpeg">
-      </div>
-    </div>
+    <section id="page11" class="page">
+        <h1 class="heading-main" style="font-size: 3.5rem;">HAPPY BIRTHDAY YASH 🤍</h1>
+        <img src="intro3.jpeg" alt="Celebration" class="vertical-image">
+        <div class="typing-text">This is your moment. And you deserve every bit of it.</div>
+        <div id="final-message" style="margin-top: 20px; font-style: italic;">You are rare. You are powerful. You are loved.</div>
+    </section>
 
-    <div class="textBlock">
-      <p>
-        Hi Yash. It’s me. Your younger self 💭  
-        How are you? I know you’ve grown up now.  
-        You’re handling life. Being responsible.  
-        Still a little naughty… just like me 😊
-      </p>
+    <script>
+        // Sound Logic
+        const music = document.getElementById('bg-music');
+        let isPlaying = false;
 
-      <p>
-        You’ve lived 24 whole years.  
-        And you’ve done the best you could.  
-        I see how hard you try every day 💗
-      </p>
+        function toggleAudio() {
+            if (isPlaying) {
+                music.pause();
+                document.getElementById('audio-icon').innerText = '🔇';
+            } else {
+                music.play();
+                document.getElementById('audio-icon').innerText = '🔊';
+            }
+            isPlaying = !isPlaying;
+        }
 
-      <p>
-        Please keep chasing your dreams ✨  
-        But don’t forget to stop sometimes.  
-        Resting doesn’t mean you’re behind.  
-        It just means you’re human 🤍
-      </p>
+        // Navigation Logic
+        function nextPage(current, next) {
+            const currentPg = document.getElementById(`page${current}`);
+            const nextPg = document.getElementById(`page${next}`);
+            
+            currentPg.style.opacity = '0';
+            setTimeout(() => {
+                currentPg.classList.remove('active');
+                nextPg.classList.add('active');
+                setTimeout(() => {
+                    nextPg.style.opacity = '1';
+                    startTyping(next);
+                }, 50);
+            }, 1000);
+        }
 
-      <p>
-        Happy Birthday, elder one 🎂  
-        You became everything I dreamed of.  
-        I’m always proud of you 💞
-      </p>
-    </div>
-  </div>
-</div>
+        // Typing Effect Logic
+        const content = {
+            1: "Here's a little birthday experience, made just for you.\nFor your 24th, something small but meaningful.\nSomeone has been waiting to meet you."
+        };
 
-<!-- PRESENT -->
-<div class="card">
-  <h2>Present 💜</h2>
+        function startTyping(pageId) {
+            const element = document.getElementById(`text${pageId}`);
+            if (!element || !content[pageId]) return;
+            
+            let i = 0;
+            element.innerHTML = "";
+            function type() {
+                if (i < content[pageId].length) {
+                    element.innerHTML += content[pageId].charAt(i);
+                    i++;
+                    setTimeout(type, 50); // Medium speed
+                }
+            }
+            type();
+        }
 
-  <div class="mediaBlock">
-    <div class="imgFrame">
-      <div class="imgInner">
-        <img src="images/present.jpeg">
-      </div>
-    </div>
+        // Heart Animation Logic
+        function spawnHeart(e) {
+            for(let i=0; i<8; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = e.clientX + (Math.random() - 0.5) * 100 + 'px';
+                heart.style.top = e.clientY + 'px';
+                heart.style.left = Math.random() * 100 + 'vw';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
 
-    <div class="textBlock">
-      <p>
-        And here you are today,  
-        after seven to eight years of showing up  
-        for yourself again and again 💗
-      </p>
-
-      <p>
-        You proved that consistency changes everything ✨  
-        You moved forward quietly,  
-        handled responsibilities with strength,  
-        and kept growing without seeking validation 🤍
-      </p>
-    </div>
-  </div>
-</div>
-
-<!-- SUCCESS -->
-<div class="card">
-  <h2>Success 🌟</h2>
-
-  <div class="mediaBlock">
-    <div class="imgFrame">
-      <div class="imgInner">
-        <img src="images/success.jpeg">
-      </div>
-    </div>
-
-    <div class="textBlock">
-      <p>Slowly, things began to change ✨</p>
-      <p>The hard work started showing results 💗</p>
-      <p>
-        The discipline, the long days,  
-        and the silent effort finally found direction 🤍
-      </p>
-    </div>
-  </div>
-</div>
-
-<!-- LETTER -->
-<div class="card">
-  <h2>A Letter From Someone Who Believes In You 🤍</h2>
-
-  <div class="mediaBlock">
-    <div class="imgFrame">
-      <div class="imgInner">
-        <img src="images/us.jpeg">
-      </div>
-    </div>
-
-    <div class="textBlock">
-      <p>
-        It feels like I’ve known you forever 💗  
-        Like I somehow knew your story  
-        even before you told me ✨
-      </p>
-
-      <p>
-        I know I wasn’t there when you were a child,  
-        but the way you talk about your life,  
-        it feels like I’ve lived it with you 🤍
-      </p>
-
-      <p>
-        You always wanted everything,  
-        not because you were greedy,  
-        but because you saw others have  
-        what you couldn’t 💭
-      </p>
-
-      <p>
-        And that lack lit a fire inside you 🔥  
-        A fire to give yourself and your family  
-        everything one day 💞
-      </p>
-    </div>
-  </div>
-</div>
-
-<!-- FINAL -->
-<div class="card">
-  <h1>HAPPY BIRTHDAY YASH 💖</h1>
-</div>
-
-</div>
-
-<script>
-const music=document.getElementById("bgMusic");
-let playing=false;
-function toggleMusic(){
-  if(!playing){
-    music.play();
-    playing=true;
-  }else{
-    music.pause();
-    playing=false;
-  }
-}
-</script>
-
+        // Start typing for Page 1 on load
+        window.onload = () => startTyping(1);
+    </script>
 </body>
 </html>
