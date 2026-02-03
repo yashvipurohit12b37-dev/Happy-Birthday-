@@ -234,7 +234,7 @@
       margin: 6px auto 0;
     }
 
-    /* Images: keep original aspect ratio AND fit without needing extra scroll */
+    /* Vertical images everywhere, no cropping, no zoom */
     .imgFrame{
       width:min(880px, 96%);
       border-radius: 22px;
@@ -245,40 +245,48 @@
       position:relative;
       padding: 14px;
     }
-
     .imgInner{
       border-radius: 18px;
       background: rgba(255,255,255,.65);
       border: 1px solid rgba(255,209,230,.70);
       overflow:hidden;
       position:relative;
-
-      /* KEY: constrain visual height so images are visible without extra scrolling */
-      max-height: min(42vh, 340px);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .imgInner.wide{
-      width:100%;
-      max-height: min(40vh, 320px);
-    }
-
-    .imgInner.portrait{
-      max-width: 520px;
-      margin: 0 auto;
-      max-height: min(46vh, 380px);
-    }
-
-    .imgInner img{
-      width:100%;
       height:auto;
-      max-height: 100%;
-      display:block;
-      object-fit: contain;  /* no crop */
-      transform:none;
-      background: transparent;
+    }
+   /* Images in real shape no crop no forced height */
+.imgInner{
+  border-radius: 18px;
+  background: rgba(255,255,255,.65);
+  border: 1px solid rgba(255,209,230,.70);
+  overflow:hidden;
+  position:relative;
+  height:auto;
+}
+
+/* No max height constraint so image stays in its original aspect ratio */
+.imgInner.wide{
+  height:auto;
+  max-height:none;
+}
+
+.imgInner.portrait{
+  height:auto;
+  max-height:none;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* Real shape */
+.imgInner img{
+  width:100%;
+  height:auto;
+  display:block;
+  object-fit: initial;
+  object-position: 50% 50%;
+  transform:none;
+  background: transparent;
+}
+
     }
 
     .btnRow{
@@ -446,31 +454,6 @@
       to{ opacity:1; transform: translateY(0); }
     }
 
-    /* Soft appear (not typing) for pages 4 to 10 */
-    .softLine{
-      opacity:0;
-      transform: translateY(8px);
-      filter: blur(.2px);
-      transition: opacity .55s ease, transform .55s ease, filter .55s ease;
-    }
-    .softLine.show{
-      opacity:1;
-      transform: translateY(0);
-      filter: blur(0);
-    }
-
-    /* Typing cursor */
-    .tCursor{
-      display:inline-block;
-      margin-left:2px;
-      opacity:.65;
-      animation: blink 0.9s steps(1,end) infinite;
-      vertical-align:baseline;
-    }
-    @keyframes blink{
-      50%{ opacity:0; }
-    }
-
     .toast{
       position:fixed;
       left:50%;
@@ -578,7 +561,7 @@
           </div>
         </section>
 
-        <!-- Page 3 Younger self letter (typing animation) -->
+        <!-- Page 3 Younger self letter -->
         <section class="page" id="p3" data-page="3">
           <div class="card">
             <div class="scroll" id="ysScroll">
@@ -591,7 +574,7 @@
                   </div>
                 </div>
 
-                <div class="story" id="p3Story" style="max-width:880px;">
+                <div class="story" style="max-width:880px;">
                   <p>Hi Yash. It’s me. Your younger self. 🧸</p>
                   <p>How are you? I know you’ve grown up now. You’re handling life. Being responsible. Still a little naughty… just like me. 😄</p>
                   <p>You’ve lived 24 whole years. And you’ve done the best you could. I see how hard you try every day. I’m really proud of you for that. 🫶</p>
@@ -607,7 +590,7 @@
           </div>
         </section>
 
-        <!-- Page 4 Journey intro (soft appear) -->
+        <!-- Page 4 Journey intro -->
         <section class="page" id="p4" data-page="4">
           <div class="card">
             <div class="scroll">
@@ -638,7 +621,7 @@
           </div>
         </section>
 
-        <!-- Page 5 Childhood (soft appear) -->
+        <!-- Page 5 Childhood -->
         <section class="page" id="p5" data-page="5">
           <div class="card">
             <div class="scroll">
@@ -665,7 +648,7 @@
           </div>
         </section>
 
-        <!-- Page 6 Competitions (soft appear) -->
+        <!-- Page 6 Competitions -->
         <section class="page" id="p6" data-page="6">
           <div class="card">
             <div class="scroll">
@@ -694,7 +677,7 @@
           </div>
         </section>
 
-        <!-- Page 7 Turning point (soft appear) -->
+        <!-- Page 7 Turning point -->
         <section class="page" id="p7" data-page="7">
           <div class="card">
             <div class="scroll">
@@ -723,7 +706,7 @@
           </div>
         </section>
 
-        <!-- Page 8 Success (soft appear) -->
+        <!-- Page 8 Success -->
         <section class="page" id="p8" data-page="8">
           <div class="card">
             <div class="scroll">
@@ -752,7 +735,7 @@
           </div>
         </section>
 
-        <!-- Page 9 Present (soft appear) -->
+        <!-- Page 9 Present -->
         <section class="page" id="p9" data-page="9">
           <div class="card">
             <div class="scroll">
@@ -781,7 +764,7 @@
           </div>
         </section>
 
-        <!-- Page 10 Letter (already softly appears by paragraphs) -->
+        <!-- Page 10 Letter -->
         <section class="page" id="p10" data-page="10">
           <div class="card">
             <div class="scroll">
@@ -843,7 +826,7 @@
           </div>
         </section>
 
-        <!-- Page 11 Final (typing animation) -->
+        <!-- Page 11 Final -->
         <section class="page" id="p11" data-page="11">
           <div class="card">
             <div class="scroll">
@@ -856,12 +839,12 @@
                   </div>
                 </div>
 
-                <div class="story" id="p11Story" style="text-align:center; max-width:880px;">
+                <div class="story" style="text-align:center; max-width:880px;">
                   <p>This is your moment. 💗</p>
                   <p>And you deserve every bit of it. ✨</p>
                 </div>
 
-                <p class="sub" id="p11Sub" style="max-width:720px; margin-top:4px;">
+                <p class="sub" style="max-width:720px; margin-top:4px;">
                   I hope you liked it ✨
                 </p>
 
@@ -889,119 +872,21 @@
       setTimeout(() => t.classList.remove("show"), 1400);
     }
 
-    // ---- Soft appear for pages 4 to 10 ----
-    function prepSoftLines(pageEl){
-      const lines = pageEl.querySelectorAll(".story p, .sub");
-      lines.forEach(el => {
-        // Don't touch letter page animations, those already have .para
-        if(el.classList.contains("para")) return;
-        el.classList.add("softLine");
-        el.classList.remove("show");
-      });
-    }
-
-    function playSoftLines(pageEl){
-      const lines = Array.from(pageEl.querySelectorAll(".softLine"));
-      lines.forEach(el => el.classList.remove("show"));
-      lines.forEach((el, idx) => {
-        setTimeout(() => el.classList.add("show"), 220 * idx);
-      });
-    }
-
-    // ---- Typing animation (slow, soft, reading pace, stays) for pages 3 and 11 ----
-    const TYPE_SPEED = 35;      // reading pace
-    const LINE_PAUSE = 520;     // pause at line breaks
-    const PARA_PAUSE = 460;     // pause between paragraphs
-
-    function typeElementsSequentially(elements){
-      // store original text once
-      elements.forEach(el => {
-        if(!el.dataset.full){
-          el.dataset.full = el.textContent;
-        }
-      });
-
-      // reset display before typing
-      elements.forEach(el => {
-        el.textContent = "";
-      });
-
-      let i = 0;
-
-      function typeOne(){
-        if(i >= elements.length) return;
-
-        const el = elements[i];
-        const full = el.dataset.full || "";
-        let idx = 0;
-
-        const cursor = document.createElement("span");
-        cursor.className = "tCursor";
-        cursor.textContent = "|";
-        el.appendChild(cursor);
-
-        function step(){
-          if(idx >= full.length){
-            cursor.remove();
-            i++;
-            setTimeout(typeOne, PARA_PAUSE);
-            return;
-          }
-
-          const ch = full[idx++];
-          cursor.insertAdjacentText("beforebegin", ch);
-
-          const pause = (ch === "\n") ? LINE_PAUSE : 0;
-          setTimeout(step, TYPE_SPEED + pause);
-        }
-
-        step();
-      }
-
-      typeOne();
-    }
-
-    function startTypingForPage(pageEl){
-      // Page 3: type all story paragraphs
-      if(pageEl.id === "p3"){
-        const story = $("p3Story");
-        if(!story) return;
-        const ps = Array.from(story.querySelectorAll("p"));
-        typeElementsSequentially(ps);
-      }
-
-      // Page 11: type story paragraphs + the sub line
-      if(pageEl.id === "p11"){
-        const story = $("p11Story");
-        const sub = $("p11Sub");
-        const ps = story ? Array.from(story.querySelectorAll("p")) : [];
-        const els = sub ? [...ps, sub] : ps;
-        typeElementsSequentially(els);
-      }
-    }
-
     function showPage(i){
-      pageIndex = Math.max(0, Math.min(pages.length - 1, i));
-      pages.forEach((p, idx) => p.classList.toggle("active", idx === pageIndex));
+  pageIndex = Math.max(0, Math.min(pages.length - 1, i));
+  pages.forEach((p, idx) => p.classList.toggle("active", idx === pageIndex));
 
-      const sc = pages[pageIndex].querySelector(".scroll");
-      if(sc) sc.scrollTop = 0;
+  const sc = pages[pageIndex].querySelector(".scroll");
+  if(sc) sc.scrollTop = 0;
 
-      // Prepare soft lines for all pages, then animate only pages 4 to 10
-      pages.forEach(prepSoftLines);
-
-      const active = pages[pageIndex];
-
-      // Pages 4 to 10 = indices 3 to 9
-      if(pageIndex >= 3 && pageIndex <= 9){
-        playSoftLines(active);
-      }
-
-      // Typing only on Page 3 and Page 11
-      if(active.id === "p3" || active.id === "p11"){
-        startTypingForPage(active);
-      }
-    }
+  // trigger reveal animations on story blocks
+  document.querySelectorAll(".reveal").forEach(el => el.classList.remove("show"));
+  const activeReveal = pages[pageIndex].querySelectorAll(".reveal");
+  activeReveal.forEach(el => {
+    void el.offsetWidth;
+    el.classList.add("show");
+  });
+}
 
     document.body.addEventListener("click", (e) => {
       const btn = e.target.closest("[data-next]");
@@ -1139,9 +1024,7 @@
         host.appendChild(el);
       }
     })();
-
-    // Start initial animations for page 1
-    showPage(0);
   </script>
 </body>
 </html>
+
