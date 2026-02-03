@@ -873,12 +873,20 @@
     }
 
     function showPage(i){
-      pageIndex = Math.max(0, Math.min(pages.length - 1, i));
-      pages.forEach((p, idx) => p.classList.toggle("active", idx === pageIndex));
+  pageIndex = Math.max(0, Math.min(pages.length - 1, i));
+  pages.forEach((p, idx) => p.classList.toggle("active", idx === pageIndex));
 
-      const sc = pages[pageIndex].querySelector(".scroll");
-      if(sc) sc.scrollTop = 0;
-    }
+  const sc = pages[pageIndex].querySelector(".scroll");
+  if(sc) sc.scrollTop = 0;
+
+  // trigger reveal animations on story blocks
+  document.querySelectorAll(".reveal").forEach(el => el.classList.remove("show"));
+  const activeReveal = pages[pageIndex].querySelectorAll(".reveal");
+  activeReveal.forEach(el => {
+    void el.offsetWidth;
+    el.classList.add("show");
+  });
+}
 
     document.body.addEventListener("click", (e) => {
       const btn = e.target.closest("[data-next]");
