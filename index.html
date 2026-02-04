@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -29,7 +28,6 @@ rel="stylesheet">
   --shadow2: 0 18px 46px rgba(255,90,165,.12);
   --radius: 28px;
   --maxw: 1020px;
-  /* keeps buttons reachable on iPhone safe area */
   --safeB: env(safe-area-inset-bottom, 0px);
   --safeT: env(safe-area-inset-top, 0px);
 }
@@ -72,7 +70,6 @@ body{
   to{ transform: translateY(110vh) rotate(360deg); opacity:.75; }
 }
 
-/* Extra wow layer: sparkles */
 .sparkles{
   position:fixed; inset:0; pointer-events:none; z-index:2; overflow:hidden;
   opacity:1;
@@ -118,7 +115,6 @@ body{
   backdrop-filter: blur(16px);
 }
 
-/* better height handling on iOS so bottom isn't cut */
 @supports (height: 100dvh){
   .app{ height:100dvh; }
   .shell{ height:min(860px, 92dvh); }
@@ -146,7 +142,6 @@ body{
   transition: transform .12s ease, background .12s ease;
 }
 .musicBtn:active{ transform: scale(.98); }
-
 .dot{
   width:10px; height:10px; border-radius:999px;
   background: rgba(0,0,0,.14);
@@ -186,7 +181,6 @@ body{
   box-shadow: var(--shadow2);
 }
 
-/* subtle premium glow */
 .card:before{
   content:"";
   position:absolute; inset:-2px;
@@ -210,7 +204,6 @@ body{
   padding: clamp(18px, 3vw, 28px);
   position:relative;
   z-index:2;
-  /* ensures you can always scroll far enough to reach the button */
   padding-bottom: calc(clamp(18px, 3vw, 28px) + 96px + var(--safeB));
 }
 
@@ -224,7 +217,6 @@ body{
   gap: 14px;
   position:relative;
   z-index:2;
-  /* extra breathing room so the last button never sits under the phone bar */
   padding-bottom: calc(24px + var(--safeB));
 }
 
@@ -256,7 +248,6 @@ body{
   margin: 6px auto 0;
 }
 
-/* images */
 .imgFrame{
   width:min(880px, 96%);
   border-radius: 22px;
@@ -296,7 +287,7 @@ body{
   background: transparent;
 }
 
-/* vertical small portrait frame like your screenshot */
+/* vertical small portrait frame */
 .imgFrame.portraitFrame{
   width: min(420px, 92%);
   padding: 12px;
@@ -317,7 +308,7 @@ body{
   object-position: 50% 35%;
 }
 
-/* buttons all pink with white text */
+/* all buttons pink with white text */
 .btnRow{
   display:flex;
   justify-content:center;
@@ -470,31 +461,69 @@ body{
   font-size: 15.5px;
 }
 
-.para{
-  margin:0 0 18px;
-  opacity:0;
-  transform: translateY(8px);
-  animation: fadeUp .7s ease forwards;
+/* typing blocks */
+.typeBox{
+  max-width: 860px;
+  margin: 14px auto 0;
+  padding: 16px 18px;
+  border-radius: 22px;
+  background: rgba(255,255,255,.78);
+  border:1px solid rgba(255,209,230,.95);
+  line-height:1.9;
+  color: #3a3a42;
+  font-size: 15.5px;
+  box-shadow: 0 14px 34px rgba(30,10,20,.05);
+  position:relative;
+  z-index:2;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
 }
-.para:nth-child(2){ animation-delay:.06s }
-.para:nth-child(3){ animation-delay:.12s }
-.para:nth-child(4){ animation-delay:.18s }
-.para:nth-child(5){ animation-delay:.24s }
-.para:nth-child(6){ animation-delay:.30s }
-.para:nth-child(7){ animation-delay:.36s }
-.para:nth-child(8){ animation-delay:.42s }
-.para:nth-child(9){ animation-delay:.48s }
-.para:nth-child(10){ animation-delay:.54s }
-.para:nth-child(11){ animation-delay:.60s }
-.para:nth-child(12){ animation-delay:.66s }
-.para:nth-child(13){ animation-delay:.72s }
-.para:nth-child(14){ animation-delay:.78s }
-.para:nth-child(15){ animation-delay:.84s }
-.para:nth-child(16){ animation-delay:.90s }
-.para:last-child{ margin:0; }
 
-@keyframes fadeUp{
-  to{ opacity:1; transform: translateY(0); }
+/* Spotify-like lyric typing look */
+.lyricLine{
+  margin: 0 0 12px;
+  opacity: .35;
+  transform: translateY(6px);
+  transition: opacity .35s ease, transform .35s ease;
+  font-weight: 700;
+}
+.lyricLine.active{
+  opacity: 1;
+  transform: translateY(0);
+}
+.lyricLine.done{
+  opacity: .55;
+  font-weight: 600;
+}
+
+.caret{
+  display:inline-block;
+  width: 10px;
+  margin-left: 2px;
+  color: var(--accent);
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink{
+  50%{ opacity: 0; }
+}
+
+/* Letter typing paragraphs style */
+.letterLine{
+  margin: 0 0 18px;
+  opacity: .35;
+  transform: translateY(6px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+.letterLine.active{
+  opacity: 1;
+  transform: translateY(0);
+}
+.letterLine.done{
+  opacity: .55;
+}
+.letterText{
+  white-space: pre-wrap;
 }
 
 .toast{
@@ -531,51 +560,6 @@ body{
 @keyframes floatUp{
   from{ transform: translateY(0) scale(.95); opacity:1; }
   to{ transform: translateY(-160px) scale(1.15); opacity:0; }
-}
-
-/* Spotify like slow typing */
-.typeBox{
-  max-width: 860px;
-  margin: 14px auto 0;
-  padding: 16px 18px;
-  border-radius: 22px;
-  background: rgba(255,255,255,.78);
-  border:1px solid rgba(255,209,230,.95);
-  line-height:1.9;
-  color: #3a3a42;
-  font-size: 15.5px;
-  box-shadow: 0 14px 34px rgba(30,10,20,.05);
-  position:relative;
-  z-index:2;
-  text-align: justify;
-  text-justify: inter-word;
-  hyphens: auto;
-}
-
-.lyricLine{
-  margin: 0 0 12px;
-  opacity: .35;
-  transform: translateY(6px);
-  transition: opacity .35s ease, transform .35s ease;
-  font-weight: 700;
-}
-.lyricLine.active{
-  opacity: 1;
-  transform: translateY(0);
-}
-.lyricLine.done{
-  opacity: .55;
-  font-weight: 600;
-}
-.caret{
-  display:inline-block;
-  width: 10px;
-  margin-left: 2px;
-  color: var(--accent);
-  animation: blink 1s step-end infinite;
-}
-@keyframes blink{
-  50%{ opacity: 0; }
 }
 </style>
 </head>
@@ -846,7 +830,7 @@ body{
         </div>
       </section>
 
-      <!-- Page 10 Letter -->
+      <!-- Page 10 Letter with slow typing -->
       <section class="page" id="p10" data-page="10">
         <div class="card">
           <div class="scroll">
@@ -865,24 +849,7 @@ body{
               </div>
 
               <div class="letterBox">
-                <div class="letterBody">
-                  <p class="para">It feels like I’ve known you forever.<br>Like I somehow knew your story even before you told me. ✨</p>
-                  <p class="para">I know I wasn’t there when you were a child,<br>but the way you talk about your life,<br>it feels like I’ve lived it with you. 🫶</p>
-                  <p class="para">You always wanted everything, not because you were greedy,<br>but because you saw others have what you couldn’t.<br>And that lack lit a fire inside you,<br>a fire to give yourself and your family everything one day. 🔥</p>
-                  <p class="para">You are always a champion.<br>In school, in competitions, in life,<br>you never played small. 🏆</p>
-                  <p class="para">You want to win, and you worked for it quietly, patiently. 🌙</p>
-                  <p class="para">Then came the moment where you chose yourself.<br>You didn’t follow the usual path.<br>You chose something uncertain, risky, and completely yours.<br>And that decision changed everything. ✨</p>
-                  <p class="para">The discipline you’ve shown for years,<br>Seven, eight, now so many years,<br>I honestly don’t have words for how proud we are of you. 🤍</p>
-                  <p class="para">Your family is grateful, protected, and standing strong<br>because of you. 🫶</p>
-                  <p class="para">Yes, you’re annoying sometimes.<br>Yes, you’re stubborn.<br>But that mischief, that madness,<br>we love it. 😄</p>
-                  <p class="para">You are the main character in our lives,<br>and we cannot imagine life without you. 💗</p>
-                  <p class="para">And then… there’s us.<br>How destiny made us meet out of nowhere,<br>right when I needed light the most.<br>You showed up, just like that.<br>And somehow, everything shifted. ✨</p>
-                  <p class="para">You give me comfort, but you also push me to grow.<br>You make me feel safe, but never stagnant.<br>You walk ahead, but always holding everyone’s hand. 🫶</p>
-                  <p class="para">From our first conversations,<br>to Rishikesh, Goa, Kerala, Dubai,<br>so many firsts, so many memories.<br>Life with you has been magical in ways I can’t explain. 🌟</p>
-                  <p class="para">You feel like home to me.<br>Safe. Warm. Real.<br>And still challenging me to become better. 🤍</p>
-                  <p class="para">I don’t know what good karma brought us together,<br>but I’m grateful every single day. 🌙</p>
-                  <p class="para">Happy happy 24th birthday.<br>You are rare. You are powerful. You are loved.<br>And this is only the beginning.<br>Love, Always 🤍</p>
-                </div>
+                <div class="letterBody" id="letterType" aria-live="polite"></div>
               </div>
 
               <div class="btnRow" style="margin-top:16px;">
@@ -936,10 +903,11 @@ function showToast(msg){
   setTimeout(() => t.classList.remove("show"), 1400);
 }
 
-/* Spotify like slow typing */
+/* typing state */
 const typingState = {
   p3: { running:false, abort:null },
-  p11:{ running:false, abort:null }
+  p11:{ running:false, abort:null },
+  letter:{ running:false, abort:null }
 };
 
 function stopTyping(key, container){
@@ -953,6 +921,7 @@ function stopTyping(key, container){
 
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
 
+/* line-by-line typing (page 3 and page 11) */
 async function typeLyrics({ key, container, lines, charDelay=38, linePause=900, startDelay=300 }){
   if(!container) return;
   if(typingState[key].running) return;
@@ -1009,51 +978,65 @@ async function typeLyrics({ key, container, lines, charDelay=38, linePause=900, 
   }
 }
 
-function showPage(i){
-  // stop typing when changing pages so it restarts clean
-  stopTyping("p3", $("p3Type"));
-  stopTyping("p11", $("p11Type"));
+/* paragraph typing (letter page) with reading pace */
+async function typeLetter({ container, paragraphs, charDelay=26, paragraphPause=1200, startDelay=400 }){
+  if(!container) return;
+  if(typingState.letter.running) return;
 
-  pageIndex = Math.max(0, Math.min(pages.length - 1, i));
-  pages.forEach((p, idx) => p.classList.toggle("active", idx === pageIndex));
+  const controller = new AbortController();
+  typingState.letter = { running:true, abort:controller };
+  const { signal } = controller;
 
-  const sc = pages[pageIndex].querySelector(".scroll");
-  if(sc) sc.scrollTop = 0;
+  container.innerHTML = "";
 
-  // Start typing on the required pages
-  if(pages[pageIndex].id === "p3"){
-    typeLyrics({
-      key: "p3",
-      container: $("p3Type"),
-      lines: [
-        "Hi Yash. It’s me. Your younger self. 🧸",
-        "How are you? I know you’ve grown up now. You’re handling life. Being responsible.",
-        "Still a little naughty… just like me. 😄",
-        "You’ve lived 24 whole years. And you’ve done the best you could.",
-        "I see how hard you try every day. I’m really proud of you for that. 🫶",
-        "Please keep chasing your dreams. But don’t forget to stop sometimes.",
-        "Resting doesn’t mean you’re behind. It just means you’re human. 🌙",
-        "Happy Birthday, elder one. You became everything I dreamed of.",
-        "I’m always proud of you. And I’m really happy that you finally have all the toys and things I once wished for. 😊"
-      ],
-      charDelay: 40,
-      linePause: 950,
-      startDelay: 350
-    });
-  }
+  try{
+    await sleep(startDelay);
+    if(signal.aborted) return;
 
-  if(pages[pageIndex].id === "p11"){
-    typeLyrics({
-      key: "p11",
-      container: $("p11Type"),
-      lines: [
-        "This is your moment. 💗",
-        "And you deserve every bit of it. ✨"
-      ],
-      charDelay: 46,
-      linePause: 1100,
-      startDelay: 420
-    });
+    for(let i=0;i<paragraphs.length;i++){
+      if(signal.aborted) return;
+
+      const p = document.createElement("p");
+      p.className = "letterLine active";
+      container.appendChild(p);
+
+      const textSpan = document.createElement("span");
+      textSpan.className = "letterText";
+      const caret = document.createElement("span");
+      caret.className = "caret";
+      caret.textContent = "▍";
+
+      p.appendChild(textSpan);
+      p.appendChild(caret);
+
+      // mark previous paragraphs as done
+      const all = container.querySelectorAll(".letterLine");
+      all.forEach((el, idx) => {
+        if(idx < i){
+          el.classList.remove("active");
+          el.classList.add("done");
+        }
+      });
+
+      const para = paragraphs[i];
+      let out = "";
+      for(let c=0;c<para.length;c++){
+        if(signal.aborted) return;
+        out += para[c];
+        textSpan.textContent = out;
+        await sleep(charDelay);
+      }
+
+      caret.remove();
+
+      // extra pause for longer paragraphs so it feels like reading pace
+      const extra = Math.min(900, Math.floor(para.length / 18) * 120);
+      await sleep(paragraphPause + extra);
+    }
+
+    typingState.letter.running = false;
+  }catch(e){
+    typingState.letter.running = false;
   }
 }
 
@@ -1155,6 +1138,84 @@ function renderQuestions(){
 }
 renderQuestions();
 
+/* LETTER TEXT (typed on page 10) */
+const letterParagraphs = [
+  "It feels like I’ve known you forever.\nLike I somehow knew your story even before you told me. ✨",
+  "I know I wasn’t there when you were a child,\nbut the way you talk about your life,\nit feels like I’ve lived it with you. 🫶",
+  "You always wanted everything, not because you were greedy,\nbut because you saw others have what you couldn’t.\nAnd that lack lit a fire inside you,\na fire to give yourself and your family everything one day. 🔥",
+  "You are always a champion.\nIn school, in competitions, in life,\nyou never played small. 🏆",
+  "You want to win, and you worked for it quietly, patiently. 🌙",
+  "Then came the moment where you chose yourself.\nYou didn’t follow the usual path.\nYou chose something uncertain, risky, and completely yours.\nAnd that decision changed everything. ✨",
+  "The discipline you’ve shown for years,\nSeven, eight, now so many years,\nI honestly don’t have words for how proud we are of you. 🤍",
+  "Your family is grateful, protected, and standing strong\nbecause of you. 🫶",
+  "Yes, you’re annoying sometimes.\nYes, you’re stubborn.\nBut that mischief, that madness,\nwe love it. 😄",
+  "You are the main character in our lives,\nand we cannot imagine life without you. 💗",
+  "And then… there’s us.\nHow destiny made us meet out of nowhere,\nright when I needed light the most.\nYou showed up, just like that.\nAnd somehow, everything shifted. ✨",
+  "You give me comfort, but you also push me to grow.\nYou make me feel safe, but never stagnant.\nYou walk ahead, but always holding everyone’s hand. 🫶",
+  "From our first conversations,\nto Rishikesh, Goa, Kerala, Dubai,\nso many firsts, so many memories.\nLife with you has been magical in ways I can’t explain. 🌟",
+  "You feel like home to me.\nSafe. Warm. Real.\nAnd still challenging me to become better. 🤍",
+  "I don’t know what good karma brought us together,\nbut I’m grateful every single day. 🌙",
+  "Happy happy 24th birthday.\nYou are rare. You are powerful. You are loved.\nAnd this is only the beginning.\nLove, Always 🤍"
+];
+
+function showPage(i){
+  // stop any running typing so it restarts clean
+  stopTyping("p3", $("p3Type"));
+  stopTyping("p11", $("p11Type"));
+  stopTyping("letter", $("letterType"));
+
+  pageIndex = Math.max(0, Math.min(pages.length - 1, i));
+  pages.forEach((p, idx) => p.classList.toggle("active", idx === pageIndex));
+
+  const sc = pages[pageIndex].querySelector(".scroll");
+  if(sc) sc.scrollTop = 0;
+
+  if(pages[pageIndex].id === "p3"){
+    typeLyrics({
+      key: "p3",
+      container: $("p3Type"),
+      lines: [
+        "Hi Yash. It’s me. Your younger self. 🧸",
+        "How are you? I know you’ve grown up now. You’re handling life. Being responsible.",
+        "Still a little naughty… just like me. 😄",
+        "You’ve lived 24 whole years. And you’ve done the best you could.",
+        "I see how hard you try every day. I’m really proud of you for that. 🫶",
+        "Please keep chasing your dreams. But don’t forget to stop sometimes.",
+        "Resting doesn’t mean you’re behind. It just means you’re human. 🌙",
+        "Happy Birthday, elder one. You became everything I dreamed of.",
+        "I’m always proud of you. And I’m really happy that you finally have all the toys and things I once wished for. 😊"
+      ],
+      charDelay: 40,
+      linePause: 950,
+      startDelay: 350
+    });
+  }
+
+  if(pages[pageIndex].id === "p10"){
+    typeLetter({
+      container: $("letterType"),
+      paragraphs: letterParagraphs,
+      charDelay: 24,          // slightly faster than page 3 so it feels like reading
+      paragraphPause: 1100,   // pause between paragraphs like reading pace
+      startDelay: 420
+    });
+  }
+
+  if(pages[pageIndex].id === "p11"){
+    typeLyrics({
+      key: "p11",
+      container: $("p11Type"),
+      lines: [
+        "This is your moment. 💗",
+        "And you deserve every bit of it. ✨"
+      ],
+      charDelay: 46,
+      linePause: 1100,
+      startDelay: 420
+    });
+  }
+}
+
 // Premium background petals
 (function makePetals(){
   const host = $("petals");
@@ -1199,6 +1260,5 @@ renderQuestions();
 // Start on Page 1
 showPage(0);
 </script>
-
 </body>
 </html>
