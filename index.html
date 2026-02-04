@@ -8,8 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
-href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&family=Playfair+Display:wght@500;700&display=swap"
-rel="stylesheet">
+  href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&family=Playfair+Display:wght@500;700&display=swap"
+  rel="stylesheet"
+/>
 
 <style>
 :root{
@@ -142,6 +143,7 @@ body{
   transition: transform .12s ease, background .12s ease;
 }
 .musicBtn:active{ transform: scale(.98); }
+
 .dot{
   width:10px; height:10px; border-radius:999px;
   background: rgba(0,0,0,.14);
@@ -248,6 +250,7 @@ body{
   margin: 6px auto 0;
 }
 
+/* images */
 .imgFrame{
   width:min(880px, 96%);
   border-radius: 22px;
@@ -268,17 +271,7 @@ body{
   height:auto;
 }
 
-.imgInner.wide{
-  height:auto;
-  max-height:none;
-}
-
-.imgInner.portrait{
-  height:auto;
-  max-height:none;
-  max-width: 520px;
-  margin: 0 auto;
-}
+.imgInner.wide{ height:auto; max-height:none; }
 
 .imgInner img{
   width:100%;
@@ -287,7 +280,7 @@ body{
   background: transparent;
 }
 
-/* vertical small portrait frame */
+/* vertical small portrait frame like screenshot */
 .imgFrame.portraitFrame{
   width: min(420px, 92%);
   padding: 12px;
@@ -308,7 +301,7 @@ body{
   object-position: 50% 35%;
 }
 
-/* all buttons pink with white text */
+/* buttons all pink */
 .btnRow{
   display:flex;
   justify-content:center;
@@ -335,7 +328,6 @@ body{
 }
 .btn:active{ transform: scale(.98); }
 
-/* make ghost same pink */
 .btnGhost{
   color:#ffffff;
   background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -343,6 +335,7 @@ body{
   box-shadow: 0 16px 34px rgba(255,90,165,.20);
 }
 
+/* questions */
 .qWrap{
   max-width: 860px;
   margin: 18px auto 0;
@@ -361,9 +354,7 @@ body{
   opacity:0;
   animation: rise .55s ease forwards;
 }
-@keyframes rise{
-  to{ transform: translateY(0); opacity:1; }
-}
+@keyframes rise{ to{ transform: translateY(0); opacity:1; } }
 
 .q{
   margin:0 0 10px;
@@ -397,6 +388,7 @@ body{
   border-color: rgba(255,90,165,.34);
 }
 
+/* text cards */
 .story{
   max-width: 860px;
   margin: 14px auto 0;
@@ -414,7 +406,6 @@ body{
   text-justify: inter-word;
   hyphens: auto;
 }
-
 .story p{ margin:0 0 12px; }
 .story p:last-child{ margin:0; }
 
@@ -461,7 +452,7 @@ body{
   font-size: 15.5px;
 }
 
-/* typing blocks */
+/* typing containers */
 .typeBox{
   max-width: 860px;
   margin: 14px auto 0;
@@ -480,7 +471,7 @@ body{
   hyphens: auto;
 }
 
-/* Spotify-like lyric typing look */
+/* Spotify-like highlight without cursor */
 .lyricLine{
   margin: 0 0 12px;
   opacity: .35;
@@ -497,18 +488,7 @@ body{
   font-weight: 600;
 }
 
-.caret{
-  display:inline-block;
-  width: 10px;
-  margin-left: 2px;
-  color: var(--accent);
-  animation: blink 1s step-end infinite;
-}
-@keyframes blink{
-  50%{ opacity: 0; }
-}
-
-/* Letter typing paragraphs style */
+/* Letter typing paragraphs without cursor */
 .letterLine{
   margin: 0 0 18px;
   opacity: .35;
@@ -616,7 +596,7 @@ body{
         </div>
       </section>
 
-      <!-- Page 2 Questions -->
+      <!-- Page 2 -->
       <section class="page" id="p2" data-page="2">
         <div class="card">
           <div class="scroll" id="qScroll">
@@ -633,7 +613,7 @@ body{
         </div>
       </section>
 
-      <!-- Page 3 Younger self letter with slow typing -->
+      <!-- Page 3 -->
       <section class="page" id="p3" data-page="3">
         <div class="card">
           <div class="scroll" id="ysScroll">
@@ -656,7 +636,7 @@ body{
         </div>
       </section>
 
-      <!-- Page 4 Journey intro -->
+      <!-- Page 4 -->
       <section class="page" id="p4" data-page="4">
         <div class="card">
           <div class="scroll">
@@ -687,7 +667,7 @@ body{
         </div>
       </section>
 
-      <!-- Page 5 Childhood -->
+      <!-- Page 5 -->
       <section class="page" id="p5" data-page="5">
         <div class="card">
           <div class="scroll">
@@ -714,7 +694,7 @@ body{
         </div>
       </section>
 
-      <!-- Page 6 Competitions -->
+      <!-- Page 6 -->
       <section class="page" id="p6" data-page="6">
         <div class="card">
           <div class="scroll">
@@ -743,7 +723,7 @@ body{
         </div>
       </section>
 
-      <!-- Page 7 Turning point -->
+      <!-- Page 7 -->
       <section class="page" id="p7" data-page="7">
         <div class="card">
           <div class="scroll">
@@ -772,7 +752,7 @@ body{
         </div>
       </section>
 
-      <!-- Page 8 Success -->
+      <!-- Page 8 -->
       <section class="page" id="p8" data-page="8">
         <div class="card">
           <div class="scroll">
@@ -801,7 +781,7 @@ body{
         </div>
       </section>
 
-      <!-- Page 9 Present -->
+      <!-- Page 9 -->
       <section class="page" id="p9" data-page="9">
         <div class="card">
           <div class="scroll">
@@ -830,7 +810,7 @@ body{
         </div>
       </section>
 
-      <!-- Page 10 Letter with slow typing -->
+      <!-- Page 10 Letter -->
       <section class="page" id="p10" data-page="10">
         <div class="card">
           <div class="scroll">
@@ -860,7 +840,7 @@ body{
         </div>
       </section>
 
-      <!-- Page 11 Final with slow typing -->
+      <!-- Page 11 Final -->
       <section class="page" id="p11" data-page="11">
         <div class="card">
           <div class="scroll">
@@ -921,7 +901,7 @@ function stopTyping(key, container){
 
 function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
 
-/* line-by-line typing (page 3 and page 11) */
+/* line-by-line typing (page 3 and page 11) WITHOUT cursor */
 async function typeLyrics({ key, container, lines, charDelay=38, linePause=900, startDelay=300 }){
   if(!container) return;
   if(typingState[key].running) return;
@@ -944,13 +924,9 @@ async function typeLyrics({ key, container, lines, charDelay=38, linePause=900, 
       container.appendChild(p);
 
       const textSpan = document.createElement("span");
-      const caret = document.createElement("span");
-      caret.className = "caret";
-      caret.textContent = "▍";
-
       p.appendChild(textSpan);
-      p.appendChild(caret);
 
+      // previous lines to done
       const all = container.querySelectorAll(".lyricLine");
       all.forEach((el, idx) => {
         if(idx < i){
@@ -968,7 +944,6 @@ async function typeLyrics({ key, container, lines, charDelay=38, linePause=900, 
         await sleep(charDelay);
       }
 
-      caret.remove();
       await sleep(linePause);
     }
 
@@ -978,7 +953,7 @@ async function typeLyrics({ key, container, lines, charDelay=38, linePause=900, 
   }
 }
 
-/* paragraph typing (letter page) with reading pace */
+/* paragraph typing (letter page) WITHOUT cursor, with reading pace */
 async function typeLetter({ container, paragraphs, charDelay=26, paragraphPause=1200, startDelay=400 }){
   if(!container) return;
   if(typingState.letter.running) return;
@@ -1002,14 +977,9 @@ async function typeLetter({ container, paragraphs, charDelay=26, paragraphPause=
 
       const textSpan = document.createElement("span");
       textSpan.className = "letterText";
-      const caret = document.createElement("span");
-      caret.className = "caret";
-      caret.textContent = "▍";
-
       p.appendChild(textSpan);
-      p.appendChild(caret);
 
-      // mark previous paragraphs as done
+      // mark previous paras done
       const all = container.querySelectorAll(".letterLine");
       all.forEach((el, idx) => {
         if(idx < i){
@@ -1027,9 +997,7 @@ async function typeLetter({ container, paragraphs, charDelay=26, paragraphPause=
         await sleep(charDelay);
       }
 
-      caret.remove();
-
-      // extra pause for longer paragraphs so it feels like reading pace
+      // reading pace pause (longer para = slightly longer pause)
       const extra = Math.min(900, Math.floor(para.length / 18) * 120);
       await sleep(paragraphPause + extra);
     }
@@ -1138,7 +1106,7 @@ function renderQuestions(){
 }
 renderQuestions();
 
-/* LETTER TEXT (typed on page 10) */
+/* Letter text typed on page 10 */
 const letterParagraphs = [
   "It feels like I’ve known you forever.\nLike I somehow knew your story even before you told me. ✨",
   "I know I wasn’t there when you were a child,\nbut the way you talk about your life,\nit feels like I’ve lived it with you. 🫶",
@@ -1195,8 +1163,8 @@ function showPage(i){
     typeLetter({
       container: $("letterType"),
       paragraphs: letterParagraphs,
-      charDelay: 24,          // slightly faster than page 3 so it feels like reading
-      paragraphPause: 1100,   // pause between paragraphs like reading pace
+      charDelay: 24,
+      paragraphPause: 1100,
       startDelay: 420
     });
   }
@@ -1260,5 +1228,6 @@ function showPage(i){
 // Start on Page 1
 showPage(0);
 </script>
+
 </body>
 </html>
